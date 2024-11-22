@@ -1,0 +1,6 @@
+employee_id,first_name,last_name,email,job_title,date_of_birth,date_of_hire,salary
+1,john,doe,john.doe@example.com,software_engineer,1990-05-12,2015-08-01,85000
+2,jane,smith,jane.smith@example.com,data_scientist,1988-11-23,2017-03-15,95000
+3,bob,johnson,bob.johnson@example.com,product_manager,1985-07-19,2012-10-10,105000
+4,alice,davis,alice.davis@example.com,ux_designer,1992-04-06,2020-01-21,78000
+5,charlie,brown,charlie.brown@example.com,qa_engineer,1993-09-14,2019-07-08,72000

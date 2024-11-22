@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: polars-extensions
+Version: 0.1.0
+Summary: The Library of Polars Extensions
+Author-email: Jayden Rasband <jayden.rasband@gmail.com>
+License: MIT
+Project-URL: Source, https://github.com/jrasband-dev/polars-extensions
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: polars
+
+# Polars Extensions
+
+This library is designed to extend the capabilities of polars with functionalities that are not currently found in Polars. 
+
+
+## Social Proving Ground
+
+Polars is written in Rust, but these extensions are created in pure python. The concept for this package is to create a social proving ground for extensions that could be added to the main polars library. Those who don't know Rust can develop functions here in Python and the best ideas can be passed on to the main polars library for development. 
