@@ -36,3 +36,27 @@ class NameExtensionNameSpace:
             return '_'.join(word.capitalize() for word in words)
         new_columns = {col: _to_pascal_snake_case(col) for col in self._df.columns}
         return self._df.rename(new_columns)
+    
+
+    def to_kebeb_case(self) -> pl.DataFrame:
+        def _to_kebeb_case(name: str) -> str:
+            return re.sub(r'(?<!^)(?=[A-Z])', '-', name).lower().replace('_', '-')
+        
+        new_columns = {col: _to_kebeb_case(col) for col in self._df.columns}
+        return self._df.rename(new_columns)
+
+    
+    def to_upper_snake_case(self) -> pl.DataFrame:
+        def _to_upper_snake_case(name: str) -> str:
+            return re.sub(r'(?<!^)(?=[A-Z])', '_', name).upper().replace('-', '_')
+        
+        new_columns = {col: _to_upper_snake_case(col) for col in self._df.columns}
+        return self._df.rename(new_columns)
+
+
+    def to_train_case(self) -> pl.DataFrame:
+        def _to_train_case(name: str) -> str:
+            return '-'.join(word.capitalize() for word in re.sub(r'[_\s]+', ' ', name).split())
+        
+        new_columns = {col: _to_train_case(col) for col in self._df.columns}
+        return self._df.rename(new_columns)
