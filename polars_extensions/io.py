@@ -1,6 +1,8 @@
-import json 
-from typing import IO, Union
+import json
 from pathlib import Path
+from typing import IO, Union
+import ast
+
 import polars as pl
 
 
@@ -20,6 +22,6 @@ def read_schema(file: str | Path | IO[str] | IO[bytes]):
     f = open(file,'r')
     schema = json.load(f)
     f.close()
-    schema_dict = {k: eval(f"pl.{v}") for k, v in schema.items()}
+    schema_dict = {k: ast.literal_eval(f"pl.{v}") for k, v in schema.items()}
     schema_object = pl.Schema(schema_dict)
     return schema_object
