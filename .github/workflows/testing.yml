@@ -28,8 +28,12 @@ jobs:
         pip install pylint flake8 mypy bandit
 
     - name: Run Pylint
-      run: pylint polars_extensions
-
+      run: | 
+          pylint polars_extensions
+          flake8 polars_extensions
+          mypy polars_extensions
+          bandit -r polars_extensions
+          
     - name: Run Flake8
       run: flake8 polars_extensions
 
