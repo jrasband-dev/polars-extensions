@@ -1,14 +1,12 @@
 import json
-from pathlib import Path
-from typing import IO, Union
+from typing import Union
 import ast
 
 import polars as pl
 
 
-def write_schema(
-    schema: Union[pl.DataFrame, pl.Schema], file: str
-):
+def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
+    "Saves a Polars schema a JSON file"
     if isinstance(schema, pl.DataFrame):
         schema = schema.schema
 
@@ -21,6 +19,7 @@ def write_schema(
 
 
 def read_schema(file: str):
+    "Opens a JSON Schema file and return a Polars Schema object"
     f = open(file, "r")
     schema = json.load(f)
     f.close()
