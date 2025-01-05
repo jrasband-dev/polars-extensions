@@ -1,5 +1,6 @@
 import polars as pl
 
+
 @pl.api.register_expr_namespace("num_ext") 
 class NumericExtensionNamespace: 
     def __init__(self, expr: pl.Expr):
