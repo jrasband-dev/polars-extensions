@@ -1,10 +1,10 @@
 from .io import *
 from .name import *
-from .string import *
+from .numeric import *
 
 __all__ = [
     "NameExtensionNameSpace",
-    "StringExtensionNamespace",
+    "NumericExtensionNamespace",
     "write_schema",
     "read_schema",
 ]
