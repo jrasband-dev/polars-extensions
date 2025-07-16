@@ -1,13 +1,12 @@
 import polars as pl
-from shapely import wkb, wkt
 from shapely.geometry.base import BaseGeometry
 
-@pl.api.register_dataframe_namespace("geo")
+@pl.api.register_expr_namespace("geo_ext")
 class GeometryExtensionNamespace:
     """Geometry utilities for handling WKB, WKT, and coordinate conversion."""
 
-    def __init__(self, df: pl.DataFrame):
-        self._df = df
+    def __init__(self, expr: pl.Expr):
+        self._expr = expr
 
     def _geom_to_coords(self, geom: BaseGeometry):
         """Convert any shapely geometry to a nested coordinate list."""
@@ -23,33 +22,61 @@ class GeometryExtensionNamespace:
             return [self._geom_to_coords(part) for part in geom.geoms]
         else:
             return None  # Unknown type
+        
 
-    def wkb_to_coords(self, col: str, output_col: str = "coords") -> pl.DataFrame:
-        coords = [
-            self._geom_to_coords(wkb.loads(bytes.fromhex(val))) if val else None
-            for val in self._df[col]
-        ]
-        return self._df.with_columns(pl.Series(output_col, coords))
+    def _coords_to_geojson(self, coords):
+        """Infer geometry type from coordinates and return GeoJSON-like dict."""
+        if not coords:
+            return None
+        # Point: [x, y]
+        if isinstance(coords[0], (float, int)):
+            return {"type": "Point", "coordinates": coords}
+        # LineString: [[x, y], ...]
+        if isinstance(coords[0], list) and isinstance(coords[0][0], (float, int)):
+            return {"type": "LineString", "coordinates": coords}
+        # Polygon: [[[x, y], ...], ...]
+        if isinstance(coords[0], list) and isinstance(coords[0][0], list):
+            return {"type": "Polygon", "coordinates": coords}
+        # Multi geometries or GeometryCollection
+        # Try MultiPoint
+        if all(isinstance(c, list) and isinstance(c[0], (float, int)) for c in coords):
+            return {"type": "MultiPoint", "coordinates": coords}
+        # Try MultiLineString
+        if all(isinstance(c, list) and isinstance(c[0], list) and isinstance(c[0][0], (float, int)) for c in coords):
+            return {"type": "MultiLineString", "coordinates": coords}
+        # Try MultiPolygon
+        if all(isinstance(c, list) and isinstance(c[0], list) and isinstance(c[0][0], list) for c in coords):
+            return {"type": "MultiPolygon", "coordinates": coords}
+        # Fallback
+        return None
 
-    def coords_to_wkb(self, col: str, output_col: str = "wkb") -> pl.DataFrame:
+    def wkb_to_coords(self) -> pl.Expr:
+        from shapely import wkb
+
+        return self._expr.map_elements(
+            lambda x: self._geom_to_coords(wkb.loads(bytes.fromhex(x))) if x else None,
+            return_dtype=pl.Object
+        )
+
+    def coords_to_wkb(self) -> pl.Expr:
         from shapely.geometry import shape
-        wkb_hex = [
-            shape(geom).wkb.hex() if geom else None
-            for geom in self._df[col]
-        ]
-        return self._df.with_columns(pl.Series(output_col, wkb_hex))
 
-    def wkt_to_coords(self, col: str, output_col: str = "coords") -> pl.DataFrame:
-        coords = [
-            self._geom_to_coords(wkt.loads(val)) if val else None
-            for val in self._df[col]
-        ]
-        return self._df.with_columns(pl.Series(output_col, coords))
+        return self._expr.map_elements(
+            lambda x: shape(self._coords_to_geojson(x)).wkb.hex() if x else None,
+            return_dtype=pl.String
+        )
+    def wkt_to_coords(self) -> pl.Expr:
+        from shapely import wkt
 
-    def coords_to_wkt(self, col: str, output_col: str = "wkt") -> pl.DataFrame:
+        return self._expr.map_elements(
+            lambda x: self._geom_to_coords(wkt.loads(x)) if x else None,
+            return_dtype=pl.Object
+        )
+
+    def coords_to_wkt(self) -> pl.Expr:
         from shapely.geometry import shape
-        wkt_strs = [
-            shape(geom).wkt if geom else None
-            for geom in self._df[col]
-        ]
-        return self._df.with_columns(pl.Series(output_col, wkt_strs))
+
+        return self._expr.map_elements(
+            lambda x: shape(self._coords_to_geojson(x)).wkt if x else None,
+            return_dtype=pl.String
+        )
