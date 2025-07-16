@@ -1,6 +1,7 @@
 import polars as pl
 
 
+
 @pl.api.register_expr_namespace("num_ext") 
 class NumericExtensionNamespace: 
     def __init__(self, expr: pl.Expr):
@@ -52,3 +53,8 @@ class NumericExtensionNamespace:
 
         # Use map_elements for element-wise operation
         return self._expr.map_elements(convert_from_roman,return_dtype=pl.Int64)
+    
+    def word_to_number(self) -> pl.Expr:
+        from word2number import w2n
+        
+        return self._expr.map_elements(lambda x: w2n.word_to_num(x) if isinstance(x, str) else x, return_dtype=pl.Int64)
