@@ -1,5 +1,8 @@
 import polars as pl
 from shapely.geometry.base import BaseGeometry
+from shapely import wkb
+from shapely import wkt
+
 
 @pl.api.register_expr_namespace("geo_ext")
 class GeometryExtensionNamespace:
@@ -80,3 +83,29 @@ class GeometryExtensionNamespace:
             lambda x: shape(self._coords_to_geojson(x)).wkt if x else None,
             return_dtype=pl.String
         )
+    
+
+    def wkb_to_wkt(self) ->pl.Expr:
+        if self._expr is None:
+            return None
+            
+        return self._expr.map_elements(
+            lambda x: wkb.loads(x).wkt if x else None,
+            return_dtype=pl.String
+        )
+
+
+    def wkt_to_wkb(self,format='raw') -> pl.Expr:
+        if self._expr is None:
+            return None
+
+        elif format == 'hex':
+            return self._expr.map_elements(
+                lambda x: wkt.loads(x).wkb.hex() if x else None,
+                return_dtype=pl.String
+            )
+        elif format == 'raw':
+            return self._expr.map_elements(
+                lambda x: wkt.loads(x).wkb if x else None,
+                return_dtype=pl.Binary
+            )
