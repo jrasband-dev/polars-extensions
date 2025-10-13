@@ -153,10 +153,10 @@ html_theme_options = {
     #     "image_light": f"{asset_root}/static/metric-forge-black.png",
     #     "image_dark": f"{asset_root}/static/metric-forge-white.png",
     # },
-    "switcher": {
-        "json_url": f"{web_root}/api/python/dev/_static/version_switcher.json",
-        "version_match": switcher_version,
-    },
+    # "switcher": {
+    #     "json_url": f"{web_root}/api/python/dev/_static/version_switcher.json",
+    #     "version_match": switcher_version,
+    # },
     "show_version_warning_banner": False,
     "navbar_end": ["theme-switcher", "version-switcher", "navbar-icon-links"],
     "check_switcher": False,
