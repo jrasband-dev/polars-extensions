@@ -1,5 +1,0 @@
-dist
-__pycache__
-polars_extensions.egg-info
-.venv
-.codegpt
