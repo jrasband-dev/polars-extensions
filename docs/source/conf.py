@@ -105,7 +105,7 @@ html_show_sourcelink = False
 # key site root paths
 static_assets_root = ""
 github_root = "https://github.com/jrasband-dev/polars-extensions"
-web_root = "https://docs.metric-forge.com"
+web_root = "https://jrasband-dev.github.io/polars-extensions/"
 asset_root = "https://raw.githubusercontent.com/jrasband-dev/polars-extensions/main"
 
 # Specify version for version switcher dropdown menu
