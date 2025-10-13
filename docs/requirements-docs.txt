@@ -1,8 +1,9 @@
 hypothesis
 numpy
-pandas
+polars
 pyarrow
 recommonmark
+shapely
 sphinx==7.3.7
 
 # Third-party Sphinx extensions
