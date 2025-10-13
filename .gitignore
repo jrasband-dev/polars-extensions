@@ -5,3 +5,5 @@ polars_extensions.egg-info
 .codegpt
 
 *.log
+
+docs/build
