@@ -1,6 +1,8 @@
 API Reference
 =============
 
+
+
 .. grid::
 
    .. grid-item-card::
@@ -8,14 +10,22 @@ API Reference
       .. toctree:: 
          :maxdepth: 1
 
-         geo/index
+         io/index
+
+   .. grid-item-card::
+
+      .. toctree:: 
+         :maxdepth: 1
+
+         expressions/index
    
    .. grid-item-card::
 
-         .. toctree:: 
-            :maxdepth: 1
+      .. toctree:: 
+         :maxdepth: 1
 
-            io/index
+         dataframe/index
+   
 
 
 
