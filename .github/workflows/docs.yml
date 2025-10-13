@@ -3,7 +3,8 @@ name: Build and Deploy Sphinx Docs
 on:
   release:
     types: [published]
-
+    
+  workflow_dispatch:  # Allows manual runs from the GitHub Actions tab
 
 permissions:
   contents: write  # Needed to push to gh-pages
