@@ -104,9 +104,9 @@ html_show_sourcelink = False
 
 # key site root paths
 static_assets_root = ""
-github_root = "https://github.com/jrasband-dev/metric-forge"
+github_root = "https://github.com/jrasband-dev/polars-extensions"
 web_root = "https://docs.metric-forge.com"
-asset_root = "https://raw.githubusercontent.com/jrasband-dev/metric-forge/main"
+asset_root = "https://raw.githubusercontent.com/jrasband-dev/polars-extensions/main"
 
 # Specify version for version switcher dropdown menu
 git_ref = os.environ.get("METRIC_FORGE_VERSION", "main")
@@ -135,7 +135,7 @@ html_theme_options = {
         },
         {
             "name": "Pypi",
-            "url": "https://pypi.org/project/metric-forge/",
+            "url": "https://pypi.org/project/polars-extensions/",
             "icon": "fa-brands fa-python",
         },
         {
@@ -149,10 +149,10 @@ html_theme_options = {
             "icon": "fa-brands fa-youtube",
         },
     ],
-    "logo": {
-        "image_light": f"{asset_root}/static/metric-forge-black.png",
-        "image_dark": f"{asset_root}/static/metric-forge-white.png",
-    },
+    # "logo": {
+    #     "image_light": f"{asset_root}/static/metric-forge-black.png",
+    #     "image_dark": f"{asset_root}/static/metric-forge-white.png",
+    # },
     "switcher": {
         "json_url": f"{web_root}/api/python/dev/_static/version_switcher.json",
         "version_match": switcher_version,
@@ -231,10 +231,10 @@ def linkcode_resolve(domain: str, info: dict[str, Any]) -> str | None:
     linespec = f"#L{lineno}-L{lineno + len(source) - 1}" if lineno else ""
 
     conf_dir_path = Path(__file__).absolute().parent
-    project_root = (conf_dir_path.parent.parent / "metric-forge").absolute()
+    project_root = (conf_dir_path.parent.parent / "polars-extensions").absolute()
 
     fn = os.path.relpath(fn, start=project_root)
-    return f"{github_root}/blob/{git_ref}/metric-forge/{fn}{linespec}"
+    return f"{github_root}/blob/{git_ref}/polars-extensions/{fn}{linespec}"
 
 
 def _minify_classpaths(s: str) -> str:

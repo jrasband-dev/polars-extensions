@@ -1,4 +1,4 @@
-Operations 
+Geospatial
 ==========
 
 .. automodule:: polars_extensions.geo

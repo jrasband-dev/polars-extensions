@@ -1,4 +1,4 @@
-Operations 
+Input/Output
 ==========
 
 .. automodule:: polars_extensions.io
