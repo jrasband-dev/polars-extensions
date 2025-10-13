@@ -3,3 +3,5 @@ __pycache__
 polars_extensions.egg-info
 .venv
 .codegpt
+
+*.log

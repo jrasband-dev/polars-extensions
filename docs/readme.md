@@ -9,7 +9,7 @@ pip install -r requirements-docs.txt
 
 ## Building Docs
 
-```
-
-
+```cmd
+cd docs
+sphinx-build source build
 ```
