@@ -288,6 +288,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -507,6 +511,25 @@ document.write(`
                   
   <section id="input-output">
 <h1>Input/Output<a class="headerlink" href="#input-output" title="Link to this heading">#</a></h1>
+<span class="target" id="module-polars_extensions.io"></span><dl class="py function">
+<dt class="sig sig-object py" id="polars_extensions.io.read_schema">
+<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L17-L30"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
+<dd><p>Opens a JSON Schema file and return a Polars Schema object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="polars_extensions.io.write_schema">
+<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">write_schema</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Schema</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L5-L15"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
+<dd><p>Saves a Polars schema a JSON file</p>
+</dd></dl>
+
 </section>
 
 
@@ -543,6 +566,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.io.read_schema"><code class="docutils literal notranslate"><span class="pre">read_schema()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.io.write_schema"><code class="docutils literal notranslate"><span class="pre">write_schema()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

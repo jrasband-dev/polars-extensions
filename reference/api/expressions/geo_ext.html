@@ -288,6 +288,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -508,8 +512,69 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="geospatial">
-<h1>Geospatial<a class="headerlink" href="#geospatial" title="Link to this heading">#</a></h1>
+  <section id="module-polars_extensions.geo">
+<span id="geospatial"></span><h1>Geospatial<a class="headerlink" href="#module-polars_extensions.geo" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.geo.</span></span><span class="sig-name descname"><span class="pre">GeometryExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L7-L111"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Geometry utilities for handling WKB, WKT, and coordinate conversion.</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>coords_to_wkb</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>coords_to_wkt</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>wkb_to_coords</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>wkb_to_wkt</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>wkt_to_coords</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>wkt_to_wkb</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb">
+<span class="sig-name descname"><span class="pre">coords_to_wkb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L64-L70"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt">
+<span class="sig-name descname"><span class="pre">coords_to_wkt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L79-L85"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords">
+<span class="sig-name descname"><span class="pre">wkb_to_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L56-L62"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt">
+<span class="sig-name descname"><span class="pre">wkb_to_wkt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L88-L95"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords">
+<span class="sig-name descname"><span class="pre">wkt_to_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L71-L77"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb">
+<span class="sig-name descname"><span class="pre">wkt_to_wkb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raw'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L98-L111"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -546,6 +611,31 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.coords_to_wkb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.coords_to_wkt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkb_to_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkb_to_wkt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkt_to_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkt_to_wkb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

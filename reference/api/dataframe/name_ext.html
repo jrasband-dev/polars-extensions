@@ -287,6 +287,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -509,6 +513,82 @@ document.write(`
                   
   <section id="column-names">
 <h1>Column Names<a class="headerlink" href="#column-names" title="Link to this heading">#</a></h1>
+<span class="target" id="module-polars_extensions.name"></span><dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.name.</span></span><span class="sig-name descname"><span class="pre">NameExtensionNameSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L5-L73"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Functions that extend the Name capabilities of polars DataFrames</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_camel_case" title="polars_extensions.name.NameExtensionNameSpace.to_camel_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_camel_case</span></code></a>()</p></td>
+<td><p>Converts column names to camelCase</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_kebeb_case" title="polars_extensions.name.NameExtensionNameSpace.to_kebeb_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_kebeb_case</span></code></a>()</p></td>
+<td><p>Converts column names to kebab-case</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_case" title="polars_extensions.name.NameExtensionNameSpace.to_pascal_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pascal_case</span></code></a>()</p></td>
+<td><p>Converts column names to PascalCase</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case" title="polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pascal_snake_case</span></code></a>()</p></td>
+<td><p>Converts column names to Pascal_Snake_Case</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_snake_case" title="polars_extensions.name.NameExtensionNameSpace.to_snake_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_snake_case</span></code></a>()</p></td>
+<td><p>Converts column names to snake_case</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_train_case" title="polars_extensions.name.NameExtensionNameSpace.to_train_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_train_case</span></code></a>()</p></td>
+<td><p>Converts column names to Train-Case</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case" title="polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_upper_snake_case</span></code></a>()</p></td>
+<td><p>Converts column names to UPPER_SNAKE_CASE</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_camel_case">
+<span class="sig-name descname"><span class="pre">to_camel_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L31-L38"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_camel_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to camelCase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_kebeb_case">
+<span class="sig-name descname"><span class="pre">to_kebeb_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L49-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_kebeb_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to kebab-case</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_pascal_case">
+<span class="sig-name descname"><span class="pre">to_pascal_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L12-L21"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to PascalCase</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case">
+<span class="sig-name descname"><span class="pre">to_pascal_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L40-L47"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to Pascal_Snake_Case</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_snake_case">
+<span class="sig-name descname"><span class="pre">to_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L23-L29"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_snake_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to snake_case</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_train_case">
+<span class="sig-name descname"><span class="pre">to_train_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L65-L73"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_train_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to Train-Case</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case">
+<span class="sig-name descname"><span class="pre">to_upper_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L57-L63"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case" title="Link to this definition">#</a></dt>
+<dd><p>Converts column names to UPPER_SNAKE_CASE</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -536,6 +616,32 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_camel_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_camel_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_kebeb_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_kebeb_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_pascal_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_pascal_snake_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_snake_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_snake_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_train_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_train_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case"><code class="docutils literal notranslate"><span class="pre">NameExtensionNameSpace.to_upper_snake_case()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

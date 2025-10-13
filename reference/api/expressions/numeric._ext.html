@@ -286,6 +286,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -477,8 +481,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="numeric">
-<h1>Numeric<a class="headerlink" href="#numeric" title="Link to this heading">#</a></h1>
+  <section id="module-polars_extensions.numeric">
+<span id="numeric"></span><h1>Numeric<a class="headerlink" href="#module-polars_extensions.numeric" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.numeric.</span></span><span class="sig-name descname"><span class="pre">NumericExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L5-L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.numeric.NumericExtensionNamespace.from_roman" title="polars_extensions.numeric.NumericExtensionNamespace.from_roman"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_roman</span></code></a>()</p></td>
+<td><p>Convert Roman numerals to integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman" title="polars_extensions.numeric.NumericExtensionNamespace.to_roman"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_roman</span></code></a>()</p></td>
+<td><p>Convert an integer to Roman numerals.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>word_to_number</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.from_roman">
+<span class="sig-name descname"><span class="pre">from_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L35-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.from_roman" title="Link to this definition">#</a></dt>
+<dd><p>Convert Roman numerals to integers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.to_roman">
+<span class="sig-name descname"><span class="pre">to_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L17-L33"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman" title="Link to this definition">#</a></dt>
+<dd><p>Convert an integer to Roman numerals.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.word_to_number">
+<span class="sig-name descname"><span class="pre">word_to_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L57-L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.word_to_number" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -497,6 +544,28 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.numeric.NumericExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">NumericExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.numeric.NumericExtensionNamespace.from_roman"><code class="docutils literal notranslate"><span class="pre">NumericExtensionNamespace.from_roman()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman"><code class="docutils literal notranslate"><span class="pre">NumericExtensionNamespace.to_roman()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.numeric.NumericExtensionNamespace.word_to_number"><code class="docutils literal notranslate"><span class="pre">NumericExtensionNamespace.word_to_number()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
