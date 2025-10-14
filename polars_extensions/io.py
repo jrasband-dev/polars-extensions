@@ -3,7 +3,28 @@ from typing import Union
 import polars as pl
 
 def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
-    "Saves a Polars schema a JSON file"
+    """Saves a Polars schema a JSON file
+    
+    Parameters
+    ----------
+
+    schema
+        DataFrame or Schema Object.
+
+    file 
+        Save location and filename with JSON extension.
+
+    Examples
+    --------
+
+    .. code-block:: python 
+
+        import polars as pl
+        import polars_extensions as plx
+        data = pl.read_csv('datasets/employees.csv')
+        plx.write_schema(data,'schema.json')
+    """
+    
     if isinstance(schema, pl.DataFrame):
         schema = schema.schema
 
@@ -15,7 +36,27 @@ def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
     return
 
 def read_schema(file: str):
-    "Opens a JSON Schema file and return a Polars Schema object"
+    """Opens a JSON Schema file and return a Polars Schema object
+    
+    Parameters
+    ----------
+
+    file 
+        Save location and filename with JSON extension.
+
+    Examples
+    --------
+
+    .. code-block:: python 
+
+        import polars as pl
+        import polars_extensions as plx
+        schema = plx.read_schema('schema.json')
+        schema
+
+    
+    """
+
     with open(file, "r") as f:
         schema = json.load(f)
     
