@@ -12,12 +12,48 @@ class StringExtensionNamespace:
         Calculates a similarity score between two columns of strings based on common characters,
         accounting for repeated characters.
         
-        Parameters:
+        Parameters
+        ----------
         col_a (str): The name of the first column to compare.
         col_b (str): The name of the second column to compare.
         
-        Returns:
-        pl.DataFrame: A DataFrame with the similarity scores as a new column.
+        Returns
+        -------
+        DataFrame
+
+        Examples
+        --------
+
+        .. code-block:: python
+
+            import polars_extensions as plx
+            import polars as pl 
+
+            data = pl.read_csv('datasets/string_sim.csv')
+            data.str_ext.f1_string_similarity('a','c')
+
+        .. code-block:: text
+
+            shape: (13, 3)
+            ┌──────────────────────────┬───────────────────────────┬──────────┐
+            │ a                        ┆ c                         ┆ f1_score │
+            │ ---                      ┆ ---                       ┆ ---      │
+            │ str                      ┆ str                       ┆ f64      │
+            ╞══════════════════════════╪═══════════════════════════╪══════════╡
+            │ apple                    ┆ appl                      ┆ 0.888889 │
+            │ banana                   ┆ BANANA                    ┆ 1.0      │
+            │ cherry                   ┆ cherr                     ┆ 0.909091 │
+            │ date                     ┆ etad                      ┆ 1.0      │
+            │ elderberry               ┆ elderberrys               ┆ 0.952381 │
+            │ …                        ┆ …                         ┆ …        │
+            │ kiwi                     ┆ KIW                       ┆ 0.857143 │
+            │ lemon                    ┆ lemons                    ┆ 0.909091 │
+            │ mangoes are Tangy        ┆ mango are Tangy           ┆ 0.9375   │
+            │ it was the best of times ┆ it was the worst of times ┆ 0.897959 │
+            │ of times it was the best ┆ it was the worst of times ┆ 0.897959 │
+            └──────────────────────────┴───────────────────────────┴──────────┘
+        
+
         """
 
         def similarity(row_str_a: str, row_str_b: str) -> float:
