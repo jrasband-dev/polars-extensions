@@ -1,5 +1,5 @@
 Input/Output
-==========
+============
 
 .. automodule:: polars_extensions.io
    :members:

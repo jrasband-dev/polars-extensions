@@ -436,6 +436,7 @@ document.write(`
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../expressions/index.html">Expressions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../expressions/str_ext.html">String</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions/num_ext.html">Numeric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../expressions/geo_ext.html">Geospatial</a></li>
 </ul>
 </details></li>
@@ -509,7 +510,7 @@ document.write(`
 <h1>Column Names<a class="headerlink" href="#column-names" title="Link to this heading">#</a></h1>
 <span class="target" id="module-polars_extensions.name"></span><dl class="py class">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.name.</span></span><span class="sig-name descname"><span class="pre">NameExtensionNameSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L5-L73"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.name.</span></span><span class="sig-name descname"><span class="pre">NameExtensionNameSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L5-L320"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Functions that extend the Name capabilities of polars DataFrames</p>
 <p class="rubric">Methods</p>
@@ -541,44 +542,259 @@ document.write(`
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_camel_case">
-<span class="sig-name descname"><span class="pre">to_camel_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L31-L38"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_camel_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_camel_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L102-L144"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_camel_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to camelCase</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_camel_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬───────────┬──────────┬─────────────┬─────────────┬────────────┬────────────┬────────┐
+│ employeeId ┆ firstName ┆ lastName ┆ email       ┆ jobTitle    ┆ dateOfBirt ┆ dateOfHire ┆ salary │
+│ ---        ┆ ---       ┆ ---      ┆ ---         ┆ ---         ┆ h          ┆ ---        ┆ ---    │
+│ i64        ┆ str       ┆ str      ┆ str         ┆ str         ┆ ---        ┆ str        ┆ i64    │
+│            ┆           ┆          ┆             ┆             ┆ str        ┆            ┆        │
+╞════════════╪═══════════╪══════════╪═════════════╪═════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john      ┆ doe      ┆ john.doe@ex ┆ software_en ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆           ┆          ┆ ample.com   ┆ gineer      ┆            ┆            ┆        │
+│ 2          ┆ jane      ┆ smith    ┆ jane.smith@ ┆ data_scient ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆           ┆          ┆ example.com ┆ ist         ┆            ┆            ┆        │
+│ 3          ┆ bob       ┆ johnson  ┆ bob.johnson ┆ product_man ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆           ┆          ┆ @example.co ┆ ager        ┆            ┆            ┆        │
+│            ┆           ┆          ┆ m           ┆             ┆            ┆            ┆        │
+│ 4          ┆ alice     ┆ davis    ┆ alice.davis ┆ ux_designer ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆           ┆          ┆ @example.co ┆             ┆            ┆            ┆        │
+│            ┆           ┆          ┆ m           ┆             ┆            ┆            ┆        │
+│ 5          ┆ charlie   ┆ brown    ┆ charlie.bro ┆ qa_engineer ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆           ┆          ┆ wn@example. ┆             ┆            ┆            ┆        │
+│            ┆           ┆          ┆ com         ┆             ┆            ┆            ┆        │
+└────────────┴───────────┴──────────┴─────────────┴─────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_kebeb_case">
-<span class="sig-name descname"><span class="pre">to_kebeb_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L49-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_kebeb_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_kebeb_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L190-L231"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_kebeb_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to kebab-case</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_kebeb_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
+│ employee-i ┆ first-name ┆ last-name ┆ email      ┆ job-title  ┆ date-of-bi ┆ date-of-hi ┆ salary │
+│ d          ┆ ---        ┆ ---       ┆ ---        ┆ ---        ┆ rth        ┆ re         ┆ ---    │
+│ ---        ┆ str        ┆ str       ┆ str        ┆ str        ┆ ---        ┆ ---        ┆ i64    │
+│ i64        ┆            ┆           ┆            ┆            ┆ str        ┆ str        ┆        │
+╞════════════╪════════════╪═══════════╪════════════╪════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john       ┆ doe       ┆ john.doe@e ┆ software_e ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆            ┆           ┆ xample.com ┆ ngineer    ┆            ┆            ┆        │
+│ 2          ┆ jane       ┆ smith     ┆ jane.smith ┆ data_scien ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆            ┆           ┆ @example.c ┆ tist       ┆            ┆            ┆        │
+│            ┆            ┆           ┆ om         ┆            ┆            ┆            ┆        │
+│ 3          ┆ bob        ┆ johnson   ┆ bob.johnso ┆ product_ma ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆            ┆           ┆ n@example. ┆ nager      ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 4          ┆ alice      ┆ davis     ┆ alice.davi ┆ ux_designe ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆            ┆           ┆ s@example. ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 5          ┆ charlie    ┆ brown     ┆ charlie.br ┆ qa_enginee ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆            ┆           ┆ own@exampl ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
+└────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_pascal_case">
-<span class="sig-name descname"><span class="pre">to_pascal_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L12-L21"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_pascal_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L12-L56"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to PascalCase</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_pascal_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬───────────┬──────────┬─────────────┬─────────────┬────────────┬────────────┬────────┐
+│ EmployeeId ┆ FirstName ┆ LastName ┆ Email       ┆ JobTitle    ┆ DateOfBirt ┆ DateOfHire ┆ Salary │
+│ ---        ┆ ---       ┆ ---      ┆ ---         ┆ ---         ┆ h          ┆ ---        ┆ ---    │
+│ i64        ┆ str       ┆ str      ┆ str         ┆ str         ┆ ---        ┆ str        ┆ i64    │
+│            ┆           ┆          ┆             ┆             ┆ str        ┆            ┆        │
+╞════════════╪═══════════╪══════════╪═════════════╪═════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john      ┆ doe      ┆ john.doe@ex ┆ software_en ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆           ┆          ┆ ample.com   ┆ gineer      ┆            ┆            ┆        │
+│ 2          ┆ jane      ┆ smith    ┆ jane.smith@ ┆ data_scient ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆           ┆          ┆ example.com ┆ ist         ┆            ┆            ┆        │
+│ 3          ┆ bob       ┆ johnson  ┆ bob.johnson ┆ product_man ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆           ┆          ┆ @example.co ┆ ager        ┆            ┆            ┆        │
+│            ┆           ┆          ┆ m           ┆             ┆            ┆            ┆        │
+│ 4          ┆ alice     ┆ davis    ┆ alice.davis ┆ ux_designer ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆           ┆          ┆ @example.co ┆             ┆            ┆            ┆        │
+│            ┆           ┆          ┆ m           ┆             ┆            ┆            ┆        │
+│ 5          ┆ charlie   ┆ brown    ┆ charlie.bro ┆ qa_engineer ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆           ┆          ┆ wn@example. ┆             ┆            ┆            ┆        │
+│            ┆           ┆          ┆ com         ┆             ┆            ┆            ┆        │
+└────────────┴───────────┴──────────┴─────────────┴─────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case">
-<span class="sig-name descname"><span class="pre">to_pascal_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L40-L47"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_pascal_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L146-L188"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_pascal_snake_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to Pascal_Snake_Case</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_pascal_snake_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
+│ Employee_I ┆ First_Name ┆ Last_Name ┆ Email      ┆ Job_Title  ┆ Date_Of_Bi ┆ Date_Of_Hi ┆ Salary │
+│ d          ┆ ---        ┆ ---       ┆ ---        ┆ ---        ┆ rth        ┆ re         ┆ ---    │
+│ ---        ┆ str        ┆ str       ┆ str        ┆ str        ┆ ---        ┆ ---        ┆ i64    │
+│ i64        ┆            ┆           ┆            ┆            ┆ str        ┆ str        ┆        │
+╞════════════╪════════════╪═══════════╪════════════╪════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john       ┆ doe       ┆ john.doe@e ┆ software_e ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆            ┆           ┆ xample.com ┆ ngineer    ┆            ┆            ┆        │
+│ 2          ┆ jane       ┆ smith     ┆ jane.smith ┆ data_scien ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆            ┆           ┆ @example.c ┆ tist       ┆            ┆            ┆        │
+│            ┆            ┆           ┆ om         ┆            ┆            ┆            ┆        │
+│ 3          ┆ bob        ┆ johnson   ┆ bob.johnso ┆ product_ma ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆            ┆           ┆ n@example. ┆ nager      ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 4          ┆ alice      ┆ davis     ┆ alice.davi ┆ ux_designe ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆            ┆           ┆ s@example. ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 5          ┆ charlie    ┆ brown     ┆ charlie.br ┆ qa_enginee ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆            ┆           ┆ own@exampl ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
+└────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_snake_case">
-<span class="sig-name descname"><span class="pre">to_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L23-L29"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_snake_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L58-L100"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_snake_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to snake_case</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_snake_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
+│ employee_i ┆ first_name ┆ last_name ┆ email      ┆ job_title  ┆ date_of_bi ┆ date_of_hi ┆ salary │
+│ d          ┆ ---        ┆ ---       ┆ ---        ┆ ---        ┆ rth        ┆ re         ┆ ---    │
+│ ---        ┆ str        ┆ str       ┆ str        ┆ str        ┆ ---        ┆ ---        ┆ i64    │
+│ i64        ┆            ┆           ┆            ┆            ┆ str        ┆ str        ┆        │
+╞════════════╪════════════╪═══════════╪════════════╪════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john       ┆ doe       ┆ john.doe@e ┆ software_e ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆            ┆           ┆ xample.com ┆ ngineer    ┆            ┆            ┆        │
+│ 2          ┆ jane       ┆ smith     ┆ jane.smith ┆ data_scien ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆            ┆           ┆ @example.c ┆ tist       ┆            ┆            ┆        │
+│            ┆            ┆           ┆ om         ┆            ┆            ┆            ┆        │
+│ 3          ┆ bob        ┆ johnson   ┆ bob.johnso ┆ product_ma ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆            ┆           ┆ n@example. ┆ nager      ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 4          ┆ alice      ┆ davis     ┆ alice.davi ┆ ux_designe ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆            ┆           ┆ s@example. ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 5          ┆ charlie    ┆ brown     ┆ charlie.br ┆ qa_enginee ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆            ┆           ┆ own@exampl ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
+└────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_train_case">
-<span class="sig-name descname"><span class="pre">to_train_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L65-L73"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_train_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_train_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L278-L320"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_train_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to Train-Case</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_train_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
+│ Employee-I ┆ First-Name ┆ Last-Name ┆ Email      ┆ Job-Title  ┆ Date-Of-Bi ┆ Date-Of-Hi ┆ Salary │
+│ d          ┆ ---        ┆ ---       ┆ ---        ┆ ---        ┆ rth        ┆ re         ┆ ---    │
+│ ---        ┆ str        ┆ str       ┆ str        ┆ str        ┆ ---        ┆ ---        ┆ i64    │
+│ i64        ┆            ┆           ┆            ┆            ┆ str        ┆ str        ┆        │
+╞════════════╪════════════╪═══════════╪════════════╪════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john       ┆ doe       ┆ john.doe@e ┆ software_e ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆            ┆           ┆ xample.com ┆ ngineer    ┆            ┆            ┆        │
+│ 2          ┆ jane       ┆ smith     ┆ jane.smith ┆ data_scien ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆            ┆           ┆ @example.c ┆ tist       ┆            ┆            ┆        │
+│            ┆            ┆           ┆ om         ┆            ┆            ┆            ┆        │
+│ 3          ┆ bob        ┆ johnson   ┆ bob.johnso ┆ product_ma ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆            ┆           ┆ n@example. ┆ nager      ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 4          ┆ alice      ┆ davis     ┆ alice.davi ┆ ux_designe ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆            ┆           ┆ s@example. ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 5          ┆ charlie    ┆ brown     ┆ charlie.br ┆ qa_enginee ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆            ┆           ┆ own@exampl ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
+└────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case">
-<span class="sig-name descname"><span class="pre">to_upper_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L57-L63"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_upper_snake_case</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/name.py#L233-L276"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.name.NameExtensionNameSpace.to_upper_snake_case" title="Link to this definition">#</a></dt>
 <dd><p>Converts column names to UPPER_SNAKE_CASE</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">name_ext</span><span class="o">.</span><span class="n">to_kebeb_case</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 8)
+┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
+│ EMPLOYEE_I ┆ FIRST_NAME ┆ LAST_NAME ┆ EMAIL      ┆ JOB_TITLE  ┆ DATE_OF_BI ┆ DATE_OF_HI ┆ SALARY │
+│ D          ┆ ---        ┆ ---       ┆ ---        ┆ ---        ┆ RTH        ┆ RE         ┆ ---    │
+│ ---        ┆ str        ┆ str       ┆ str        ┆ str        ┆ ---        ┆ ---        ┆ i64    │
+│ i64        ┆            ┆           ┆            ┆            ┆ str        ┆ str        ┆        │
+╞════════════╪════════════╪═══════════╪════════════╪════════════╪════════════╪════════════╪════════╡
+│ 1          ┆ john       ┆ doe       ┆ john.doe@e ┆ software_e ┆ 1990-05-12 ┆ 2015-08-01 ┆ 85000  │
+│            ┆            ┆           ┆ xample.com ┆ ngineer    ┆            ┆            ┆        │
+│ 2          ┆ jane       ┆ smith     ┆ jane.smith ┆ data_scien ┆ 1988-11-23 ┆ 2017-03-15 ┆ 95000  │
+│            ┆            ┆           ┆ @example.c ┆ tist       ┆            ┆            ┆        │
+│            ┆            ┆           ┆ om         ┆            ┆            ┆            ┆        │
+│ 3          ┆ bob        ┆ johnson   ┆ bob.johnso ┆ product_ma ┆ 1985-07-19 ┆ 2012-10-10 ┆ 105000 │
+│            ┆            ┆           ┆ n@example. ┆ nager      ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 4          ┆ alice      ┆ davis     ┆ alice.davi ┆ ux_designe ┆ 1992-04-06 ┆ 2020-01-21 ┆ 78000  │
+│            ┆            ┆           ┆ s@example. ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ com        ┆            ┆            ┆            ┆        │
+│ 5          ┆ charlie    ┆ brown     ┆ charlie.br ┆ qa_enginee ┆ 1993-09-14 ┆ 2019-07-08 ┆ 72000  │
+│            ┆            ┆           ┆ own@exampl ┆ r          ┆            ┆            ┆        │
+│            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
+└────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

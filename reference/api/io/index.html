@@ -437,6 +437,7 @@ document.write(`
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../expressions/index.html">Expressions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../expressions/str_ext.html">String</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../expressions/num_ext.html">Numeric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../expressions/geo_ext.html">Geospatial</a></li>
 </ul>
 </details></li>
@@ -503,12 +504,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="input-output">
-<h1>Input/Output<a class="headerlink" href="#input-output" title="Link to this heading">#</a></h1>
-<span class="target" id="module-polars_extensions.io"></span><dl class="py function">
+  <section id="module-polars_extensions.io">
+<span id="input-output"></span><h1>Input/Output<a class="headerlink" href="#module-polars_extensions.io" title="Link to this heading">#</a></h1>
+<dl class="py function">
 <dt class="sig sig-object py" id="polars_extensions.io.read_schema">
-<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L17-L30"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L38-L71"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
 <dd><p>Opens a JSON Schema file and return a Polars Schema object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file</strong></dt><dd><p>Save location and filename with JSON extension.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">plx</span><span class="o">.</span><span class="n">read_schema</span><span class="p">(</span><span class="s1">&#39;schema.json&#39;</span><span class="p">)</span>
+<span class="n">schema</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -520,8 +536,25 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
 </dl>
 
-<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L5-L15"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
+<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L5-L36"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
 <dd><p>Saves a Polars schema a JSON file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>schema</strong></dt><dd><p>DataFrame or Schema Object.</p>
+</dd>
+<dt><strong>file</strong></dt><dd><p>Save location and filename with JSON extension.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/employees.csv&#39;</span><span class="p">)</span>
+<span class="n">plx</span><span class="o">.</span><span class="n">write_schema</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="s1">&#39;schema.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>

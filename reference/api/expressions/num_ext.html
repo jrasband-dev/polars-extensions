@@ -44,9 +44,11 @@
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/api/expressions/numeric._ext';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/api/expressions/num_ext';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Geospatial" href="geo_ext.html" />
+    <link rel="prev" title="String" href="str_ext.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="python"/>
   </head>
@@ -143,7 +145,7 @@
 </li>
 
 
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="../index.html">
     API Reference
   </a>
@@ -294,9 +296,7 @@ document.write(`
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -318,7 +318,7 @@ document.write(`
 </li>
 
 
-<li class="nav-item ">
+<li class="nav-item current active">
   <a class="nav-link nav-internal" href="../index.html">
     API Reference
   </a>
@@ -426,6 +426,32 @@ document.write(`
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html">Input/Output</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Expressions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="str_ext.html">String</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Numeric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geo_ext.html">Geospatial</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dataframe/index.html">DataFrame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dataframe/name_ext.html">Column Names</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -458,6 +484,12 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Expressions</a></li>
+    
     <li class="breadcrumb-item active" aria-current="page">Numeric</li>
   </ul>
 </nav>
@@ -479,7 +511,7 @@ document.write(`
 <span id="numeric"></span><h1>Numeric<a class="headerlink" href="#module-polars_extensions.numeric" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.numeric.</span></span><span class="sig-name descname"><span class="pre">NumericExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L5-L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.numeric.</span></span><span class="sig-name descname"><span class="pre">NumericExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L5-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -490,33 +522,103 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman" title="polars_extensions.numeric.NumericExtensionNamespace.to_roman"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_roman</span></code></a>()</p></td>
 <td><p>Convert an integer to Roman numerals.</p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>word_to_number</strong></p></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.numeric.NumericExtensionNamespace.word_to_number" title="polars_extensions.numeric.NumericExtensionNamespace.word_to_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">word_to_number</span></code></a>()</p></td>
+<td><p>Convert Natural Language to Numbers</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.from_roman">
-<span class="sig-name descname"><span class="pre">from_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L35-L55"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.from_roman" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">from_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L63-L111"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.from_roman" title="Link to this definition">#</a></dt>
 <dd><p>Convert Roman numerals to integers.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Roman&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="s1">&#39;III&#39;</span><span class="p">,</span> <span class="s1">&#39;CCCIX&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">]})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;Roman&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">num_ext</span><span class="o">.</span><span class="n">from_roman</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;Decoded&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">result</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 2)
+┌───────┬─────────┐
+│ Roman ┆ Decoded │
+│ ---   ┆ ---     │
+│ str   ┆ i64     │
+╞═══════╪═════════╡
+│ I     ┆ 1       │
+│ II    ┆ 2       │
+│ III   ┆ 3       │
+│ CCCIX ┆ 309     │
+│ V     ┆ 5       │
+└───────┴─────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.to_roman">
-<span class="sig-name descname"><span class="pre">to_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L17-L33"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">to_roman</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L17-L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.to_roman" title="Link to this definition">#</a></dt>
 <dd><p>Convert an integer to Roman numerals.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">309</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">num_ext</span><span class="o">.</span><span class="n">to_roman</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;Roman&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">result</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 2)
+┌─────────┬───────┐
+│ numbers ┆ Roman │
+│ ---     ┆ ---   │
+│ i64     ┆ str   │
+╞═════════╪═══════╡
+│ 1       ┆ I     │
+│ 2       ┆ II    │
+│ 309     ┆ CCCIX │
+│ 4       ┆ IV    │
+│ 5       ┆ V     │
+└─────────┴───────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.numeric.NumericExtensionNamespace.word_to_number">
-<span class="sig-name descname"><span class="pre">word_to_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L57-L60"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.word_to_number" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">word_to_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/numeric.py#L113-L148"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.numeric.NumericExtensionNamespace.word_to_number" title="Link to this definition">#</a></dt>
+<dd><p>Convert Natural Language to Numbers</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three hundred and nine&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">]})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;numbers&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">num_ext</span><span class="o">.</span><span class="n">word_to_number</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;Actual Numbers&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 2)
+┌────────────────────────┬────────────────┐
+│ numbers                ┆ Actual Numbers │
+│ ---                    ┆ ---            │
+│ str                    ┆ i64            │
+╞════════════════════════╪════════════════╡
+│ 6                      ┆ 6              │
+│ two                    ┆ 2              │
+│ three hundred and nine ┆ 309            │
+│ 5                      ┆ 5              │
+│ 4                      ┆ 4              │
+└────────────────────────┴────────────────┘
+</pre></div>
+</div>
+</dd></dl>
 
 </dd></dl>
 
@@ -532,6 +634,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="str_ext.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">String</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="geo_ext.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Geospatial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
