@@ -1,0 +1,1197 @@
+
+<!DOCTYPE html>
+
+
+<html lang="python" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Units &#8212; Polars Extensions 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=40be6288"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/api/expressions/units_ext';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Units" href="url_ext.html" />
+    <link rel="prev" title="Geospatial" href="geo_ext.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Polars Extensions 1.0.0 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jrasband-dev/polars-extensions" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/polars-extensions/" title="Pypi" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Pypi</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/in/jayden-rasband-303449133/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/@polarsCodeAcademy" title="YouTube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started/index.html">
+    Getting Started
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API Reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/jrasband-dev/polars-extensions" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/polars-extensions/" title="Pypi" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-python fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Pypi</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/in/jayden-rasband-303449133/" title="LinkedIn" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">LinkedIn</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/@polarsCodeAcademy" title="YouTube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">YouTube</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../io/index.html">Input/Output</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Expressions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="str_ext.html">String</a></li>
+<li class="toctree-l2"><a class="reference internal" href="num_ext.html">Numeric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geo_ext.html">Geospatial</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url_ext.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bio_ext.html">Biology</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dataframe/index.html">DataFrame</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../dataframe/name_ext.html">Column Names</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API Reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Expressions</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Units</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-polars_extensions.units">
+<span id="units"></span><h1>Units<a class="headerlink" href="#module-polars_extensions.units" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.units.</span></span><span class="sig-name descname"><span class="pre">UnitExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L3-L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Polars expression namespace for unit conversions.</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_bits" title="polars_extensions.units.UnitExtensionNamespace.bytes_to_bits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes_to_bits</span></code></a>()</p></td>
+<td><p>Convert bytes to bits.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_gigabytes" title="polars_extensions.units.UnitExtensionNamespace.bytes_to_gigabytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes_to_gigabytes</span></code></a>()</p></td>
+<td><p>Convert bytes to gigabytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_kilobytes" title="polars_extensions.units.UnitExtensionNamespace.bytes_to_kilobytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes_to_kilobytes</span></code></a>()</p></td>
+<td><p>Convert bytes to kilobytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_megabytes" title="polars_extensions.units.UnitExtensionNamespace.bytes_to_megabytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes_to_megabytes</span></code></a>()</p></td>
+<td><p>Convert bytes to megabytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_terabytes" title="polars_extensions.units.UnitExtensionNamespace.bytes_to_terabytes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bytes_to_terabytes</span></code></a>()</p></td>
+<td><p>Convert bytes to terabytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.calories_to_joules" title="polars_extensions.units.UnitExtensionNamespace.calories_to_joules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calories_to_joules</span></code></a>()</p></td>
+<td><p>Convert calories to joules.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_fahrenheit" title="polars_extensions.units.UnitExtensionNamespace.celsius_to_fahrenheit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">celsius_to_fahrenheit</span></code></a>()</p></td>
+<td><p>Convert Celsius to Fahrenheit.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_kelvin" title="polars_extensions.units.UnitExtensionNamespace.celsius_to_kelvin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">celsius_to_kelvin</span></code></a>()</p></td>
+<td><p>Convert Celsius to Kelvin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.centimeters_to_inches" title="polars_extensions.units.UnitExtensionNamespace.centimeters_to_inches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">centimeters_to_inches</span></code></a>()</p></td>
+<td><p>Convert centimeters to inches.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.days_to_weeks" title="polars_extensions.units.UnitExtensionNamespace.days_to_weeks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">days_to_weeks</span></code></a>()</p></td>
+<td><p>Convert days to weeks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.days_to_years" title="polars_extensions.units.UnitExtensionNamespace.days_to_years"><code class="xref py py-obj docutils literal notranslate"><span class="pre">days_to_years</span></code></a>()</p></td>
+<td><p>Convert days to years (approx, 365 days).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.fahrenheit_to_celsius" title="polars_extensions.units.UnitExtensionNamespace.fahrenheit_to_celsius"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fahrenheit_to_celsius</span></code></a>()</p></td>
+<td><p>Convert Fahrenheit to Celsius.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.gallons_to_liters" title="polars_extensions.units.UnitExtensionNamespace.gallons_to_liters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gallons_to_liters</span></code></a>()</p></td>
+<td><p>Convert gallons to liters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.grams_to_ounces" title="polars_extensions.units.UnitExtensionNamespace.grams_to_ounces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grams_to_ounces</span></code></a>()</p></td>
+<td><p>Convert grams to ounces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.hours_to_days" title="polars_extensions.units.UnitExtensionNamespace.hours_to_days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hours_to_days</span></code></a>()</p></td>
+<td><p>Convert hours to days.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_btus" title="polars_extensions.units.UnitExtensionNamespace.joules_to_btus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">joules_to_btus</span></code></a>()</p></td>
+<td><p>Convert joules to BTUs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_calories" title="polars_extensions.units.UnitExtensionNamespace.joules_to_calories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">joules_to_calories</span></code></a>()</p></td>
+<td><p>Convert joules to calories.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_kwh" title="polars_extensions.units.UnitExtensionNamespace.joules_to_kwh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">joules_to_kwh</span></code></a>()</p></td>
+<td><p>Convert joules to kilowatt-hours.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_therms" title="polars_extensions.units.UnitExtensionNamespace.joules_to_therms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">joules_to_therms</span></code></a>()</p></td>
+<td><p>Convert joules to therms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_celsius_" title="polars_extensions.units.UnitExtensionNamespace.kelvin_to_celsius_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kelvin_to_celsius_</span></code></a>()</p></td>
+<td><p>Convert Kelvin to Celsius.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_rankine" title="polars_extensions.units.UnitExtensionNamespace.kelvin_to_rankine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kelvin_to_rankine</span></code></a>()</p></td>
+<td><p>Convert Kelvin to Rankine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_grams" title="polars_extensions.units.UnitExtensionNamespace.kilograms_to_grams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilograms_to_grams</span></code></a>()</p></td>
+<td><p>Convert kilograms to grams.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_pounds" title="polars_extensions.units.UnitExtensionNamespace.kilograms_to_pounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilograms_to_pounds</span></code></a>()</p></td>
+<td><p>Convert kilograms to pounds.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_stones" title="polars_extensions.units.UnitExtensionNamespace.kilograms_to_stones"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilograms_to_stones</span></code></a>()</p></td>
+<td><p>Convert kilograms to stones.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kilometers_to_miles" title="polars_extensions.units.UnitExtensionNamespace.kilometers_to_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kilometers_to_miles</span></code></a>()</p></td>
+<td><p>Convert kilometers to miles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mph" title="polars_extensions.units.UnitExtensionNamespace.kph_to_mph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kph_to_mph</span></code></a>()</p></td>
+<td><p>Convert kilometers per hour to miles per hour.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mps" title="polars_extensions.units.UnitExtensionNamespace.kph_to_mps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kph_to_mps</span></code></a>()</p></td>
+<td><p>Convert kilometers per hour to meters per second.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_cubic_meters" title="polars_extensions.units.UnitExtensionNamespace.liters_to_cubic_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">liters_to_cubic_meters</span></code></a>()</p></td>
+<td><p>Convert liters to cubic meters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_gallons" title="polars_extensions.units.UnitExtensionNamespace.liters_to_gallons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">liters_to_gallons</span></code></a>()</p></td>
+<td><p>Convert liters to gallons.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_milliliters" title="polars_extensions.units.UnitExtensionNamespace.liters_to_milliliters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">liters_to_milliliters</span></code></a>()</p></td>
+<td><p>Convert liters to milliliters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_feet" title="polars_extensions.units.UnitExtensionNamespace.meters_to_feet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_feet</span></code></a>()</p></td>
+<td><p>Convert meters to feet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_kilometers" title="polars_extensions.units.UnitExtensionNamespace.meters_to_kilometers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_kilometers</span></code></a>()</p></td>
+<td><p>Convert meters to kilometers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_light_years" title="polars_extensions.units.UnitExtensionNamespace.meters_to_light_years"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_light_years</span></code></a>()</p></td>
+<td><p>Convert meters to light years.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_nautical_miles" title="polars_extensions.units.UnitExtensionNamespace.meters_to_nautical_miles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_nautical_miles</span></code></a>()</p></td>
+<td><p>Convert meters to nautical miles.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_yards" title="polars_extensions.units.UnitExtensionNamespace.meters_to_yards"><code class="xref py py-obj docutils literal notranslate"><span class="pre">meters_to_yards</span></code></a>()</p></td>
+<td><p>Convert meters to yards.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.milliliters_to_fluid_ounces" title="polars_extensions.units.UnitExtensionNamespace.milliliters_to_fluid_ounces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">milliliters_to_fluid_ounces</span></code></a>()</p></td>
+<td><p>Convert milliliters to US fluid ounces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_knots" title="polars_extensions.units.UnitExtensionNamespace.mps_to_knots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mps_to_knots</span></code></a>()</p></td>
+<td><p>Convert meters per second to knots.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_kph" title="polars_extensions.units.UnitExtensionNamespace.mps_to_kph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mps_to_kph</span></code></a>()</p></td>
+<td><p>Convert meters per second to kilometers per hour.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_atm" title="polars_extensions.units.UnitExtensionNamespace.pascals_to_atm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pascals_to_atm</span></code></a>()</p></td>
+<td><p>Convert Pascals to atmospheres.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_bar" title="polars_extensions.units.UnitExtensionNamespace.pascals_to_bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pascals_to_bar</span></code></a>()</p></td>
+<td><p>Convert Pascals to bar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_torr" title="polars_extensions.units.UnitExtensionNamespace.pascals_to_torr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pascals_to_torr</span></code></a>()</p></td>
+<td><p>Convert Pascals to torr.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.pounds_to_kilograms" title="polars_extensions.units.UnitExtensionNamespace.pounds_to_kilograms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pounds_to_kilograms</span></code></a>()</p></td>
+<td><p>Convert pounds to kilograms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.psi_to_pascals" title="polars_extensions.units.UnitExtensionNamespace.psi_to_pascals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_to_pascals</span></code></a>()</p></td>
+<td><p>Convert psi to Pascals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.rankine_to_kelvin" title="polars_extensions.units.UnitExtensionNamespace.rankine_to_kelvin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rankine_to_kelvin</span></code></a>()</p></td>
+<td><p>Convert Rankine to Kelvin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_hours" title="polars_extensions.units.UnitExtensionNamespace.sec_to_hours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sec_to_hours</span></code></a>()</p></td>
+<td><p>Convert seconds to hours.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_minutes" title="polars_extensions.units.UnitExtensionNamespace.sec_to_minutes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sec_to_minutes</span></code></a>()</p></td>
+<td><p>Convert seconds to minutes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sq_feet_to_sq_meters" title="polars_extensions.units.UnitExtensionNamespace.sq_feet_to_sq_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_feet_to_sq_meters</span></code></a>()</p></td>
+<td><p>Convert square feet to square meters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_acres" title="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_acres"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_meters_to_acres</span></code></a>()</p></td>
+<td><p>Convert square meters to acres.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_hectares" title="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_hectares"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_meters_to_hectares</span></code></a>()</p></td>
+<td><p>Convert square meters to hectares.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_sq_feet" title="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_sq_feet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sq_meters_to_sq_feet</span></code></a>()</p></td>
+<td><p>Convert square meters to square feet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.units.UnitExtensionNamespace.yards_to_meters" title="polars_extensions.units.UnitExtensionNamespace.yards_to_meters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yards_to_meters</span></code></a>()</p></td>
+<td><p>Convert yards to meters.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.bytes_to_bits">
+<span class="sig-name descname"><span class="pre">bytes_to_bits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L284-L286"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_bits" title="Link to this definition">#</a></dt>
+<dd><p>Convert bytes to bits.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.bytes_to_gigabytes">
+<span class="sig-name descname"><span class="pre">bytes_to_gigabytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L276-L278"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_gigabytes" title="Link to this definition">#</a></dt>
+<dd><p>Convert bytes to gigabytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.bytes_to_kilobytes">
+<span class="sig-name descname"><span class="pre">bytes_to_kilobytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L268-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_kilobytes" title="Link to this definition">#</a></dt>
+<dd><p>Convert bytes to kilobytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.bytes_to_megabytes">
+<span class="sig-name descname"><span class="pre">bytes_to_megabytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L272-L274"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_megabytes" title="Link to this definition">#</a></dt>
+<dd><p>Convert bytes to megabytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.bytes_to_terabytes">
+<span class="sig-name descname"><span class="pre">bytes_to_terabytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L280-L282"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_terabytes" title="Link to this definition">#</a></dt>
+<dd><p>Convert bytes to terabytes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.calories_to_joules">
+<span class="sig-name descname"><span class="pre">calories_to_joules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L175-L177"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.calories_to_joules" title="Link to this definition">#</a></dt>
+<dd><p>Convert calories to joules.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.celsius_to_fahrenheit">
+<span class="sig-name descname"><span class="pre">celsius_to_fahrenheit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L47-L49"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_fahrenheit" title="Link to this definition">#</a></dt>
+<dd><p>Convert Celsius to Fahrenheit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.celsius_to_kelvin">
+<span class="sig-name descname"><span class="pre">celsius_to_kelvin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L51-L53"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_kelvin" title="Link to this definition">#</a></dt>
+<dd><p>Convert Celsius to Kelvin.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.centimeters_to_inches">
+<span class="sig-name descname"><span class="pre">centimeters_to_inches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L112-L114"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.centimeters_to_inches" title="Link to this definition">#</a></dt>
+<dd><p>Convert centimeters to inches.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.days_to_weeks">
+<span class="sig-name descname"><span class="pre">days_to_weeks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L259-L261"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.days_to_weeks" title="Link to this definition">#</a></dt>
+<dd><p>Convert days to weeks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.days_to_years">
+<span class="sig-name descname"><span class="pre">days_to_years</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L263-L265"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.days_to_years" title="Link to this definition">#</a></dt>
+<dd><p>Convert days to years (approx, 365 days).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.fahrenheit_to_celsius">
+<span class="sig-name descname"><span class="pre">fahrenheit_to_celsius</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L13-L45"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.fahrenheit_to_celsius" title="Link to this definition">#</a></dt>
+<dd><p>Convert Fahrenheit to Celsius.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;temp_F&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">104</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;temp_F&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unit_ext</span><span class="o">.</span><span class="n">fahrenheit_to_celsius</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;temp_C&quot;</span><span class="p">),</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (3, 2)
+┌────────┬────────┐
+│ temp_F ┆ temp_C │
+│ ---    ┆ ---    │
+│ i64    ┆ f64    │
+╞════════╪════════╡
+│ 32     ┆ 0.0    │
+│ 68     ┆ 20.0   │
+│ 104    ┆ 40.0   │
+└────────┴────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.gallons_to_liters">
+<span class="sig-name descname"><span class="pre">gallons_to_liters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L154-L156"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.gallons_to_liters" title="Link to this definition">#</a></dt>
+<dd><p>Convert gallons to liters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.grams_to_ounces">
+<span class="sig-name descname"><span class="pre">grams_to_ounces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L145-L147"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.grams_to_ounces" title="Link to this definition">#</a></dt>
+<dd><p>Convert grams to ounces.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.hours_to_days">
+<span class="sig-name descname"><span class="pre">hours_to_days</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L255-L257"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.hours_to_days" title="Link to this definition">#</a></dt>
+<dd><p>Convert hours to days.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.joules_to_btus">
+<span class="sig-name descname"><span class="pre">joules_to_btus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L187-L189"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_btus" title="Link to this definition">#</a></dt>
+<dd><p>Convert joules to BTUs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.joules_to_calories">
+<span class="sig-name descname"><span class="pre">joules_to_calories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L179-L181"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_calories" title="Link to this definition">#</a></dt>
+<dd><p>Convert joules to calories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.joules_to_kwh">
+<span class="sig-name descname"><span class="pre">joules_to_kwh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L183-L185"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_kwh" title="Link to this definition">#</a></dt>
+<dd><p>Convert joules to kilowatt-hours.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.joules_to_therms">
+<span class="sig-name descname"><span class="pre">joules_to_therms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L191-L193"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_therms" title="Link to this definition">#</a></dt>
+<dd><p>Convert joules to therms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kelvin_to_celsius_">
+<span class="sig-name descname"><span class="pre">kelvin_to_celsius_</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L55-L57"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_celsius_" title="Link to this definition">#</a></dt>
+<dd><p>Convert Kelvin to Celsius.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kelvin_to_rankine">
+<span class="sig-name descname"><span class="pre">kelvin_to_rankine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L59-L61"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_rankine" title="Link to this definition">#</a></dt>
+<dd><p>Convert Kelvin to Rankine.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kilograms_to_grams">
+<span class="sig-name descname"><span class="pre">kilograms_to_grams</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L141-L143"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_grams" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilograms to grams.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kilograms_to_pounds">
+<span class="sig-name descname"><span class="pre">kilograms_to_pounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L137-L139"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_pounds" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilograms to pounds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kilograms_to_stones">
+<span class="sig-name descname"><span class="pre">kilograms_to_stones</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L149-L151"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_stones" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilograms to stones.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kilometers_to_miles">
+<span class="sig-name descname"><span class="pre">kilometers_to_miles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L120-L122"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kilometers_to_miles" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilometers to miles.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kph_to_mph">
+<span class="sig-name descname"><span class="pre">kph_to_mph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L204-L206"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mph" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilometers per hour to miles per hour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.kph_to_mps">
+<span class="sig-name descname"><span class="pre">kph_to_mps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L196-L198"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mps" title="Link to this definition">#</a></dt>
+<dd><p>Convert kilometers per hour to meters per second.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.liters_to_cubic_meters">
+<span class="sig-name descname"><span class="pre">liters_to_cubic_meters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L166-L168"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_cubic_meters" title="Link to this definition">#</a></dt>
+<dd><p>Convert liters to cubic meters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.liters_to_gallons">
+<span class="sig-name descname"><span class="pre">liters_to_gallons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L158-L160"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_gallons" title="Link to this definition">#</a></dt>
+<dd><p>Convert liters to gallons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.liters_to_milliliters">
+<span class="sig-name descname"><span class="pre">liters_to_milliliters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L162-L164"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_milliliters" title="Link to this definition">#</a></dt>
+<dd><p>Convert liters to milliliters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.meters_to_feet">
+<span class="sig-name descname"><span class="pre">meters_to_feet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L108-L110"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_feet" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters to feet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.meters_to_kilometers">
+<span class="sig-name descname"><span class="pre">meters_to_kilometers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L116-L118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_kilometers" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters to kilometers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.meters_to_light_years">
+<span class="sig-name descname"><span class="pre">meters_to_light_years</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L128-L130"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_light_years" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters to light years.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.meters_to_nautical_miles">
+<span class="sig-name descname"><span class="pre">meters_to_nautical_miles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L124-L126"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_nautical_miles" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters to nautical miles.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.meters_to_yards">
+<span class="sig-name descname"><span class="pre">meters_to_yards</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L104-L106"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_yards" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters to yards.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.milliliters_to_fluid_ounces">
+<span class="sig-name descname"><span class="pre">milliliters_to_fluid_ounces</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L170-L172"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.milliliters_to_fluid_ounces" title="Link to this definition">#</a></dt>
+<dd><p>Convert milliliters to US fluid ounces.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.mps_to_knots">
+<span class="sig-name descname"><span class="pre">mps_to_knots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L208-L210"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_knots" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters per second to knots.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.mps_to_kph">
+<span class="sig-name descname"><span class="pre">mps_to_kph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L200-L202"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_kph" title="Link to this definition">#</a></dt>
+<dd><p>Convert meters per second to kilometers per hour.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.pascals_to_atm">
+<span class="sig-name descname"><span class="pre">pascals_to_atm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L238-L240"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_atm" title="Link to this definition">#</a></dt>
+<dd><p>Convert Pascals to atmospheres.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.pascals_to_bar">
+<span class="sig-name descname"><span class="pre">pascals_to_bar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L234-L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_bar" title="Link to this definition">#</a></dt>
+<dd><p>Convert Pascals to bar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.pascals_to_torr">
+<span class="sig-name descname"><span class="pre">pascals_to_torr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L242-L244"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_torr" title="Link to this definition">#</a></dt>
+<dd><p>Convert Pascals to torr.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.pounds_to_kilograms">
+<span class="sig-name descname"><span class="pre">pounds_to_kilograms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L133-L135"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.pounds_to_kilograms" title="Link to this definition">#</a></dt>
+<dd><p>Convert pounds to kilograms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.psi_to_pascals">
+<span class="sig-name descname"><span class="pre">psi_to_pascals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L230-L232"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.psi_to_pascals" title="Link to this definition">#</a></dt>
+<dd><p>Convert psi to Pascals.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.rankine_to_kelvin">
+<span class="sig-name descname"><span class="pre">rankine_to_kelvin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L63-L65"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.rankine_to_kelvin" title="Link to this definition">#</a></dt>
+<dd><p>Convert Rankine to Kelvin.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sec_to_hours">
+<span class="sig-name descname"><span class="pre">sec_to_hours</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L251-L253"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_hours" title="Link to this definition">#</a></dt>
+<dd><p>Convert seconds to hours.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sec_to_minutes">
+<span class="sig-name descname"><span class="pre">sec_to_minutes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L247-L249"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_minutes" title="Link to this definition">#</a></dt>
+<dd><p>Convert seconds to minutes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sq_feet_to_sq_meters">
+<span class="sig-name descname"><span class="pre">sq_feet_to_sq_meters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L213-L215"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sq_feet_to_sq_meters" title="Link to this definition">#</a></dt>
+<dd><p>Convert square feet to square meters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_acres">
+<span class="sig-name descname"><span class="pre">sq_meters_to_acres</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L221-L223"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_acres" title="Link to this definition">#</a></dt>
+<dd><p>Convert square meters to acres.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_hectares">
+<span class="sig-name descname"><span class="pre">sq_meters_to_hectares</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L225-L227"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_hectares" title="Link to this definition">#</a></dt>
+<dd><p>Convert square meters to hectares.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.sq_meters_to_sq_feet">
+<span class="sig-name descname"><span class="pre">sq_meters_to_sq_feet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L217-L219"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_sq_feet" title="Link to this definition">#</a></dt>
+<dd><p>Convert square meters to square feet.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.units.UnitExtensionNamespace.yards_to_meters">
+<span class="sig-name descname"><span class="pre">yards_to_meters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/units.py#L68-L102"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.units.UnitExtensionNamespace.yards_to_meters" title="Link to this definition">#</a></dt>
+<dd><p>Convert yards to meters.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;yards&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">([</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;yards&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unit_ext</span><span class="o">.</span><span class="n">yards_to_meters</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;meters&quot;</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (3, 2)
+┌───────┬────────┐
+│ yards ┆ meters │
+│ ---   ┆ ---    │
+│ i64   ┆ f64    │
+╞═══════╪════════╡
+│ 10    ┆ 9.144  │
+│ 50    ┆ 45.72  │
+│ 100   ┆ 91.44  │
+└───────┴────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="geo_ext.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Geospatial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="url_ext.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Units</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_bits"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.bytes_to_bits()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_gigabytes"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.bytes_to_gigabytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_kilobytes"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.bytes_to_kilobytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_megabytes"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.bytes_to_megabytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.bytes_to_terabytes"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.bytes_to_terabytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.calories_to_joules"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.calories_to_joules()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_fahrenheit"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.celsius_to_fahrenheit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.celsius_to_kelvin"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.celsius_to_kelvin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.centimeters_to_inches"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.centimeters_to_inches()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.days_to_weeks"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.days_to_weeks()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.days_to_years"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.days_to_years()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.fahrenheit_to_celsius"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.fahrenheit_to_celsius()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.gallons_to_liters"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.gallons_to_liters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.grams_to_ounces"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.grams_to_ounces()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.hours_to_days"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.hours_to_days()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_btus"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.joules_to_btus()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_calories"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.joules_to_calories()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_kwh"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.joules_to_kwh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.joules_to_therms"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.joules_to_therms()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_celsius_"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kelvin_to_celsius_()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kelvin_to_rankine"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kelvin_to_rankine()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_grams"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kilograms_to_grams()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_pounds"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kilograms_to_pounds()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kilograms_to_stones"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kilograms_to_stones()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kilometers_to_miles"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kilometers_to_miles()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mph"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kph_to_mph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.kph_to_mps"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.kph_to_mps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_cubic_meters"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.liters_to_cubic_meters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_gallons"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.liters_to_gallons()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.liters_to_milliliters"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.liters_to_milliliters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_feet"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.meters_to_feet()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_kilometers"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.meters_to_kilometers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_light_years"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.meters_to_light_years()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_nautical_miles"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.meters_to_nautical_miles()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.meters_to_yards"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.meters_to_yards()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.milliliters_to_fluid_ounces"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.milliliters_to_fluid_ounces()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_knots"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.mps_to_knots()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.mps_to_kph"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.mps_to_kph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_atm"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.pascals_to_atm()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_bar"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.pascals_to_bar()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.pascals_to_torr"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.pascals_to_torr()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.pounds_to_kilograms"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.pounds_to_kilograms()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.psi_to_pascals"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.psi_to_pascals()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.rankine_to_kelvin"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.rankine_to_kelvin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_hours"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sec_to_hours()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sec_to_minutes"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sec_to_minutes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sq_feet_to_sq_meters"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sq_feet_to_sq_meters()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_acres"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sq_meters_to_acres()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_hectares"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sq_meters_to_hectares()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.sq_meters_to_sq_feet"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.sq_meters_to_sq_feet()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.units.UnitExtensionNamespace.yards_to_meters"><code class="docutils literal notranslate"><span class="pre">UnitExtensionNamespace.yards_to_meters()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Jayden Rasband.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
