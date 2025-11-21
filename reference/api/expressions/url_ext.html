@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Units &#8212; Polars Extensions 1.0.0 documentation</title>
+    <title>URL &#8212; Polars Extensions 1.0.0 documentation</title>
   
   
   
@@ -186,30 +186,6 @@ document.write(`
 `);
 </script></div>
       
-        <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-2"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-2"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-2"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-2">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
-  </div>
-`);
-</script></div>
-      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -282,10 +258,6 @@ document.write(`
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -343,30 +315,6 @@ document.write(`
     <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
     <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-`);
-</script></div>
-        
-          <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-3"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-3"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-3"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-3">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
-  </div>
 `);
 </script></div>
         
@@ -440,7 +388,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="num_ext.html">Numeric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo_ext.html">Geospatial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="units_ext.html">Units</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Units</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">URL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bio_ext.html">Biology</a></li>
 </ul>
 </details></li>
@@ -493,7 +441,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Expressions</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Units</li>
+    <li class="breadcrumb-item active" aria-current="page">URL</li>
   </ul>
 </nav>
 </div>
@@ -511,108 +459,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="module-polars_extensions.url">
-<span id="units"></span><h1>Units<a class="headerlink" href="#module-polars_extensions.url" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.url.</span></span><span class="sig-name descname"><span class="pre">UrlExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L4-L95"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.domain" title="polars_extensions.url.UrlExtensionNamespace.domain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">domain</span></code></a>()</p></td>
-<td><p>Extract just the domain name (without port or subdomain).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.fragment" title="polars_extensions.url.UrlExtensionNamespace.fragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fragment</span></code></a>()</p></td>
-<td><p>Extract fragment (#section).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.host" title="polars_extensions.url.UrlExtensionNamespace.host"><code class="xref py py-obj docutils literal notranslate"><span class="pre">host</span></code></a>()</p></td>
-<td><p>Extract host (domain + optional port).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.path" title="polars_extensions.url.UrlExtensionNamespace.path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">path</span></code></a>()</p></td>
-<td><p>Extract the path (/docs/, /path/to/page, etc.).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.query" title="polars_extensions.url.UrlExtensionNamespace.query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query</span></code></a>()</p></td>
-<td><p>Extract the full query string.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.query_param" title="polars_extensions.url.UrlExtensionNamespace.query_param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_param</span></code></a>(key)</p></td>
-<td><p>Extract the value of a specific query parameter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.url.UrlExtensionNamespace.scheme" title="polars_extensions.url.UrlExtensionNamespace.scheme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scheme</span></code></a>()</p></td>
-<td><p>Extract URL scheme (http, https, ftp, etc.).</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.domain">
-<span class="sig-name descname"><span class="pre">domain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L23-L31"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.domain" title="Link to this definition">#</a></dt>
-<dd><p>Extract just the domain name (without port or subdomain).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.fragment">
-<span class="sig-name descname"><span class="pre">fragment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L90-L95"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.fragment" title="Link to this definition">#</a></dt>
-<dd><p>Extract fragment (#section).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.host">
-<span class="sig-name descname"><span class="pre">host</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L16-L21"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.host" title="Link to this definition">#</a></dt>
-<dd><p>Extract host (domain + optional port).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.path">
-<span class="sig-name descname"><span class="pre">path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L33-L38"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.path" title="Link to this definition">#</a></dt>
-<dd><p>Extract the path (/docs/, /path/to/page, etc.).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.query">
-<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L40-L45"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query" title="Link to this definition">#</a></dt>
-<dd><p>Extract the full query string.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.query_param">
-<span class="sig-name descname"><span class="pre">query_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L47-L88"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query_param" title="Link to this definition">#</a></dt>
-<dd><p>Extract the value of a specific query parameter.</p>
-<p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-<span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="p">[</span>
-<span class="s2">&quot;https://pypi.org/search/?q=polars-extensions&quot;</span><span class="p">,</span>
-<span class="s2">&quot;https://pypi.org/search/?q=polars&quot;</span><span class="p">,</span>
-<span class="s2">&quot;https://pypi.org/search/?q=pyodbc&quot;</span>
-<span class="p">]</span>
-<span class="p">})</span>
-<span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;link&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">url_ext</span><span class="o">.</span><span class="n">query_param</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (3, 2)
-┌─────────────────────────────────┬───────────────────┐
-│ link                            ┆ q                 │
-│ ---                             ┆ ---               │
-│ str                             ┆ str               │
-╞═════════════════════════════════╪═══════════════════╡
-│ https://pypi.org/search/?q=pol… ┆ polars-extensions │
-│ https://pypi.org/search/?q=pol… ┆ polars            │
-│ https://pypi.org/search/?q=pyo… ┆ pyodbc            │
-└─────────────────────────────────┴───────────────────┘
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.scheme">
-<span class="sig-name descname"><span class="pre">scheme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L9-L14"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.scheme" title="Link to this definition">#</a></dt>
-<dd><p>Extract URL scheme (http, https, ftp, etc.).</p>
-</dd></dl>
-
-</dd></dl>
-
+<span id="url"></span><h1>URL<a class="headerlink" href="#module-polars_extensions.url" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -649,32 +496,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.domain"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.domain()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.fragment"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.fragment()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.host"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.host()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.path"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.path()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.query"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.query()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.query_param"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.query_param()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.url.UrlExtensionNamespace.scheme"><code class="docutils literal notranslate"><span class="pre">UrlExtensionNamespace.scheme()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

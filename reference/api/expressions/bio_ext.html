@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="DataFrame" href="../dataframe/index.html" />
-    <link rel="prev" title="Units" href="url_ext.html" />
+    <link rel="prev" title="URL" href="url_ext.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="python"/>
   </head>
@@ -186,30 +186,6 @@ document.write(`
 `);
 </script></div>
       
-        <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-2"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-2"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-2"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-2">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
-  </div>
-`);
-</script></div>
-      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -282,10 +258,6 @@ document.write(`
   
 
   
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
 
     </header>
@@ -343,30 +315,6 @@ document.write(`
     <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
     <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-`);
-</script></div>
-        
-          <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-3"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-3"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-3"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-3">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
-  </div>
 `);
 </script></div>
         
@@ -440,7 +388,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="num_ext.html">Numeric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="geo_ext.html">Geospatial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="units_ext.html">Units</a></li>
-<li class="toctree-l2"><a class="reference internal" href="url_ext.html">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url_ext.html">URL</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Biology</a></li>
 </ul>
 </details></li>
@@ -512,236 +460,6 @@ document.write(`
                   
   <section id="module-polars_extensions.biology">
 <span id="biology"></span><h1>Biology<a class="headerlink" href="#module-polars_extensions.biology" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.biology.</span></span><span class="sig-name descname"><span class="pre">BioExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L4-L164"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Polars expression namespace for biological sequence conversions and analysis.</p>
-<p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.at_content" title="polars_extensions.biology.BioExtensionNamespace.at_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">at_content</span></code></a>()</p></td>
-<td><p>Return AT content as a percentage.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.contains_motif" title="polars_extensions.biology.BioExtensionNamespace.contains_motif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains_motif</span></code></a>(motif)</p></td>
-<td><p>Return True if sequence contains the given motif.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.count_codons" title="polars_extensions.biology.BioExtensionNamespace.count_codons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_codons</span></code></a>()</p></td>
-<td><p>Return the number of codons (sequence length / 3).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.count_motif" title="polars_extensions.biology.BioExtensionNamespace.count_motif"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_motif</span></code></a>(motif)</p></td>
-<td><p>Count occurrences of a motif in the sequence.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.count_nucleotides" title="polars_extensions.biology.BioExtensionNamespace.count_nucleotides"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_nucleotides</span></code></a>()</p></td>
-<td><p>Return a struct of counts for A, T, G, and C.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.delete_sequence" title="polars_extensions.biology.BioExtensionNamespace.delete_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">delete_sequence</span></code></a>(start, end)</p></td>
-<td><p>Delete a segment of the sequence from start to end.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.dna_complement" title="polars_extensions.biology.BioExtensionNamespace.dna_complement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dna_complement</span></code></a>()</p></td>
-<td><p>Return the DNA complement (A↔T, C↔G).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.dna_reverse_complement" title="polars_extensions.biology.BioExtensionNamespace.dna_reverse_complement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dna_reverse_complement</span></code></a>()</p></td>
-<td><p>Return the reverse complement of DNA sequence.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.dna_to_rna" title="polars_extensions.biology.BioExtensionNamespace.dna_to_rna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dna_to_rna</span></code></a>()</p></td>
-<td><p>Convert DNA sequences (A, T, G, C) to RNA sequences (A, U, G, C).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.dna_transcribe" title="polars_extensions.biology.BioExtensionNamespace.dna_transcribe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dna_transcribe</span></code></a>()</p></td>
-<td><p>Transcribe DNA to RNA (same as dna_to_rna).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.gc_content" title="polars_extensions.biology.BioExtensionNamespace.gc_content"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_content</span></code></a>()</p></td>
-<td><p>Return GC content as a percentage.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.gc_skew" title="polars_extensions.biology.BioExtensionNamespace.gc_skew"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gc_skew</span></code></a>()</p></td>
-<td><p>Compute GC skew = (G - C) / (G + C).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.hamming_distance" title="polars_extensions.biology.BioExtensionNamespace.hamming_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hamming_distance</span></code></a>(other)</p></td>
-<td><p>Return Hamming distance between two equal-length sequences.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.insert_sequence" title="polars_extensions.biology.BioExtensionNamespace.insert_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_sequence</span></code></a>(position, subseq)</p></td>
-<td><p>Insert a subsequence at the given position.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_dna" title="polars_extensions.biology.BioExtensionNamespace.is_valid_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_dna</span></code></a>()</p></td>
-<td><p>Return True if the sequence only contains valid DNA bases (A, T, G, C, N).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_rna" title="polars_extensions.biology.BioExtensionNamespace.is_valid_rna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_valid_rna</span></code></a>()</p></td>
-<td><p>Return True if the sequence only contains valid RNA bases (A, U, G, C, N).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.mutate_sequence" title="polars_extensions.biology.BioExtensionNamespace.mutate_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mutate_sequence</span></code></a>(position, new_base)</p></td>
-<td><p>Mutate a sequence by replacing one base at a given position (0-indexed).</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.repeat_sequence" title="polars_extensions.biology.BioExtensionNamespace.repeat_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repeat_sequence</span></code></a>(n)</p></td>
-<td><p>Repeat the sequence n times.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.reverse_sequence" title="polars_extensions.biology.BioExtensionNamespace.reverse_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_sequence</span></code></a>()</p></td>
-<td><p>Reverse a sequence string.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.rna_to_dna" title="polars_extensions.biology.BioExtensionNamespace.rna_to_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rna_to_dna</span></code></a>()</p></td>
-<td><p>Convert RNA sequences (A, U, G, C) to DNA sequences (A, T, G, C).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.biology.BioExtensionNamespace.sequence_length" title="polars_extensions.biology.BioExtensionNamespace.sequence_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequence_length</span></code></a>()</p></td>
-<td><p>Return the sequence length.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.at_content">
-<span class="sig-name descname"><span class="pre">at_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L59-L64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.at_content" title="Link to this definition">#</a></dt>
-<dd><p>Return AT content as a percentage.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.contains_motif">
-<span class="sig-name descname"><span class="pre">contains_motif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L99-L101"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.contains_motif" title="Link to this definition">#</a></dt>
-<dd><p>Return True if sequence contains the given motif.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.count_codons">
-<span class="sig-name descname"><span class="pre">count_codons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L83-L85"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.count_codons" title="Link to this definition">#</a></dt>
-<dd><p>Return the number of codons (sequence length / 3).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.count_motif">
-<span class="sig-name descname"><span class="pre">count_motif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L103-L105"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.count_motif" title="Link to this definition">#</a></dt>
-<dd><p>Count occurrences of a motif in the sequence.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.count_nucleotides">
-<span class="sig-name descname"><span class="pre">count_nucleotides</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L72-L81"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.count_nucleotides" title="Link to this definition">#</a></dt>
-<dd><p>Return a struct of counts for A, T, G, and C.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.delete_sequence">
-<span class="sig-name descname"><span class="pre">delete_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L159-L164"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.delete_sequence" title="Link to this definition">#</a></dt>
-<dd><p>Delete a segment of the sequence from start to end.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.dna_complement">
-<span class="sig-name descname"><span class="pre">dna_complement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L25-L34"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.dna_complement" title="Link to this definition">#</a></dt>
-<dd><p>Return the DNA complement (A↔T, C↔G).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.dna_reverse_complement">
-<span class="sig-name descname"><span class="pre">dna_reverse_complement</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L36-L38"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.dna_reverse_complement" title="Link to this definition">#</a></dt>
-<dd><p>Return the reverse complement of DNA sequence.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.dna_to_rna">
-<span class="sig-name descname"><span class="pre">dna_to_rna</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L17-L19"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.dna_to_rna" title="Link to this definition">#</a></dt>
-<dd><p>Convert DNA sequences (A, T, G, C) to RNA sequences (A, U, G, C).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.dna_transcribe">
-<span class="sig-name descname"><span class="pre">dna_transcribe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L40-L42"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.dna_transcribe" title="Link to this definition">#</a></dt>
-<dd><p>Transcribe DNA to RNA (same as dna_to_rna).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.gc_content">
-<span class="sig-name descname"><span class="pre">gc_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L52-L57"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.gc_content" title="Link to this definition">#</a></dt>
-<dd><p>Return GC content as a percentage.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.gc_skew">
-<span class="sig-name descname"><span class="pre">gc_skew</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L66-L70"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.gc_skew" title="Link to this definition">#</a></dt>
-<dd><p>Compute GC skew = (G - C) / (G + C).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.hamming_distance">
-<span class="sig-name descname"><span class="pre">hamming_distance</span></span><span class="sig-paren">(</span>
-
-<dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em>,</dd>
-</dl>
-
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L111-L128"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.hamming_distance" title="Link to this definition">#</a></dt>
-<dd><p>Return Hamming distance between two equal-length sequences.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>other</strong><span class="classifier">pl.Expr</span></dt><dd><p>Another expression containing sequences of equal length.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.insert_sequence">
-<span class="sig-name descname"><span class="pre">insert_sequence</span></span><span class="sig-paren">(</span>
-
-<dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">subseq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
-</dl>
-
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L151-L157"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.insert_sequence" title="Link to this definition">#</a></dt>
-<dd><p>Insert a subsequence at the given position.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.is_valid_dna">
-<span class="sig-name descname"><span class="pre">is_valid_dna</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L91-L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_dna" title="Link to this definition">#</a></dt>
-<dd><p>Return True if the sequence only contains valid DNA bases (A, T, G, C, N).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.is_valid_rna">
-<span class="sig-name descname"><span class="pre">is_valid_rna</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L95-L97"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_rna" title="Link to this definition">#</a></dt>
-<dd><p>Return True if the sequence only contains valid RNA bases (A, U, G, C, N).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.mutate_sequence">
-<span class="sig-name descname"><span class="pre">mutate_sequence</span></span><span class="sig-paren">(</span>
-
-<dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">new_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
-</dl>
-
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L142-L149"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.mutate_sequence" title="Link to this definition">#</a></dt>
-<dd><p>Mutate a sequence by replacing one base at a given position (0-indexed).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.repeat_sequence">
-<span class="sig-name descname"><span class="pre">repeat_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L138-L140"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.repeat_sequence" title="Link to this definition">#</a></dt>
-<dd><p>Repeat the sequence n times.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.reverse_sequence">
-<span class="sig-name descname"><span class="pre">reverse_sequence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L134-L136"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.reverse_sequence" title="Link to this definition">#</a></dt>
-<dd><p>Reverse a sequence string.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.rna_to_dna">
-<span class="sig-name descname"><span class="pre">rna_to_dna</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L21-L23"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.rna_to_dna" title="Link to this definition">#</a></dt>
-<dd><p>Convert RNA sequences (A, U, G, C) to DNA sequences (A, T, G, C).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="polars_extensions.biology.BioExtensionNamespace.sequence_length">
-<span class="sig-name descname"><span class="pre">sequence_length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/biology.py#L48-L50"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.biology.BioExtensionNamespace.sequence_length" title="Link to this definition">#</a></dt>
-<dd><p>Return the sequence length.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 
 
@@ -760,7 +478,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Units</p>
+        <p class="prev-next-title">URL</p>
       </div>
     </a>
     <a class="right-next"
@@ -778,46 +496,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.at_content"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.at_content()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.contains_motif"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.contains_motif()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.count_codons"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.count_codons()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.count_motif"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.count_motif()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.count_nucleotides"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.count_nucleotides()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.delete_sequence"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.delete_sequence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.dna_complement"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.dna_complement()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.dna_reverse_complement"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.dna_reverse_complement()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.dna_to_rna"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.dna_to_rna()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.dna_transcribe"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.dna_transcribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.gc_content"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.gc_content()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.gc_skew"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.gc_skew()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.hamming_distance"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.hamming_distance()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.insert_sequence"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.insert_sequence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_dna"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.is_valid_dna()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.is_valid_rna"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.is_valid_rna()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.mutate_sequence"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.mutate_sequence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.repeat_sequence"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.repeat_sequence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.reverse_sequence"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.reverse_sequence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.rna_to_dna"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.rna_to_dna()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.biology.BioExtensionNamespace.sequence_length"><code class="docutils literal notranslate"><span class="pre">BioExtensionNamespace.sequence_length()</span></code></a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
