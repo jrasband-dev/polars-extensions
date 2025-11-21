@@ -1,5 +1,5 @@
 URL
-======
+===
 
 .. automodule:: polars_extensions.url
    :members:
