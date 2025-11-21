@@ -109,9 +109,9 @@ web_root = "https://jrasband-dev.github.io/polars-extensions/"
 asset_root = "https://raw.githubusercontent.com/jrasband-dev/polars-extensions/main"
 
 # Specify version for version switcher dropdown menu
-git_ref = os.environ.get("METRIC_FORGE_VERSION", "main")
-version_match = re.fullmatch(r"py-(\d+)\.\d+\.\d+.*", git_ref)
-switcher_version = version_match.group(1) if version_match is not None else "dev"
+# git_ref = os.environ.get("METRIC_FORGE_VERSION", "main")
+# version_match = re.fullmatch(r"py-(\d+)\.\d+\.\d+.*", git_ref)
+# switcher_version = version_match.group(1) if version_match is not None else "dev"
 
 # html_js_files = [
 #     (
@@ -158,7 +158,7 @@ html_theme_options = {
     #     "version_match": switcher_version,
     # },
     "show_version_warning_banner": False,
-    "navbar_end": ["theme-switcher", "version-switcher", "navbar-icon-links"],
+    "navbar_end": ["theme-switcher", "navbar-icon-links"],
     "check_switcher": False,
 }
 
@@ -235,15 +235,6 @@ def linkcode_resolve(domain: str, info: dict[str, Any]) -> str | None:
 
     fn = os.path.relpath(fn, start=project_root)
     return f"{github_root}/blob/{git_ref}/polars-extensions/{fn}{linespec}"
-
-
-def _minify_classpaths(s: str) -> str:
-    logging.debug(f'classpath: {s}')
-    return re.sub(
-        pattern=r"metric_forge\.ecommerce\.([^.]+\.[^.]+)",  
-        repl=r"\1",  # Replace with just the captured part
-        string=s,
-    )
 
 
 
