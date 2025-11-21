@@ -258,6 +258,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -460,6 +464,244 @@ document.write(`
                   
   <section id="module-polars_extensions.geo">
 <span id="geospatial"></span><h1>Geospatial<a class="headerlink" href="#module-polars_extensions.geo" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.geo.</span></span><span class="sig-name descname"><span class="pre">GeometryExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L7-L321"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Geometry utilities for handling WKB, WKT, and coordinate conversion.</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb" title="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coords_to_wkb</span></code></a>()</p></td>
+<td><p>Convert Coordinates to Well-Known Binary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt" title="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coords_to_wkt</span></code></a>()</p></td>
+<td><p>Convert Coordinates to Well-Known Text</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords" title="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wkb_to_coords</span></code></a>()</p></td>
+<td><p>Convert Well-Known Binary to Coordinates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt" title="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wkb_to_wkt</span></code></a>()</p></td>
+<td><p>Convert Well-Known Binary to Well-Known Text</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords" title="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wkt_to_coords</span></code></a>()</p></td>
+<td><p>Convert Well-Known Text to Coordinates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb" title="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wkt_to_wkb</span></code></a>([format])</p></td>
+<td><p>Convert Well-Known Text to Well-Known Binary</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb">
+<span class="sig-name descname"><span class="pre">coords_to_wkb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L100-L141"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb" title="Link to this definition">#</a></dt>
+<dd><p>Convert Coordinates to Well-Known Binary</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044612343761</span><span class="p">,</span> <span class="mf">45.139066210329</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044119223429</span><span class="p">,</span> <span class="mf">48.1390850482555</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">102.044733837176</span><span class="p">,</span> <span class="mf">43.1389478003816</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">114.04470525049</span><span class="p">,</span> <span class="mf">43.1385010700204</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">},</span><span class="n">schema_overrides</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span><span class="n">pl</span><span class="o">.</span><span class="n">Object</span><span class="p">})</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">coords_to_wkb</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;wkb&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ geometry                        ┆ wkb                             │
+│ ---                             ┆ ---                             │
+│ object                          ┆ str                             │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ [-101.044612343761, 45.1390662… ┆ 0101000000e45cbbedda4259c0bdab… │
+│ [-101.044119223429, 48.1390850… ┆ 010100000029706fd9d24259c05bcf… │
+│ [-102.044733837176, 43.1389478… ┆ 010100000083ec4febdc8259c0bc3e… │
+│ [-114.04470525049, 43.13850107… ┆ 010100000019346973dc825cc06d19… │
+└─────────────────────────────────┴─────────────────────────────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt">
+<span class="sig-name descname"><span class="pre">coords_to_wkt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L183-L224"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt" title="Link to this definition">#</a></dt>
+<dd><p>Convert Coordinates to Well-Known Text</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044612343761</span><span class="p">,</span> <span class="mf">45.139066210329</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044119223429</span><span class="p">,</span> <span class="mf">48.1390850482555</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">102.044733837176</span><span class="p">,</span> <span class="mf">43.1389478003816</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">114.04470525049</span><span class="p">,</span> <span class="mf">43.1385010700204</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">},</span><span class="n">schema_overrides</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span><span class="n">pl</span><span class="o">.</span><span class="n">Object</span><span class="p">})</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">coords_to_wkt</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;wkb&#39;</span><span class="p">))</span>  
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ geometry                        ┆ wkb                             │
+│ ---                             ┆ ---                             │
+│ object                          ┆ str                             │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ [-101.044612343761, 45.1390662… ┆ POINT (-101.044612343761 45.13… │
+│ [-101.044119223429, 48.1390850… ┆ POINT (-101.044119223429 48.13… │
+│ [-102.044733837176, 43.1389478… ┆ POINT (-102.044733837176 43.13… │
+│ [-114.04470525049, 43.13850107… ┆ POINT (-114.04470525049 43.138… │
+└─────────────────────────────────┴─────────────────────────────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords">
+<span class="sig-name descname"><span class="pre">wkb_to_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L56-L98"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords" title="Link to this definition">#</a></dt>
+<dd><p>Convert Well-Known Binary to Coordinates</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044612343761</span><span class="p">,</span> <span class="mf">45.139066210329</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">101.044119223429</span><span class="p">,</span> <span class="mf">48.1390850482555</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">102.044733837176</span><span class="p">,</span> <span class="mf">43.1389478003816</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">114.04470525049</span><span class="p">,</span> <span class="mf">43.1385010700204</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">},</span><span class="n">schema_overrides</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span><span class="n">pl</span><span class="o">.</span><span class="n">Object</span><span class="p">})</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">coords_to_wkt</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;wkt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ geometry                        ┆ wkt                             │
+│ ---                             ┆ ---                             │
+│ object                          ┆ str                             │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ [-101.044612343761, 45.1390662… ┆ POINT (-101.044612343761 45.13… │
+│ [-101.044119223429, 48.1390850… ┆ POINT (-101.044119223429 48.13… │
+│ [-102.044733837176, 43.1389478… ┆ POINT (-102.044733837176 43.13… │
+│ [-114.04470525049, 43.13850107… ┆ POINT (-114.04470525049 43.138… │
+└─────────────────────────────────┴─────────────────────────────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt">
+<span class="sig-name descname"><span class="pre">wkb_to_wkt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L227-L269"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt" title="Link to this definition">#</a></dt>
+<dd><p>Convert Well-Known Binary to Well-Known Text</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;wkb&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;0101000000e45cbbedda4259c0bdabecebcc914640&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;010100000029706fd9d24259c05bcff289cd114840&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;010100000083ec4febdc8259c0bc3ea10ac9914540&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;010100000019346973dc825cc06d192f67ba914540&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;wkb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">wkb_to_wkt</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;wkt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ wkb                             ┆ wkt                             │
+│ ---                             ┆ ---                             │
+│ str                             ┆ str                             │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ 0101000000e45cbbedda4259c0bdab… ┆ POINT (-101.044612343761 45.13… │
+│ 010100000029706fd9d24259c05bcf… ┆ POINT (-101.044119223429 48.13… │
+│ 010100000083ec4febdc8259c0bc3e… ┆ POINT (-102.044733837176 43.13… │
+│ 010100000019346973dc825cc06d19… ┆ POINT (-114.04470525049 43.138… │
+└─────────────────────────────────┴─────────────────────────────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords">
+<span class="sig-name descname"><span class="pre">wkt_to_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L142-L181"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords" title="Link to this definition">#</a></dt>
+<dd><p>Convert Well-Known Text to Coordinates</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;POINT (-101.044612343761 45.139066210329)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-101.044119223429 48.1390850482555)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-102.044733837176 43.1389478003816)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-114.04470525049 43.1385010700204)&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">wkt_to_coords</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;coords&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ geometry                        ┆ coords                          │
+│ ---                             ┆ ---                             │
+│ str                             ┆ object                          │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ POINT (-101.044612343761 45.13… ┆ [-101.044612343761, 45.1390662… │
+│ POINT (-101.044119223429 48.13… ┆ [-101.044119223429, 48.1390850… │
+│ POINT (-102.044733837176 43.13… ┆ [-102.044733837176, 43.1389478… │
+│ POINT (-114.04470525049 43.138… ┆ [-114.04470525049, 43.13850107… │
+└─────────────────────────────────┴─────────────────────────────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb">
+<span class="sig-name descname"><span class="pre">wkt_to_wkb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raw'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/geo.py#L272-L321"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb" title="Link to this definition">#</a></dt>
+<dd><p>Convert Well-Known Text to Well-Known Binary</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;POINT (-101.044612343761 45.139066210329)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-101.044119223429 48.1390850482555)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-102.044733837176 43.1389478003816)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;POINT (-114.04470525049 43.1385010700204)&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geo_ext</span><span class="o">.</span><span class="n">wkt_to_wkb</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;coords&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<pre class="literal-block">shape: (4, 2)
+┌─────────────────────────────────┬─────────────────────────────────┐
+│ geometry                        ┆ coords                          │
+│ ---                             ┆ ---                             │
+│ str                             ┆ binary                          │
+╞═════════════════════════════════╪═════════════════════════════════╡
+│ POINT (-101.044612343761 45.13… ┆ b&quot;ä\xb… │
+│ POINT (-101.044119223429 48.13… ┆ b&quot;)poÙ\… │
+│ POINT (-102.044733837176 43.13… ┆ b&quot;ì… │
+│ POINT (-114.04470525049 43.138… ┆ b&quot;4is\… │
+└─────────────────────────────────┴─────────────────────────────────┘</pre>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -496,6 +738,31 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkb"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.coords_to_wkb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.coords_to_wkt"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.coords_to_wkt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_coords"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkb_to_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkb_to_wkt"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkb_to_wkt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_coords"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkt_to_coords()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.geo.GeometryExtensionNamespace.wkt_to_wkb"><code class="docutils literal notranslate"><span class="pre">GeometryExtensionNamespace.wkt_to_wkb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

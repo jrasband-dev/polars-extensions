@@ -258,6 +258,10 @@ document.write(`
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -460,6 +464,77 @@ document.write(`
                   
   <section id="module-polars_extensions.string">
 <span id="string"></span><h1>String<a class="headerlink" href="#module-polars_extensions.string" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="polars_extensions.string.StringExtensionNamespace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.string.</span></span><span class="sig-name descname"><span class="pre">StringExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/string.py#L3-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.string.StringExtensionNamespace" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>String Extensions for the Polars Library</p>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#polars_extensions.string.StringExtensionNamespace.f1_string_similarity" title="polars_extensions.string.StringExtensionNamespace.f1_string_similarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f1_string_similarity</span></code></a>(col_a, col_b)</p></td>
+<td><p>Calculates a similarity score between two columns of strings based on common characters, accounting for repeated characters.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars_extensions.string.StringExtensionNamespace.f1_string_similarity">
+<span class="sig-name descname"><span class="pre">f1_string_similarity</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">col_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">col_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/string.py#L10-L94"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.string.StringExtensionNamespace.f1_string_similarity" title="Link to this definition">#</a></dt>
+<dd><p>Calculates a similarity score between two columns of strings based on common characters,
+accounting for repeated characters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>col_a (str): The name of the first column to compare.</strong></dt><dd></dd>
+<dt><strong>col_b (str): The name of the second column to compare.</strong></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span> 
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/string_sim.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">str_ext</span><span class="o">.</span><span class="n">f1_string_similarity</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (13, 3)
+┌──────────────────────────┬───────────────────────────┬──────────┐
+│ a                        ┆ c                         ┆ f1_score │
+│ ---                      ┆ ---                       ┆ ---      │
+│ str                      ┆ str                       ┆ f64      │
+╞══════════════════════════╪═══════════════════════════╪══════════╡
+│ apple                    ┆ appl                      ┆ 0.888889 │
+│ banana                   ┆ BANANA                    ┆ 1.0      │
+│ cherry                   ┆ cherr                     ┆ 0.909091 │
+│ date                     ┆ etad                      ┆ 1.0      │
+│ elderberry               ┆ elderberrys               ┆ 0.952381 │
+│ …                        ┆ …                         ┆ …        │
+│ kiwi                     ┆ KIW                       ┆ 0.857143 │
+│ lemon                    ┆ lemons                    ┆ 0.909091 │
+│ mangoes are Tangy        ┆ mango are Tangy           ┆ 0.9375   │
+│ it was the best of times ┆ it was the worst of times ┆ 0.897959 │
+│ of times it was the best ┆ it was the worst of times ┆ 0.897959 │
+└──────────────────────────┴───────────────────────────┴──────────┘
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -496,6 +571,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.string.StringExtensionNamespace"><code class="docutils literal notranslate"><span class="pre">StringExtensionNamespace</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.string.StringExtensionNamespace.f1_string_similarity"><code class="docutils literal notranslate"><span class="pre">StringExtensionNamespace.f1_string_similarity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
