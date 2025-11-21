@@ -1,5 +1,5 @@
 Column Names
-====
+============
 
 .. automodule:: polars_extensions.name
    :members:

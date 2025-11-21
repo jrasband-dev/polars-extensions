@@ -36,7 +36,7 @@ sys.path.insert(0, str(Path("../..").resolve()))
 project = 'Polars Extensions'
 copyright = '2025, Jayden Rasband'
 author = 'Jayden Rasband'
-release = '0.8.0'
+release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 
