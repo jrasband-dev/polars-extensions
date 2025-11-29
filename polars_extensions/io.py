@@ -8,8 +8,8 @@ def read_xml(
     xml_input: Union[str, bytes],
     record_path: Optional[str] = None,
     include_attributes: bool = True,
-    flatten: bool = False,
-    strict: bool = True,
+    flatten: bool = True,
+    strict: bool = False,
 ) -> pl.DataFrame:
     """
     Reads and normalizes XML into a flat or semi-structured Polars DataFrame.
@@ -31,6 +31,66 @@ def read_xml(
     Returns
     -------
     pl.DataFrame
+
+    Examples
+    --------
+
+    .. code-block:: python
+
+        import polars_extensions as plx
+        xml_data = '''
+        <catalog>
+            <product sku="A123" available="true">
+                <name>Mechanical Keyboard</name>
+                <price currency="USD">129.99</price>
+                <features>
+                    <feature>RGB Lighting</feature>
+                    <feature>Hot-swappable switches</feature>
+                    <feature>Aluminum frame</feature>
+                </features>
+            </product>
+
+            <product sku="B456" available="false">
+                <name>Noise Cancelling Headphones</name>
+                <price currency="USD">299.00</price>
+                <features>
+                    <feature>ANC</feature>
+                    <feature>Bluetooth 5.0</feature>
+                </features>
+            </product>
+        </catalog>
+        '''
+
+        df = plx.read_xml(xml_data,flatten=True)
+        df
+
+
+    .. code-block:: text
+
+        shape: (5, 6)
+        ┌────────────────┬────────────────┬────────────────┬───────────────┬───────────────┬───────────────┐
+        │ catalog.produc ┆ catalog.produc ┆ catalog.produc ┆ catalog.produ ┆ catalog.produ ┆ catalog.produ │
+        │ t.product.sku  ┆ t.product.avai ┆ t.product.name ┆ ct.product.pr ┆ ct.product.pr ┆ ct.product.fe │
+        │ ---            ┆ la…            ┆ .t…            ┆ ice.…         ┆ ice.…         ┆ atur…         │
+        │ str            ┆ ---            ┆ ---            ┆ ---           ┆ ---           ┆ ---           │
+        │                ┆ str            ┆ str            ┆ str           ┆ str           ┆ str           │
+        ╞════════════════╪════════════════╪════════════════╪═══════════════╪═══════════════╪═══════════════╡
+        │ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ RGB Lighting  │
+        │                ┆                ┆ Keyboard       ┆               ┆               ┆               │
+        │ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ Hot-swappable │
+        │                ┆                ┆ Keyboard       ┆               ┆               ┆ switches      │
+        │ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ Aluminum      │
+        │                ┆                ┆ Keyboard       ┆               ┆               ┆ frame         │
+        │ B456           ┆ false          ┆ Noise          ┆ USD           ┆ 299.00        ┆ ANC           │
+        │                ┆                ┆ Cancelling     ┆               ┆               ┆               │
+        │                ┆                ┆ Headphones     ┆               ┆               ┆               │
+        │ B456           ┆ false          ┆ Noise          ┆ USD           ┆ 299.00        ┆ Bluetooth 5.0 │
+        │                ┆                ┆ Cancelling     ┆               ┆               ┆               │
+        │                ┆                ┆ Headphones     ┆               ┆               ┆               │
+        └────────────────┴────────────────┴────────────────┴───────────────┴───────────────┴───────────────┘
+
+
+
     """
 
     # --- Internal: recursively explode lists + unnest structs ---
