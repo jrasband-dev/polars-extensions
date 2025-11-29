@@ -10,11 +10,11 @@ def xml_normalize(
     strict: bool = True,
 ) -> pl.DataFrame:
     """
-    Generic XML flattening into a Polars DataFrame.
+    Flatten XML data into a Polars DataFrame.
 
     Parameters:
     - xml_input: XML string or file path
-    - record_path: path to record nodes (e.g., "channel/item")
+    - record_path: dot-separated path to record nodes (e.g., "channel.item")
     - include_attributes: include XML attributes
     - flatten: recursively explode lists and unnest structs
     - strict: True -> Polars raises on type mismatch
@@ -54,17 +54,15 @@ def xml_normalize(
 
         for tag, siblings in children_by_tag.items():
             if len(siblings) == 1:
-                child_data = flatten_element(siblings[0], parent_path=path_prefix)
-                data.update(child_data)
+                data.update(flatten_element(siblings[0], parent_path=path_prefix))
             else:
-                # Multiple siblings → list of dicts
                 data[f"{path_prefix}.{tag}"] = [flatten_element(s, parent_path="") for s in siblings]
 
         return data
 
     # --- Determine record nodes ---
     if record_path:
-        parts = record_path.strip("/").split("/")
+        parts = record_path.strip(".").split(".")
         parent_parts = parts[:-1]
         record_tag = parts[-1]
 
@@ -77,7 +75,7 @@ def xml_normalize(
             parent_nodes = next_nodes
 
         if not parent_nodes:
-            raise ValueError(f"Parent path '{'/'.join(parent_parts)}' not found in XML.")
+            raise ValueError(f"Parent path '{'.'.join(parent_parts)}' not found in XML.")
 
         # Extract records
         records = []
@@ -91,7 +89,7 @@ def xml_normalize(
             if text:
                 parent_data[f"{strip_ns(parent.tag)}.text"] = text
 
-            # Record nodes under parent (recursive)
+            # Record nodes under parent recursively
             record_nodes = parent.findall(f".//{record_tag}")
             for record in record_nodes:
                 record_data = flatten_element(record, parent_path="")
