@@ -6,6 +6,7 @@ from .geo import *
 from .units import *
 from .url import *
 from .biology import *
+from .xml import *
 
 __all__ = [
     "NameExtensionNameSpace",
@@ -17,4 +18,6 @@ __all__ = [
     "BioExtensionNamespace",
     "write_schema",
     "read_schema",
+    "xml_normalize",
 ]
+ 
