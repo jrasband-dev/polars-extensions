@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>URL &#8212; Polars Extensions 1.0.0 documentation</title>
+    <title>URL &#8212; Polars Extensions 1.1.0 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../_static/documentation_options.js?v=40be6288"></script>
+    <script src="../../../_static/documentation_options.js?v=50fb5a46"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@
   
   
   
-    <p class="title logo__title">Polars Extensions 1.0.0 documentation</p>
+    <p class="title logo__title">Polars Extensions 1.1.0 documentation</p>
   
 </a></div>
     
@@ -466,7 +466,7 @@ document.write(`
 <span id="url"></span><h1>URL<a class="headerlink" href="#module-polars_extensions.url" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.url.</span></span><span class="sig-name descname"><span class="pre">UrlExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L4-L95"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">polars_extensions.url.</span></span><span class="sig-name descname"><span class="pre">UrlExtensionNamespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Expr</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L4-L127"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p class="rubric">Methods</p>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
@@ -503,7 +503,7 @@ document.write(`
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.fragment">
-<span class="sig-name descname"><span class="pre">fragment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L90-L95"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.fragment" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">fragment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L122-L127"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.fragment" title="Link to this definition">#</a></dt>
 <dd><p>Extract fragment (#section).</p>
 </dd></dl>
 
@@ -521,13 +521,39 @@ document.write(`
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.query">
-<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L40-L45"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L40-L77"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query" title="Link to this definition">#</a></dt>
 <dd><p>Extract the full query string.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;https://pypi.org/search/?q=polars-extensions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://pypi.org/search/?q=polars&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://pypi.org/search/?q=pyodbc&quot;</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">with_columns</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s1">&#39;link&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">url_ext</span><span class="o">.</span><span class="n">query</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (3, 2)
+┌─────────────────────────────────┬─────────────────────┐
+│ link                            ┆ q                   │
+│ ---                             ┆ ---                 │
+│ str                             ┆ str                 │
+╞═════════════════════════════════╪═════════════════════╡
+│ https://pypi.org/search/?q=pol… ┆ q=polars-extensions │
+│ https://pypi.org/search/?q=pol… ┆ q=polars            │
+│ https://pypi.org/search/?q=pyo… ┆ q=pyodbc            │
+└─────────────────────────────────┴─────────────────────┘
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="polars_extensions.url.UrlExtensionNamespace.query_param">
-<span class="sig-name descname"><span class="pre">query_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L47-L88"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query_param" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">query_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Expr</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/url.py#L79-L120"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.url.UrlExtensionNamespace.query_param" title="Link to this definition">#</a></dt>
 <dd><p>Extract the value of a specific query parameter.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
