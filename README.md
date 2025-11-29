@@ -1,43 +1,31 @@
 # Polars Extensions
 
-This library is designed to extend the capabilities of polars with functionalities that are not currently found in Polars. 
+[![PyPI version](https://img.shields.io/pypi/v/polars-extensions.svg)](https://pypi.org/project/polars-extensions/)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
+[![Documentation Status](https://img.shields.io/badge/docs-online-brightgreen.svg)](https://jrasband-dev.github.io/polars-extensions/)
 
-## Usage
+  
+For full details and usage, see the [official documentation](https://jrasband-dev.github.io/polars-extensions/).
 
-[Jupyter Walkthrough](https://github.com/jrasband-dev/polars-extensions/blob/main/usage.ipynb)
+---
 
+## Getting Started
 
-## Extensions
+```bash
+pip install polars-extensions
+```
 
-### IO functions
-* Read Schema 
-* Write Schema
+---
 
-### Geospatial Expressions (geo_ext)
-Quick geospatial calulations.
+## Why use Polars Extensions?
 
-* Convert from WKT to Coords 
-* Convert from Coords to WKT
-* Convert from WKB to Coords
-* Convert from Coords to WKB
+Polars Extensions fills in widely used convenience functions and transformations that many data workflows rely on — without needing custom ad-hoc code. Whether you need to:
 
-### Numeric Expressions (num_ext)
-* Convert Numbers to Roman Numerals 
-* Convert Roman Numerals to Numbers
-* Convert Textual Number Representations to Actual Numbers
+- Read or write schema definitions to manage data structure programmatically  
+- Convert between number formats (e.g. numbers ↔ Roman numerals, parse textual numbers)  
+- Uniformly rename columns across naming conventions (snake_case, camelCase, kebab-case, PascalCase, etc.)  
+- Compute approximate string-similarity (F1 similarity) for fuzzy matching or cleanup  
+- Work with simple geospatial transformations (e.g. WKT/WKB ↔ coordinate formats)  
 
-### Column Naming Expressions (name_ext)
-Automatically change column naming conventions
-
-* Snake Case
-* Pascal Case
-* Pascal Snake Case
-* Camel Case
-* Camel Snake Case
-* Kebeb Case
-* Train Case
-* Upper Snake Case
-
-### String Expressions (str_ext)
-* F1 Similarity
+Polars Extensions provides a clean, expressive, and consistent API (using Polars expression namespaces) so you stay in the “Polars way” of data manipulation.  
 
