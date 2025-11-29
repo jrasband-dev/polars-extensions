@@ -27,5 +27,5 @@ Polars Extensions fills in widely used convenience functions and transformations
 - Compute approximate string-similarity (F1 similarity) for fuzzy matching or cleanup  
 - Work with simple geospatial transformations (e.g. WKT/WKB ↔ coordinate formats)  
 
-Polars Extensions provides a clean, expressive, and consistent API (using Polars expression namespaces) so you stay in the “Polars way” of data manipulation.  
+Polars Extensions provides a clean, expressive, and consistent API (using Polars expression namespaces) so you stay in the “Polars way” of data manipulation. 
 
