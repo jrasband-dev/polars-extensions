@@ -38,7 +38,39 @@ class UrlExtensionNamespace:
         )
 
     def query(self) -> pl.Expr:
-        """Extract the full query string."""
+        """
+        Extract the full query string.
+
+        Examples
+        --------
+        .. code-block:: python
+
+            import polars as pl
+            import polars_extensions as plx
+
+            df = pl.DataFrame({
+                "link": [
+                    "https://pypi.org/search/?q=polars-extensions",
+                    "https://pypi.org/search/?q=polars",
+                    "https://pypi.org/search/?q=pyodbc"
+                ]
+            })
+            df.with_columns(pl.col('link').url_ext.query().alias('q'))
+
+        .. code-block:: text
+
+            shape: (3, 2)
+            ┌─────────────────────────────────┬─────────────────────┐
+            │ link                            ┆ q                   │
+            │ ---                             ┆ ---                 │
+            │ str                             ┆ str                 │
+            ╞═════════════════════════════════╪═════════════════════╡
+            │ https://pypi.org/search/?q=pol… ┆ q=polars-extensions │
+            │ https://pypi.org/search/?q=pol… ┆ q=polars            │
+            │ https://pypi.org/search/?q=pyo… ┆ q=pyodbc            │
+            └─────────────────────────────────┴─────────────────────┘
+        
+        """
         return self._expr.map_elements(
             lambda x: urlparse.urlparse(x).query if x else None,
             return_dtype=pl.Utf8
