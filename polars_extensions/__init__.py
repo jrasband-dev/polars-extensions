@@ -17,4 +17,6 @@ __all__ = [
     "BioExtensionNamespace",
     "write_schema",
     "read_schema",
+    "read_xml",
 ]
+ 

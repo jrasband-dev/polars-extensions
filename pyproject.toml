@@ -1,6 +1,6 @@
 [project]
 name = "polars-extensions"
-version = "1.0.0"
+version = "1.1.0"
 description = "The Library of Polars Extensions"
 readme = "README.md"
 authors = [
@@ -12,9 +12,10 @@ dependencies = [
     "polars",
 ]
 
+
 [project.urls]
 "Source" = "https://github.com/jrasband-dev/polars-extensions"
-
+"Documentation" = "https://jrasband-dev.github.io/polars-extensions/"
 
 [tool.setuptools]
 include-package-data = true

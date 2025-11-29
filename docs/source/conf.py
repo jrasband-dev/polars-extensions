@@ -36,7 +36,7 @@ sys.path.insert(0, str(Path("../..").resolve()))
 project = 'Polars Extensions'
 copyright = '2025, Jayden Rasband'
 author = 'Jayden Rasband'
-release = '1.0.0'
+release = '1.1.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -109,7 +109,7 @@ web_root = "https://jrasband-dev.github.io/polars-extensions/"
 asset_root = "https://raw.githubusercontent.com/jrasband-dev/polars-extensions/main"
 
 # Specify version for version switcher dropdown menu
-git_ref = os.environ.get("METRIC_FORGE_VERSION", "main")
+git_ref = os.environ.get("POLARS_EXTENSIONS_VERSION", "main")
 version_match = re.fullmatch(r"py-(\d+)\.\d+\.\d+.*", git_ref)
 switcher_version = version_match.group(1) if version_match is not None else "dev"
 
