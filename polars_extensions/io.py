@@ -2,6 +2,7 @@ import json
 from typing import Union, Optional, List
 import xml.etree.ElementTree as ET
 import polars as pl
+from typing import Union, Optional
 
 
 def read_xml(
@@ -20,13 +21,14 @@ def read_xml(
         XML string or file path.
     record_path : str, optional
         Dot-separated path to record nodes (e.g., "channel.item").
+        Can optionally include the root element (e.g., "catalog.product").
     include_attributes : bool
         Whether to include XML attributes in the output.
     flatten : bool
         Recursively explode lists and unnest structs.
     strict : bool
         True -> Polars raises on type mismatch.
-        False -> wrap primitives in lists to avoid schema mismatch.
+        False -> wraps primitives in lists to avoid schema mismatch.
 
     Returns
     -------
@@ -94,7 +96,6 @@ def read_xml(
     """
 
     # --- Internal: recursively explode lists + unnest structs ---
-    # Hidden from Sphinx autodoc because it is a nested function.
     def _fully_flatten(df: pl.DataFrame) -> pl.DataFrame:
         while True:
             list_cols = [c for c, t in zip(df.columns, df.dtypes) if t == pl.List]
@@ -125,7 +126,10 @@ def read_xml(
 
     # --- Flatten element recursively ---
     def flatten_element(element, parent_path=""):
-        path_prefix = f"{parent_path}.{strip_ns(element.tag)}" if parent_path else strip_ns(element.tag)
+        path_prefix = (
+            f"{parent_path}.{strip_ns(element.tag)}"
+            if parent_path else strip_ns(element.tag)
+        )
         data = {}
 
         # Attributes
@@ -157,6 +161,12 @@ def read_xml(
     # --- Determine record nodes ---
     if record_path:
         parts = record_path.strip(".").split(".")
+
+        # NEW FIX: allow the root to be listed in record_path
+        root_tag = strip_ns(root.tag)
+        if parts and parts[0] == root_tag:
+            parts = parts[1:]
+
         parent_parts = parts[:-1]
         record_tag = parts[-1]
 
