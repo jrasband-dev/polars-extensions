@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Input/Output &#8212; Polars Extensions 1.1.0 documentation</title>
+    <title>Input/Output &#8212; Polars Extensions 1.1.1 documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../_static/documentation_options.js?v=50fb5a46"></script>
+    <script src="../../../_static/documentation_options.js?v=ad8b6500"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@
   
   
   
-    <p class="title logo__title">Polars Extensions 1.1.0 documentation</p>
+    <p class="title logo__title">Polars Extensions 1.1.1 documentation</p>
   
 </a></div>
     
@@ -463,7 +463,7 @@ document.write(`
 <span id="input-output"></span><h1>Input/Output<a class="headerlink" href="#module-polars_extensions.io" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="polars_extensions.io.read_schema">
-<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L241-L265"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L251-L275"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
 <dd><p>Load a JSON schema file and return a Polars Schema object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -492,21 +492,22 @@ document.write(`
 <dd><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
 </dl>
 
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L7-L216"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_xml" title="Link to this definition">#</a></dt>
+<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L8-L226"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_xml" title="Link to this definition">#</a></dt>
 <dd><p>Reads and normalizes XML into a flat or semi-structured Polars DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>xml_input</strong><span class="classifier">str | bytes</span></dt><dd><p>XML string or file path.</p>
 </dd>
-<dt><strong>record_path</strong><span class="classifier">str, optional</span></dt><dd><p>Dot-separated path to record nodes (e.g., &quot;channel.item&quot;).</p>
+<dt><strong>record_path</strong><span class="classifier">str, optional</span></dt><dd><p>Dot-separated path to record nodes (e.g., &quot;channel.item&quot;).
+Can optionally include the root element (e.g., &quot;catalog.product&quot;).</p>
 </dd>
 <dt><strong>include_attributes</strong><span class="classifier">bool</span></dt><dd><p>Whether to include XML attributes in the output.</p>
 </dd>
 <dt><strong>flatten</strong><span class="classifier">bool</span></dt><dd><p>Recursively explode lists and unnest structs.</p>
 </dd>
 <dt><strong>strict</strong><span class="classifier">bool</span></dt><dd><p>True -&gt; Polars raises on type mismatch.
-False -&gt; wrap primitives in lists to avoid schema mismatch.</p>
+False -&gt; wraps primitives in lists to avoid schema mismatch.</p>
 </dd>
 </dl>
 </dd>
@@ -579,7 +580,7 @@ False -&gt; wrap primitives in lists to avoid schema mismatch.</p>
 <dd><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>,</dd>
 </dl>
 
-<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L219-L238"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
+<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L229-L248"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
 <dd><p>Save a Polars schema to a JSON file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
