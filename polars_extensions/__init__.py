@@ -6,6 +6,7 @@ from .geo import *
 from .units import *
 from .url import *
 from .biology import *
+from .technical_analysis import *
 
 __all__ = [
     "NameExtensionNameSpace",
@@ -15,6 +16,7 @@ __all__ = [
     "UnitExtensionNamespace",
     "UrlExtensionNamespace",
     "BioExtensionNamespace",
+    "TechnicalAnalysisNamespace",
     "write_schema",
     "read_schema",
     "read_xml",
