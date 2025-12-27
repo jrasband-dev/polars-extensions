@@ -2,11 +2,11 @@ import json
 from typing import Union, Optional, List
 import xml.etree.ElementTree as ET
 import polars as pl
-from typing import Union, Optional
+from pathlib import Path
 
 
 def read_xml(
-    xml_input: Union[str, bytes],
+    xml_input: Union[str, bytes, Path],
     record_path: Optional[str] = None,
     include_attributes: bool = True,
     flatten: bool = True,
@@ -17,8 +17,8 @@ def read_xml(
 
     Parameters
     ----------
-    xml_input : str | bytes
-        XML string or file path.
+    xml_input : str | bytes | Path
+        XML string, bytes, or file path.
     record_path : str, optional
         Dot-separated path to record nodes (e.g., "channel.item").
         Can optionally include the root element (e.g., "catalog.product").
@@ -115,10 +115,20 @@ def read_xml(
         return df
 
     # --- Load XML ---
-    if xml_input.strip().startswith("<"):
+    # Support string/bytes XML payloads or file paths (Path or string)
+    if isinstance(xml_input, (bytes, bytearray)):
+        is_string = xml_input.lstrip().startswith(b"<")
+    elif isinstance(xml_input, str):
+        is_string = xml_input.strip().startswith("<")
+    elif isinstance(xml_input, Path):
+        is_string = False
+    else:
+        raise TypeError("xml_input must be str, bytes, or pathlib.Path")
+
+    if is_string:
         root = ET.fromstring(xml_input)
     else:
-        tree = ET.parse(xml_input)
+        tree = ET.parse(str(xml_input) if isinstance(xml_input, Path) else xml_input)
         root = tree.getroot()
 
     def strip_ns(tag: str) -> str:
@@ -226,7 +236,7 @@ def read_xml(
     return df
 
 
-def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
+def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: Union[str, Path]):
     """
     Save a Polars schema to a JSON file.
 
@@ -234,7 +244,7 @@ def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
     ----------
     schema : DataFrame | Schema
         The schema source.
-    file : str
+    file : str | Path
         Output JSON file.
     """
 
@@ -248,13 +258,13 @@ def write_schema(schema: Union[pl.DataFrame, pl.Schema], file: str):
         json.dump(schema_dict, f)
 
 
-def read_schema(file: str):
+def read_schema(file: Union[str, Path]):
     """
     Load a JSON schema file and return a Polars Schema object.
 
     Parameters
     ----------
-    file : str
+    file : str | Path
         Input JSON file.
 
     Returns
