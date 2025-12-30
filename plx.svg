@@ -1,0 +1,28 @@
+<svg width="200" height="200" viewBox="0 0 200 200"
+     xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    .mono {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+  </style>
+
+  <!-- Top face -->
+  <polygon points="50,70 80,40 160,40 130,70"
+           fill="#56CCF2"/>
+
+  <!-- Side face -->
+  <polygon points="130,70 160,40 160,120 130,150"
+           fill="#2D9CDB"/>
+
+  <!-- Front face -->
+  <rect x="50" y="70" width="80" height="80"
+        fill="#2f80edff"/>
+
+  <!-- Text (bottom-left of front face) -->
+  <text x="58" y="138" font-size="20" class="mono" fill="#ffffff">
+    plx
+  </text>
+</svg>
