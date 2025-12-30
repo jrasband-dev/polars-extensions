@@ -1,5 +1,8 @@
 # Polars Extensions
 
+![alt text](plx.svg)
+
+
 [![PyPI version](https://img.shields.io/pypi/v/polars-extensions.svg)](https://pypi.org/project/polars-extensions/)  
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
 [![Documentation Status](https://img.shields.io/badge/docs-online-brightgreen.svg)](https://jrasband-dev.github.io/polars-extensions/)
