@@ -1,7 +1,6 @@
-import re
 
 """Main writer module for fast SQL Server bulk inserts."""
-
+import re
 import polars as pl
 import pyodbc
 from typing import Optional, Literal
@@ -204,7 +203,6 @@ def write_mssql(
         use_upsert = upsert_keys is not None and len(upsert_keys) > 0
         if use_upsert:
             # All upsert_keys and columns are validated above
-            upsert_keys_sql = ", ".join([f"[{k}]" for k in upsert_keys])
             on_clause = " AND ".join(
                 [f"target.[{k}] = source.[{k}]" for k in upsert_keys]
             )
@@ -245,7 +243,6 @@ def write_mssql(
                 temp_table = f"#temp_upsert_{table_name}"
                 temp_table = validate_identifier(temp_table.replace("#", ""))
                 temp_table = f"#{temp_table}"
-                temp_table_cols = ", ".join([f"[{col}]" for col in columns])
                 # Drop temp table if exists (safe, validated name)
                 cursor.execute(
                     f"IF OBJECT_ID('tempdb..[{temp_table[1:]}]') IS NOT NULL DROP TABLE {temp_table}"
