@@ -1,13 +1,13 @@
-from .io import *
-from .name import *
-from .numeric import *
-from .string import *
-from .geo import *
-from .units import *
-from .url import *
-from .biology import *
-from .technical_analysis import *
-from .mssql.writer import *
+from .io import write_schema, read_schema, read_xml
+from .name import NameExtensionNameSpace
+from .numeric import NumericExtensionNamespace
+from .string import StringExtensionNamespace
+from .geo import GeometryExtensionNamespace
+from .units import UnitExtensionNamespace
+from .url import UrlExtensionNamespace
+from .biology import BioExtensionNamespace
+from .technical_analysis import TechnicalAnalysisNamespace
+from .mssql.writer import MSSQLNamespace
 
 
 __version__ = "1.3.0"
