@@ -1,6 +1,7 @@
 [project]
 name = "polars-extensions"
-version = "1.2.1"
+
+dynamic = ["version"]
 description = "The Library of Polars Extensions"
 readme = "README.md"
 authors = [

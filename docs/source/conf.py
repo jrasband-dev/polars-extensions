@@ -36,7 +36,12 @@ sys.path.insert(0, str(Path("../..").resolve()))
 project = "Polars Extensions"
 copyright = "2025, Jayden Rasband"
 author = "Jayden Rasband"
-release = "1.2.1"
+try:
+    sys.path.insert(0, str(Path("../../polars_extensions").resolve()))
+    from polars_extensions import __version__
+    release = __version__
+except Exception:
+    release = "unknown"
 
 # -- General configuration ---------------------------------------------------
 
