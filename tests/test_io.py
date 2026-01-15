@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 
 import polars as pl
+import pytest
+from polars_extensions import io
 
 from polars_extensions.io import read_xml, write_schema, read_schema
 
