@@ -19,13 +19,16 @@ class GeometryExtensionNamespace:
             return [list(coord) for coord in geom.coords]
         elif geom.geom_type == "Polygon":
             exterior = [list(coord) for coord in geom.exterior.coords]
-            interiors = [[list(coord) for coord in ring.coords] for ring in geom.interiors]
+            interiors = [
+                [list(coord) for coord in ring.coords] for ring in geom.interiors
+            ]
             return [exterior] + interiors if interiors else [exterior]
-        elif geom.geom_type.startswith("Multi") or geom.geom_type == "GeometryCollection":
+        elif (
+            geom.geom_type.startswith("Multi") or geom.geom_type == "GeometryCollection"
+        ):
             return [self._geom_to_coords(part) for part in geom.geoms]
         else:
             return None  # Unknown type
-        
 
     def _coords_to_geojson(self, coords):
         """Infer geometry type from coordinates and return GeoJSON-like dict."""
@@ -45,10 +48,18 @@ class GeometryExtensionNamespace:
         if all(isinstance(c, list) and isinstance(c[0], (float, int)) for c in coords):
             return {"type": "MultiPoint", "coordinates": coords}
         # Try MultiLineString
-        if all(isinstance(c, list) and isinstance(c[0], list) and isinstance(c[0][0], (float, int)) for c in coords):
+        if all(
+            isinstance(c, list)
+            and isinstance(c[0], list)
+            and isinstance(c[0][0], (float, int))
+            for c in coords
+        ):
             return {"type": "MultiLineString", "coordinates": coords}
         # Try MultiPolygon
-        if all(isinstance(c, list) and isinstance(c[0], list) and isinstance(c[0][0], list) for c in coords):
+        if all(
+            isinstance(c, list) and isinstance(c[0], list) and isinstance(c[0][0], list)
+            for c in coords
+        ):
             return {"type": "MultiPolygon", "coordinates": coords}
         # Fallback
         return None
@@ -56,12 +67,12 @@ class GeometryExtensionNamespace:
     def wkb_to_coords(self) -> pl.Expr:
         """Convert Well-Known Binary to Coordinates
 
-        
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -94,17 +105,17 @@ class GeometryExtensionNamespace:
 
         return self._expr.map_elements(
             lambda x: self._geom_to_coords(wkb.loads(bytes.fromhex(x))) if x else None,
-            return_dtype=pl.Object
+            return_dtype=pl.Object,
         )
 
     def coords_to_wkb(self) -> pl.Expr:
         """Convert Coordinates to Well-Known Binary
-    
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -137,16 +148,17 @@ class GeometryExtensionNamespace:
 
         return self._expr.map_elements(
             lambda x: shape(self._coords_to_geojson(x)).wkb.hex() if x else None,
-            return_dtype=pl.String
+            return_dtype=pl.String,
         )
+
     def wkt_to_coords(self) -> pl.Expr:
         """Convert Well-Known Text to Coordinates
-        
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -177,17 +189,17 @@ class GeometryExtensionNamespace:
 
         return self._expr.map_elements(
             lambda x: self._geom_to_coords(wkt.loads(x)) if x else None,
-            return_dtype=pl.Object
+            return_dtype=pl.Object,
         )
 
     def coords_to_wkt(self) -> pl.Expr:
         """Convert Coordinates to Well-Known Text
-    
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -199,7 +211,7 @@ class GeometryExtensionNamespace:
                 ]
             },schema_overrides={'geometry':pl.Object})
 
-            data.with_columns(pl.col('geometry').geo_ext.coords_to_wkt().alias('wkb'))  
+            data.with_columns(pl.col('geometry').geo_ext.coords_to_wkt().alias('wkb'))
 
         .. code-block:: text
 
@@ -214,24 +226,23 @@ class GeometryExtensionNamespace:
             │ [-102.044733837176, 43.1389478… ┆ POINT (-102.044733837176 43.13… │
             │ [-114.04470525049, 43.13850107… ┆ POINT (-114.04470525049 43.138… │
             └─────────────────────────────────┴─────────────────────────────────┘
-     
+
         """
         from shapely.geometry import shape
 
         return self._expr.map_elements(
             lambda x: shape(self._coords_to_geojson(x)).wkt if x else None,
-            return_dtype=pl.String
+            return_dtype=pl.String,
         )
-    
 
-    def wkb_to_wkt(self) ->pl.Expr:
+    def wkb_to_wkt(self) -> pl.Expr:
         """Convert Well-Known Binary to Well-Known Text
-        
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -245,7 +256,7 @@ class GeometryExtensionNamespace:
 
             data.with_columns(pl.col('wkb').geo_ext.wkb_to_wkt().alias('wkt'))
 
-        .. code-block:: text 
+        .. code-block:: text
 
             shape: (4, 2)
             ┌─────────────────────────────────┬─────────────────────────────────┐
@@ -258,26 +269,24 @@ class GeometryExtensionNamespace:
             │ 010100000083ec4febdc8259c0bc3e… ┆ POINT (-102.044733837176 43.13… │
             │ 010100000019346973dc825cc06d19… ┆ POINT (-114.04470525049 43.138… │
             └─────────────────────────────────┴─────────────────────────────────┘
-        
+
         """
         if self._expr is None:
             return None
-            
+
         return self._expr.map_elements(
-            lambda x: wkb.loads(x).wkt if x else None,
-            return_dtype=pl.String
+            lambda x: wkb.loads(x).wkt if x else None, return_dtype=pl.String
         )
 
-
-    def wkt_to_wkb(self,format='raw') -> pl.Expr:
+    def wkt_to_wkb(self, format="raw") -> pl.Expr:
         """Convert Well-Known Text to Well-Known Binary
-        
-    
+
+
         Examples
         --------
         .. code-block:: python
 
-            import polars as pl 
+            import polars as pl
             import polars_extensions as plx
 
             data = pl.DataFrame({
@@ -291,7 +300,7 @@ class GeometryExtensionNamespace:
             data.with_columns(
                 pl.col('geometry').geo_ext.wkt_to_wkb().alias('coords'))
 
-        .. code-block:: text 
+        .. code-block:: text
 
             shape: (4, 2)
             ┌─────────────────────────────────┬─────────────────────────────────┐
@@ -309,13 +318,11 @@ class GeometryExtensionNamespace:
         if self._expr is None:
             return None
 
-        elif format == 'hex':
+        elif format == "hex":
             return self._expr.map_elements(
-                lambda x: wkt.loads(x).wkb.hex() if x else None,
-                return_dtype=pl.String
+                lambda x: wkt.loads(x).wkb.hex() if x else None, return_dtype=pl.String
             )
-        elif format == 'raw':
+        elif format == "raw":
             return self._expr.map_elements(
-                lambda x: wkt.loads(x).wkb if x else None,
-                return_dtype=pl.Binary
+                lambda x: wkt.loads(x).wkb if x else None, return_dtype=pl.Binary
             )

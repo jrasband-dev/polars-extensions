@@ -138,7 +138,8 @@ def read_xml(
     def flatten_element(element, parent_path=""):
         path_prefix = (
             f"{parent_path}.{strip_ns(element.tag)}"
-            if parent_path else strip_ns(element.tag)
+            if parent_path
+            else strip_ns(element.tag)
         )
         data = {}
 
@@ -189,7 +190,9 @@ def read_xml(
             parent_nodes = next_nodes
 
         if not parent_nodes:
-            raise ValueError(f"Parent path '{'.'.join(parent_parts)}' not found in XML.")
+            raise ValueError(
+                f"Parent path '{'.'.join(parent_parts)}' not found in XML."
+            )
 
         # Extract records
         records = []

@@ -17,9 +17,9 @@ use of this software.
 
 import polars as pl
 
+
 @pl.api.register_dataframe_namespace("ta_ext")
 class TechnicalAnalysisNamespace:
-
     def __init__(self, df: pl.DataFrame):
         self._df = df
 
@@ -43,7 +43,9 @@ class TechnicalAnalysisNamespace:
         Returns <col>_log_return_<periods>
         """
         return self._df.with_columns(
-            (pl.col(col) / pl.col(col).shift(periods)).log().alias(f"{col}_log_return_{periods}")
+            (pl.col(col) / pl.col(col).shift(periods))
+            .log()
+            .alias(f"{col}_log_return_{periods}")
         )
 
     def compare(self, col: str, value: float, op: str = "ge") -> pl.DataFrame:
@@ -79,8 +81,10 @@ class TechnicalAnalysisNamespace:
             )
         except Exception:
             return self._df.with_columns(
-                pl.map([pl.col(col)], lambda s: s.to_pandas().ewm(span=span, adjust=False).mean())[0]
-                .alias(f"{col}_ema_{span}")
+                pl.map(
+                    [pl.col(col)],
+                    lambda s: s.to_pandas().ewm(span=span, adjust=False).mean(),
+                )[0].alias(f"{col}_ema_{span}")
             )
 
     def mstd(self, col: str, window: int) -> pl.DataFrame:
@@ -99,7 +103,10 @@ class TechnicalAnalysisNamespace:
         """Mean Absolute Deviation over rolling window."""
         rolling_mean = pl.col(col).rolling_mean(window)
         return self._df.with_columns(
-            (pl.col(col) - rolling_mean).abs().rolling_mean(window).alias(f"{col}_mad_{window}")
+            (pl.col(col) - rolling_mean)
+            .abs()
+            .rolling_mean(window)
+            .alias(f"{col}_mad_{window}")
         )
 
     def zscore(self, col: str, window: int) -> pl.DataFrame:
@@ -113,12 +120,14 @@ class TechnicalAnalysisNamespace:
     def roc(self, col: str, periods: int = 1) -> pl.DataFrame:
         """Rate of Change (ROC)."""
         return self._df.with_columns(
-            ((pl.col(col) - pl.col(col).shift(periods)) / pl.col(col).shift(periods))
-            .alias(f"{col}_roc_{periods}")
+            (
+                (pl.col(col) - pl.col(col).shift(periods)) / pl.col(col).shift(periods)
+            ).alias(f"{col}_roc_{periods}")
         )
-    
 
-    def dma(self, col: str, short_window: int = 10, long_window: int = 50) -> pl.DataFrame:
+    def dma(
+        self, col: str, short_window: int = 10, long_window: int = 50
+    ) -> pl.DataFrame:
         """
         Difference of Moving Averages (DMA): short SMA minus long SMA.
 
@@ -170,20 +179,28 @@ class TechnicalAnalysisNamespace:
         """
         up_move = pl.col(high) - pl.col(high).shift(1)
         down_move = pl.col(low).shift(1) - pl.col(low)
-        plus_dm = pl.when((up_move > down_move) & (up_move > 0)).then(up_move).otherwise(0)
-        minus_dm = pl.when((down_move > up_move) & (down_move > 0)).then(down_move).otherwise(0)
+        plus_dm = (
+            pl.when((up_move > down_move) & (up_move > 0)).then(up_move).otherwise(0)
+        )
+        minus_dm = (
+            pl.when((down_move > up_move) & (down_move > 0))
+            .then(down_move)
+            .otherwise(0)
+        )
         tr = self.tr(high, low, close)["tr"]
         plus_di = (plus_dm.rolling_sum(window) / tr.rolling_sum(window)) * 100
         minus_di = (minus_dm.rolling_sum(window) / tr.rolling_sum(window)) * 100
         dx = ((plus_di - minus_di).abs() / (plus_di + minus_di)) * 100
         adx = dx.rolling_mean(window)
-        adxr = ((adx + adx.shift(window)) / 2)
-        return self._df.with_columns([
-            plus_di.alias("+DI"),
-            minus_di.alias("-DI"),
-            adx.alias("ADX"),
-            adxr.alias("ADXR")
-        ])
+        adxr = (adx + adx.shift(window)) / 2
+        return self._df.with_columns(
+            [
+                plus_di.alias("+DI"),
+                minus_di.alias("-DI"),
+                adx.alias("ADX"),
+                adxr.alias("ADXR"),
+            ]
+        )
 
     def trix(self, col: str, window: int = 15) -> pl.DataFrame:
         """
@@ -235,7 +252,9 @@ class TechnicalAnalysisNamespace:
         tema_col = 3 * ema1 - 3 * ema2 + ema3
         return self._df.with_columns(tema_col.alias(f"{col}_tema_{span}"))
 
-    def supertrend(self, high: str, low: str, close: str, period: int = 10, multiplier: float = 3.0) -> pl.DataFrame:
+    def supertrend(
+        self, high: str, low: str, close: str, period: int = 10, multiplier: float = 3.0
+    ) -> pl.DataFrame:
         """
         Supertrend indicator with Upper Band and Lower Band.
 
@@ -268,13 +287,13 @@ class TechnicalAnalysisNamespace:
         # Initialize Supertrend column
         st_col = pl.Series("supertrend", [0] * len(self._df))
         # Note: Polars does not allow easy iterative calculation, use pandas fallback for full logic if needed
-        return self._df.with_columns([
-            upper_band.alias("upper_band"),
-            lower_band.alias("lower_band"),
-            st_col
-        ])
+        return self._df.with_columns(
+            [upper_band.alias("upper_band"), lower_band.alias("lower_band"), st_col]
+        )
 
-    def kama(self, col: str, window: int = 10, fast: int = 2, slow: int = 30) -> pl.DataFrame:
+    def kama(
+        self, col: str, window: int = 10, fast: int = 2, slow: int = 30
+    ) -> pl.DataFrame:
         """
         Kaufman Adaptive Moving Average (KAMA).
 
@@ -300,10 +319,11 @@ class TechnicalAnalysisNamespace:
         diff = (pl.col(col) - pl.col(col).shift(window)).abs()
         volatility = pl.col(col).diff().abs().rolling_sum(window)
         er = diff / volatility
-        sc = (er * (2/(fast+1) - 2/(slow+1)) + 2/(slow+1)) ** 2
-        kama_col = pl.col(col).rolling_apply(lambda s: s[0], window=1)  # placeholder for iterative KAMA
+        sc = (er * (2 / (fast + 1) - 2 / (slow + 1)) + 2 / (slow + 1)) ** 2
+        kama_col = pl.col(col).rolling_apply(
+            lambda s: s[0], window=1
+        )  # placeholder for iterative KAMA
         return self._df.with_columns(kama_col.alias(f"{col}_kama_{window}"))
-
 
     # -----------------------
     # Volatility indicators
@@ -313,11 +333,11 @@ class TechnicalAnalysisNamespace:
         df = self._df.with_columns(
             (pl.col(high) - pl.col(low)).alias("_hl"),
             (pl.col(high) - pl.col(close).shift(1)).abs().alias("_hc"),
-            (pl.col(low) - pl.col(close).shift(1)).abs().alias("_lc")
+            (pl.col(low) - pl.col(close).shift(1)).abs().alias("_lc"),
         )
-        df = df.with_columns(
-            pl.max_horizontal(["_hl", "_hc", "_lc"]).alias("tr")
-        ).drop(["_hl", "_hc", "_lc"])
+        df = df.with_columns(pl.max_horizontal(["_hl", "_hc", "_lc"]).alias("tr")).drop(
+            ["_hl", "_hc", "_lc"]
+        )
         return df
 
     def atr(self, high: str, low: str, close: str, window: int = 14) -> pl.DataFrame:
@@ -334,7 +354,9 @@ class TechnicalAnalysisNamespace:
         atr_sum = tr.rolling_sum(window)
         highest = pl.max_horizontal([pl.col(high).rolling_max(window)])
         lowest = pl.min_horizontal([pl.col(low).rolling_min(window)])
-        chop_index = 100 * (pl.col("atr_{}".format(window)) / (highest - lowest)).log10()
+        chop_index = (
+            100 * (pl.col("atr_{}".format(window)) / (highest - lowest)).log10()
+        )
         return self._df.with_columns(chop_index.alias(f"chop_{window}"))
 
     # -----------------------
@@ -346,15 +368,16 @@ class TechnicalAnalysisNamespace:
         df = self._df.with_columns(
             diff.alias("_diff"),
             pl.when(diff > 0).then(diff).otherwise(0).alias("_gain"),
-            pl.when(diff < 0).then(-diff).otherwise(0).alias("_loss")
+            pl.when(diff < 0).then(-diff).otherwise(0).alias("_loss"),
         )
         df = df.with_columns(
             pl.col("_gain").rolling_mean(window).alias("_avg_gain"),
-            pl.col("_loss").rolling_mean(window).alias("_avg_loss")
+            pl.col("_loss").rolling_mean(window).alias("_avg_loss"),
         )
         df = df.with_columns(
-            (100 - 100 / (1 + (pl.col("_avg_gain") / pl.col("_avg_loss"))))
-            .alias(f"{col}_rsi_{window}")
+            (100 - 100 / (1 + (pl.col("_avg_gain") / pl.col("_avg_loss")))).alias(
+                f"{col}_rsi_{window}"
+            )
         ).drop(["_diff", "_gain", "_loss", "_avg_gain", "_avg_loss"])
         return df
 
@@ -367,7 +390,15 @@ class TechnicalAnalysisNamespace:
         stoch_rsi_col = (pl.col(rsi_col) - min_rsi) / (max_rsi - min_rsi)
         return rsi_df.with_columns(stoch_rsi_col.alias(f"{col}_stoch_rsi_{window}"))
 
-    def kdj(self, high: str, low: str, close: str, window: int = 14, k_smooth: int = 3, d_smooth: int = 3) -> pl.DataFrame:
+    def kdj(
+        self,
+        high: str,
+        low: str,
+        close: str,
+        window: int = 14,
+        k_smooth: int = 3,
+        d_smooth: int = 3,
+    ) -> pl.DataFrame:
         """KDJ Stochastic Oscillator."""
         low_min = pl.col(low).rolling_min(window)
         high_max = pl.col(high).rolling_max(window)
@@ -377,17 +408,21 @@ class TechnicalAnalysisNamespace:
         j = 3 * k - 2 * d
         return self._df.with_columns(k.alias("K"), d.alias("D"), j.alias("J"))
 
-    def bollinger(self, col: str, window: int = 20, num_std: float = 2.0) -> pl.DataFrame:
+    def bollinger(
+        self, col: str, window: int = 20, num_std: float = 2.0
+    ) -> pl.DataFrame:
         """Bollinger Bands (mid, upper, lower)."""
         mid = pl.col(col).rolling_mean(window)
         std = pl.col(col).rolling_std(window)
         return self._df.with_columns(
             mid.alias(f"{col}_bb_mid"),
             (mid + num_std * std).alias(f"{col}_bb_upper"),
-            (mid - num_std * std).alias(f"{col}_bb_lower")
+            (mid - num_std * std).alias(f"{col}_bb_lower"),
         )
 
-    def macd(self, col: str, fast: int = 12, slow: int = 26, signal: int = 9) -> pl.DataFrame:
+    def macd(
+        self, col: str, fast: int = 12, slow: int = 26, signal: int = 9
+    ) -> pl.DataFrame:
         """MACD (Moving Average Convergence Divergence)."""
         fast_ema = pl.col(col).ewm_mean(span=fast)
         slow_ema = pl.col(col).ewm_mean(span=slow)
@@ -397,7 +432,7 @@ class TechnicalAnalysisNamespace:
         return self._df.with_columns(
             macd_line.alias(f"{col}_macd"),
             signal_line.alias(f"{col}_macd_signal"),
-            hist.alias(f"{col}_macd_hist")
+            hist.alias(f"{col}_macd_hist"),
         )
 
     def cci(self, high: str, low: str, close: str, window: int = 20) -> pl.DataFrame:
@@ -429,7 +464,6 @@ class TechnicalAnalysisNamespace:
         cci_col = (typical_price - sma_tp) / (0.015 * mean_dev)
         return self._df.with_columns(cci_col.alias(f"cci_{window}"))
 
-
     def wr(self, high: str, low: str, close: str, window: int = 14) -> pl.DataFrame:
         """
         Williams %R Overbought/Oversold indicator.
@@ -458,7 +492,6 @@ class TechnicalAnalysisNamespace:
         wr_col = -100 * ((highest_high - pl.col(close)) / (highest_high - lowest_low))
         return self._df.with_columns(wr_col.alias(f"wr_{window}"))
 
-
     def ao(self, high: str, low: str, short: int = 5, long: int = 34) -> pl.DataFrame:
         """
         Awesome Oscillator (AO).
@@ -486,7 +519,6 @@ class TechnicalAnalysisNamespace:
         ao_col = mid_price.rolling_mean(short) - mid_price.rolling_mean(long)
         return self._df.with_columns(ao_col.alias(f"ao_{short}_{long}"))
 
-
     def bop(self, open: str, high: str, low: str, close: str) -> pl.DataFrame:
         """
         Balance of Power (BOP).
@@ -513,7 +545,6 @@ class TechnicalAnalysisNamespace:
         bop_col = (pl.col(close) - pl.col(open)) / (pl.col(high) - pl.col(low))
         return self._df.with_columns(bop_col.alias("bop"))
 
-
     def roc(self, col: str, periods: int = 1) -> pl.DataFrame:
         """
         Rate of Change (ROC) momentum indicator.
@@ -533,11 +564,20 @@ class TechnicalAnalysisNamespace:
         -------
         >>> df.ta_ext.roc("close", 12)
         """
-        roc_col = (pl.col(col) - pl.col(col).shift(periods)) / pl.col(col).shift(periods) * 100
+        roc_col = (
+            (pl.col(col) - pl.col(col).shift(periods))
+            / pl.col(col).shift(periods)
+            * 100
+        )
         return self._df.with_columns(roc_col.alias(f"{col}_roc_{periods}"))
 
-
-    def coppock(self, col: str, long_period: int = 14, short_period: int = 11, wma_period: int = 10) -> pl.DataFrame:
+    def coppock(
+        self,
+        col: str,
+        long_period: int = 14,
+        short_period: int = 11,
+        wma_period: int = 10,
+    ) -> pl.DataFrame:
         """
         Coppock Curve indicator.
 
@@ -560,15 +600,24 @@ class TechnicalAnalysisNamespace:
         -------
         >>> df.ta_ext.coppock(col="close", long_period=14, short_period=11, wma_period=10)
         """
-        roc_long = (pl.col(col) - pl.col(col).shift(long_period)) / pl.col(col).shift(long_period) * 100
-        roc_short = (pl.col(col) - pl.col(col).shift(short_period)) / pl.col(col).shift(short_period) * 100
+        roc_long = (
+            (pl.col(col) - pl.col(col).shift(long_period))
+            / pl.col(col).shift(long_period)
+            * 100
+        )
+        roc_short = (
+            (pl.col(col) - pl.col(col).shift(short_period))
+            / pl.col(col).shift(short_period)
+            * 100
+        )
         raw = roc_long + roc_short
         # Simple placeholder for WMA: use rolling_mean as proxy
         coppock_col = raw.rolling_mean(wma_period)
         return self._df.with_columns(coppock_col.alias("coppock"))
 
-
-    def ppo(self, col: str, fast: int = 12, slow: int = 26, signal: int = 9) -> pl.DataFrame:
+    def ppo(
+        self, col: str, fast: int = 12, slow: int = 26, signal: int = 9
+    ) -> pl.DataFrame:
         """
         Percentage Price Oscillator (PPO).
 
@@ -596,20 +645,27 @@ class TechnicalAnalysisNamespace:
         ppo_line = (fast_ema - slow_ema) / slow_ema * 100
         signal_line = ppo_line.ewm_mean(span=signal)
         hist = ppo_line - signal_line
-        return self._df.with_columns([
-            ppo_line.alias(f"{col}_ppo"),
-            signal_line.alias(f"{col}_ppo_signal"),
-            hist.alias(f"{col}_ppo_hist")
-        ])
-
-
+        return self._df.with_columns(
+            [
+                ppo_line.alias(f"{col}_ppo"),
+                signal_line.alias(f"{col}_ppo_signal"),
+                hist.alias(f"{col}_ppo_hist"),
+            ]
+        )
 
     # -----------------------
     # Complex / Multi-line Indicators
     # -----------------------
 
-    def ichimoku(self, high: str, low: str, close: str, 
-                tenkan: int = 9, kijun: int = 26, senkou: int = 52) -> pl.DataFrame:
+    def ichimoku(
+        self,
+        high: str,
+        low: str,
+        close: str,
+        tenkan: int = 9,
+        kijun: int = 26,
+        senkou: int = 52,
+    ) -> pl.DataFrame:
         """
         Ichimoku Cloud indicator: Tenkan-sen, Kijun-sen, Senkou Span A/B, Chikou Span.
 
@@ -651,14 +707,15 @@ class TechnicalAnalysisNamespace:
 
         chikou_span = pl.col(close).shift(-kijun)
 
-        return self._df.with_columns([
-            tenkan_sen.alias("tenkan_sen"),
-            kijun_sen.alias("kijun_sen"),
-            senkou_a.alias("senkou_a"),
-            senkou_b.alias("senkou_b"),
-            chikou_span.alias("chikou_span")
-        ])
-
+        return self._df.with_columns(
+            [
+                tenkan_sen.alias("tenkan_sen"),
+                kijun_sen.alias("kijun_sen"),
+                senkou_a.alias("senkou_a"),
+                senkou_b.alias("senkou_b"),
+                chikou_span.alias("chikou_span"),
+            ]
+        )
 
     def eri(self, high: str, low: str, close: str, window: int = 13) -> pl.DataFrame:
         """
@@ -686,11 +743,9 @@ class TechnicalAnalysisNamespace:
         ema_close = pl.col(close).ewm_mean(span=window)
         bull_power = pl.col(high) - ema_close
         bear_power = pl.col(low) - ema_close
-        return self._df.with_columns([
-            bull_power.alias("bull_power"),
-            bear_power.alias("bear_power")
-        ])
-
+        return self._df.with_columns(
+            [bull_power.alias("bull_power"), bear_power.alias("bear_power")]
+        )
 
     def fisher_transform(self, col: str, window: int = 10) -> pl.DataFrame:
         """
@@ -714,9 +769,10 @@ class TechnicalAnalysisNamespace:
         low_min = pl.col(col).rolling_min(window)
         high_max = pl.col(col).rolling_max(window)
         x = 0.33 * 2 * ((pl.col(col) - low_min) / (high_max - low_min) - 0.5) + 0.67 * 0
-        ftr_col = 0.5 * (pl.Series([0]*len(self._df)) + x.rolling_apply(lambda s: s[0], window))
+        ftr_col = 0.5 * (
+            pl.Series([0] * len(self._df)) + x.rolling_apply(lambda s: s[0], window)
+        )
         return self._df.with_columns(ftr_col.alias(f"ftr_{window}"))
-
 
     def qqe(self, rsi_col: str, window: int = 14, smooth: int = 5) -> pl.DataFrame:
         """
@@ -743,11 +799,9 @@ class TechnicalAnalysisNamespace:
         delta_rsi = rsi.diff().abs()
         atr_rsi = delta_rsi.rolling_mean(window)
         qqe_signal = atr_rsi.rolling_mean(smooth)
-        return self._df.with_columns([
-            atr_rsi.alias("qqe_rsi"),
-            qqe_signal.alias("qqe_signal")
-        ])
-
+        return self._df.with_columns(
+            [atr_rsi.alias("qqe_rsi"), qqe_signal.alias("qqe_signal")]
+        )
 
     def lrma(self, col: str, window: int = 14) -> pl.DataFrame:
         """
@@ -768,18 +822,21 @@ class TechnicalAnalysisNamespace:
         -------
         >>> df.ta_ext.lrma(col="close", window=14)
         """
+
         def linreg(s: pl.Series) -> float:
             x = pl.Series(range(len(s)))
             y = s
             n = len(y)
             if n == 0:
                 return 0.0
-            slope = (n * (x * y).sum() - x.sum() * y.sum()) / (n * (x ** 2).sum() - (x.sum()) ** 2)
+            slope = (n * (x * y).sum() - x.sum() * y.sum()) / (
+                n * (x**2).sum() - (x.sum()) ** 2
+            )
             intercept = (y.sum() - slope * x.sum()) / n
             return intercept + slope * (n - 1)
+
         lrma_col = pl.col(col).rolling_apply(linreg, window)
         return self._df.with_columns(lrma_col.alias(f"{col}_lrma_{window}"))
-
 
     def cti(self, col: str, window: int = 14) -> pl.DataFrame:
         """
@@ -804,6 +861,6 @@ class TechnicalAnalysisNamespace:
         mean = s.rolling_mean(window)
         dev = s - mean
         numerator = (dev * dev.shift(1)).rolling_sum(window)
-        denominator = (dev ** 2).rolling_sum(window)
+        denominator = (dev**2).rolling_sum(window)
         cti_col = numerator / denominator
         return self._df.with_columns(cti_col.alias(f"{col}_cti_{window}"))
