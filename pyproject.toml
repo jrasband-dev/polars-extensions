@@ -25,3 +25,5 @@ dependencies = [
 include-package-data = true
 
 [tool.setuptools.packages.find]
+[tool.setuptools.dynamic]
+version = {attr = "polars_extensions.__version__"}
