@@ -39,6 +39,7 @@ author = "Jayden Rasband"
 try:
     sys.path.insert(0, str(Path("../../polars_extensions").resolve()))
     from polars_extensions import __version__
+
     release = __version__
 except Exception:
     release = "unknown"

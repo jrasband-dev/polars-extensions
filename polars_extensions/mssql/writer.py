@@ -4,12 +4,11 @@ import re
 
 import polars as pl
 import pyodbc
-from typing import Union, Optional, Literal
+from typing import Optional, Literal
 from tqdm.auto import tqdm
 from .types import get_create_table_sql, prepare_value_for_insert
 
 # Register as Polars DataFrame extension
-import polars as pl
 
 
 @pl.api.register_dataframe_namespace("mssql")

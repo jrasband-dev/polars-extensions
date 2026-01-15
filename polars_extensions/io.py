@@ -1,5 +1,5 @@
 import json
-from typing import Union, Optional, List
+from typing import Union, Optional
 import defusedxml.ElementTree as ET
 import polars as pl
 from pathlib import Path

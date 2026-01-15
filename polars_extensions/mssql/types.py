@@ -1,7 +1,6 @@
 """Type mapping utilities for converting Polars types to SQL Server types."""
 
 import polars as pl
-from typing import Dict
 
 
 def polars_to_sqlserver_type(dtype: pl.DataType, column_name: str = "") -> str:
