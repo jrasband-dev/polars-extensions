@@ -1,14 +1,13 @@
-import re
-"""Main writer module for fast SQL Server bulk inserts."""
 
+"""Main writer module for fast SQL Server bulk inserts."""
+import re
 import polars as pl
 import pyodbc
-from typing import Union, Optional, Literal
+from typing import Optional, Literal
 from tqdm.auto import tqdm
 from .types import get_create_table_sql, prepare_value_for_insert
 
 # Register as Polars DataFrame extension
-import polars as pl
 
 
 @pl.api.register_dataframe_namespace("mssql")
@@ -23,10 +22,11 @@ class MSSQLNamespace:
         table_name: str,
         connection_string: Optional[str] = None,
         connection: Optional[pyodbc.Connection] = None,
-        if_exists: Literal["fail", "replace", "append"] = "fail",
+        if_exists: Literal["fail", "replace", "append", "merge"] = "fail",
         schema: str = "dbo",
         batch_size: int = 10000,
         show_progress: bool = True,
+        upsert_keys: Optional[list[str]] = None,
     ) -> None:
         return write_mssql(
             self._df,
@@ -37,6 +37,7 @@ class MSSQLNamespace:
             schema=schema,
             batch_size=batch_size,
             show_progress=show_progress,
+            upsert_keys=upsert_keys,
         )
 
 
@@ -52,16 +53,18 @@ def write_mssql(
     table_name: str,
     connection_string: Optional[str] = None,
     connection: Optional[pyodbc.Connection] = None,
-    if_exists: Literal["fail", "replace", "append"] = "fail",
+    if_exists: Literal["fail", "replace", "append", "merge"] = "fail",
     schema: str = "dbo",
     batch_size: int = 10000,
     show_progress: bool = True,
+    upsert_keys: Optional[list[str]] = None,
 ) -> None:
     """
-    Write a Polars DataFrame to SQL Server with ultra-fast bulk insert.
+    Write a Polars DataFrame to SQL Server with ultra-fast bulk insert or upsert.
 
     This function uses pyodbc's fast_executemany feature to achieve high-performance
     bulk inserts into SQL Server, typically 10-100x faster than traditional row-by-row inserts.
+    It also supports upsert (MERGE) operations if requested.
 
     Args:
         df: Polars DataFrame to write
@@ -72,9 +75,11 @@ def write_mssql(
             - "fail": Raise an error (default)
             - "replace": Drop the table and recreate it
             - "append": Append data to the existing table
+            - "merge": Upsert data using MERGE (requires upsert_keys)
         schema: Database schema name (default: "dbo")
         batch_size: Number of rows to insert per batch (default: 10000)
         show_progress: Display progress bar during insertion (default: True)
+        upsert_keys: List of column names to use as upsert keys (required for merge)
 
     Returns:
         None
@@ -82,6 +87,7 @@ def write_mssql(
     Raises:
         ValueError: If neither connection_string nor connection is provided
         ValueError: If table exists and if_exists="fail"
+        ValueError: If if_exists="merge" and upsert_keys is not provided
         RuntimeError: If insert operation fails
 
     Example:
@@ -101,8 +107,9 @@ def write_mssql(
         ...     "Trusted_Connection=yes;"
         ... )
         >>>
-        >>> write_database(df, "my_table", connection_string, if_exists="replace")
+        >>> write_mssql(df, "my_table", connection_string, if_exists="merge", upsert_keys=["id"])
     """
+
     # Validate inputs
     if connection_string is None and connection is None:
         raise ValueError("Either connection_string or connection must be provided")
@@ -113,7 +120,6 @@ def write_mssql(
     else:
         should_close_connection = False
 
-
     # Validate schema and table name
     schema = validate_identifier(schema)
     table_name = validate_identifier(table_name)
@@ -122,6 +128,19 @@ def write_mssql(
     columns = df.columns
     for col in columns:
         validate_identifier(col)
+
+    # Defensive: never allow user input to be interpolated directly into SQL
+    # All identifiers are validated above. All values use parameterized queries.
+
+    # Validate upsert_keys if provided
+    if upsert_keys is not None:
+        if not isinstance(upsert_keys, list) or not all(
+            isinstance(k, str) for k in upsert_keys
+        ):
+            raise ValueError("upsert_keys must be a list of column names (strings)")
+        for k in upsert_keys:
+            if k not in columns:
+                raise ValueError(f"Upsert key '{k}' is not a column in the DataFrame")
 
     # Enable fast_executemany for bulk insert performance
     connection.autocommit = False
@@ -146,12 +165,19 @@ def write_mssql(
             if if_exists == "fail":
                 raise ValueError(
                     f"Table {full_table_name} already exists. "
-                    f"Use if_exists='replace' or 'append' to modify this behavior."
+                    f"Use if_exists='replace', 'append', or 'merge' to modify this behavior."
                 )
             elif if_exists == "replace":
                 # Drop the existing table
                 cursor.execute(f"DROP TABLE {full_table_name}")
                 table_exists = False
+            elif if_exists == "merge":
+                # Always use upsert logic if merge is selected
+                if upsert_keys is None or not upsert_keys:
+                    raise ValueError(
+                        "if_exists='merge' requires upsert_keys to be provided."
+                    )
+                use_upsert = True
 
         # Create table if it doesn't exist
         if not table_exists:
@@ -166,7 +192,6 @@ def write_mssql(
             connection.commit()
             return
 
-        # Build INSERT statement
         columns = df.columns
         columns_str = ", ".join([f"[{col}]" for col in columns])
         placeholders = ", ".join(["?"] * len(columns))
@@ -174,11 +199,22 @@ def write_mssql(
             f"INSERT INTO {full_table_name} ({columns_str}) VALUES ({placeholders})"
         )
 
-        # Convert DataFrame to list of tuples for insertion
+        # Upsert support: if upsert_keys is provided, use MERGE
+        use_upsert = upsert_keys is not None and len(upsert_keys) > 0
+        if use_upsert:
+            # All upsert_keys and columns are validated above
+            on_clause = " AND ".join(
+                [f"target.[{k}] = source.[{k}]" for k in upsert_keys]
+            )
+            update_cols = [col for col in columns if col not in upsert_keys]
+            update_set = ", ".join(
+                [f"target.[{col}] = source.[{col}]" for col in update_cols]
+            )
+            insert_cols = ", ".join([f"[{col}]" for col in columns])
+            insert_vals = ", ".join([f"source.[{col}]" for col in columns])
+
         # Process in batches to manage memory
         num_batches = (num_rows + batch_size - 1) // batch_size
-
-        # Create progress bar iterator
         batch_iterator = range(0, num_rows, batch_size)
         if show_progress:
             batch_iterator = tqdm(
@@ -194,18 +230,47 @@ def write_mssql(
             batch_df = df[batch_start:batch_end]
 
             # Convert to row-oriented format
-            # Using to_dicts() and converting to tuples is efficient
             rows = []
             for row_dict in batch_df.iter_rows(named=False):
-                # Prepare each value in the row
                 prepared_row = tuple(
                     prepare_value_for_insert(val, dtype)
                     for val, dtype in zip(row_dict, df.dtypes)
                 )
                 rows.append(prepared_row)
 
-            # Execute bulk insert for this batch
-            cursor.executemany(insert_sql, rows)
+            if use_upsert:
+                # Defensive: temp table name is validated
+                temp_table = f"#temp_upsert_{table_name}"
+                temp_table = validate_identifier(temp_table.replace("#", ""))
+                temp_table = f"#{temp_table}"
+                # Drop temp table if exists (safe, validated name)
+                cursor.execute(
+                    f"IF OBJECT_ID('tempdb..[{temp_table[1:]}]') IS NOT NULL DROP TABLE {temp_table}"
+                )
+                # Create temp table with same structure
+                create_temp_sql = get_create_table_sql(temp_table, None, batch_df)
+                cursor.execute(create_temp_sql)
+                # Insert batch into temp table
+                temp_insert_sql = (
+                    f"INSERT INTO {temp_table} ({columns_str}) VALUES ({placeholders})"
+                )
+                cursor.fast_executemany = True
+                cursor.executemany(temp_insert_sql, rows)
+                # Build and execute MERGE statement
+                # All identifiers are validated, values are parameterized
+                merge_sql = (
+                    f"MERGE INTO {full_table_name} AS target "
+                    f"USING {temp_table} AS source "
+                    f"ON {on_clause} "
+                    f"WHEN MATCHED THEN UPDATE SET {update_set} "
+                    f"WHEN NOT MATCHED THEN INSERT ({insert_cols}) VALUES ({insert_vals});"
+                )
+                cursor.execute(merge_sql)
+                # Drop temp table
+                cursor.execute(f"DROP TABLE {temp_table}")
+            else:
+                # Execute bulk insert for this batch
+                cursor.executemany(insert_sql, rows)
 
             # Update progress bar with row count if enabled
             if show_progress and hasattr(batch_iterator, "set_postfix"):

@@ -1,6 +1,6 @@
 # Polars Extensions
 
-![alt text](plx.svg)
+![alt text](https://raw.githubusercontent.com/jrasband-dev/polars-extensions/refs/heads/main/plx.svg)
 
 
 [![PyPI version](https://img.shields.io/pypi/v/polars-extensions.svg)](https://pypi.org/project/polars-extensions/)  

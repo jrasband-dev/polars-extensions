@@ -319,7 +319,6 @@ class TechnicalAnalysisNamespace:
         diff = (pl.col(col) - pl.col(col).shift(window)).abs()
         volatility = pl.col(col).diff().abs().rolling_sum(window)
         er = diff / volatility
-        sc = (er * (2 / (fast + 1) - 2 / (slow + 1)) + 2 / (slow + 1)) ** 2
         kama_col = pl.col(col).rolling_apply(
             lambda s: s[0], window=1
         )  # placeholder for iterative KAMA
