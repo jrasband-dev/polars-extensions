@@ -11,6 +11,9 @@ license = {text = "MIT"}
 classifiers = []
 dependencies = [
     "polars",
+    "defusedxml",
+    "pyodbc",
+    "tqdm"
 ]
 
 
