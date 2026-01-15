@@ -25,8 +25,7 @@ class BioExtensionNamespace:
     def dna_complement(self) -> pl.Expr:
         """Return the DNA complement (A↔T, C↔G)."""
         return (
-            self._expr
-            .str.replace_all("A", "t")
+            self._expr.str.replace_all("A", "t")
             .str.replace_all("T", "a")
             .str.replace_all("G", "c")
             .str.replace_all("C", "g")
@@ -118,11 +117,13 @@ class BioExtensionNamespace:
             Another expression containing sequences of equal length.
         """
         return (
-            self._expr
-            .str.zip_with(other, separator="")
+            self._expr.str.zip_with(other, separator="")
             .str.split("")
             .arr.eval(
-                pl.element().alias("seq").arr.first().ne(pl.element().alias("seq").arr.last())
+                pl.element()
+                .alias("seq")
+                .arr.first()
+                .ne(pl.element().alias("seq").arr.last())
             )
             .arr.sum()
         )
@@ -142,8 +143,7 @@ class BioExtensionNamespace:
     def mutate_sequence(self, position: int, new_base: str) -> pl.Expr:
         """Mutate a sequence by replacing one base at a given position (0-indexed)."""
         return (
-            self._expr
-            .str.slice(0, position)
+            self._expr.str.slice(0, position)
             + pl.lit(new_base)
             + self._expr.str.slice(position + 1)
         )
@@ -158,7 +158,4 @@ class BioExtensionNamespace:
 
     def delete_sequence(self, start: int, end: int) -> pl.Expr:
         """Delete a segment of the sequence from start to end."""
-        return (
-            self._expr.str.slice(0, start)
-            + self._expr.str.slice(end)
-        )
+        return self._expr.str.slice(0, start) + self._expr.str.slice(end)

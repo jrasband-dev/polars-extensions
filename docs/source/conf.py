@@ -18,9 +18,9 @@ import logging
 
 # Configure the logger
 logging.basicConfig(
-    filename='docs.log',  # Log file name
+    filename="docs.log",  # Log file name
     level=logging.DEBUG,  # Log level
-    format='%(asctime)s - %(levelname)s - %(message)s'  # Log message format
+    format="%(asctime)s - %(levelname)s - %(message)s",  # Log message format
 )
 
 
@@ -33,10 +33,15 @@ sys.path.insert(0, str(Path("../..").resolve()))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Polars Extensions'
-copyright = '2025, Jayden Rasband'
-author = 'Jayden Rasband'
-release = '1.2.1'
+project = "Polars Extensions"
+copyright = "2025, Jayden Rasband"
+author = "Jayden Rasband"
+try:
+    sys.path.insert(0, str(Path("../../polars_extensions").resolve()))
+    from polars_extensions import __version__
+    release = __version__
+except Exception:
+    release = "unknown"
 
 # -- General configuration ---------------------------------------------------
 
@@ -57,7 +62,7 @@ extensions = [
     "sphinx_favicon",
     "sphinx_reredirects",
     "sphinx_toolbox.more_autodoc.overloads",
-    "recommonmark"
+    "recommonmark",
 ]
 
 # Render docstring text in `single backticks` as code.
@@ -68,9 +73,10 @@ maximum_signature_line_length = 88
 # Below setting is used by
 # sphinx-autosummary-accessors - build docs for namespace accessors like `Series.str`
 # https://sphinx-autosummary-accessors.readthedocs.io/en/stable/
-templates_path = ["_templates", 
-                #   sphinx_autosummary_accessors.templates_path
-                  ]
+templates_path = [
+    "_templates",
+    #   sphinx_autosummary_accessors.templates_path
+]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -81,14 +87,14 @@ exclude_patterns = ["Thumbs.db", ".DS_Store"]
 # sphinx_toolbox - Box of handy tools for Sphinx
 # https://sphinx-toolbox.readthedocs.io/en/latest/
 overloads_location = ["bottom"]
-language = 'python'
+language = "python"
 
 
 # -- Options for HTML output -------------------------------------------------
 
 
-html_theme = 'alabaster'
-html_static_path = ['_static']
+html_theme = "alabaster"
+html_static_path = ["_static"]
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -238,13 +244,12 @@ def linkcode_resolve(domain: str, info: dict[str, Any]) -> str | None:
 
 
 def _minify_classpaths(s: str) -> str:
-    logging.debug(f'classpath: {s}')
+    logging.debug(f"classpath: {s}")
     return re.sub(
-        pattern=r"metric_forge\.ecommerce\.([^.]+\.[^.]+)",  
+        pattern=r"metric_forge\.ecommerce\.([^.]+\.[^.]+)",
         repl=r"\1",  # Replace with just the captured part
         string=s,
     )
-
 
 
 def process_signature(  # noqa: D103
@@ -256,8 +261,8 @@ def process_signature(  # noqa: D103
     sig: str,
     ret: str,
 ) -> tuple[str, str]:
-    logging.debug(f'process_sig: {sig}')
-    logging.debug(f'return_sig: {ret}')
+    logging.debug(f"process_sig: {sig}")
+    logging.debug(f"return_sig: {ret}")
     return (
         _minify_classpaths(sig) if sig else sig,
         _minify_classpaths(ret) if ret else ret,

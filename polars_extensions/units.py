@@ -1,5 +1,6 @@
 import polars as pl
 
+
 @pl.api.register_expr_namespace("unit_ext")
 class UnitExtensionNamespace:
     """
@@ -13,7 +14,7 @@ class UnitExtensionNamespace:
     def fahrenheit_to_celsius(self) -> pl.Expr:
         """
         Convert Fahrenheit to Celsius.
-        
+
         Examples
         --------
         .. code-block:: python
@@ -40,7 +41,7 @@ class UnitExtensionNamespace:
             │ 68     ┆ 20.0   │
             │ 104    ┆ 40.0   │
             └────────┴────────┘
-        
+
         """
         return (self._expr - 32) * 5 / 9
 
@@ -68,11 +69,11 @@ class UnitExtensionNamespace:
     def yards_to_meters(self) -> pl.Expr:
         """
         Convert yards to meters.
-        
+
         Examples
         --------
         .. code-block:: python
-        
+
             import polars as pl
             import polars_extensions as plx
 
@@ -84,7 +85,7 @@ class UnitExtensionNamespace:
                 pl.col("yards").unit_ext.yards_to_meters().alias("meters")
             ])
 
-        
+
         .. code-block:: text
 
             shape: (3, 2)
@@ -284,4 +285,3 @@ class UnitExtensionNamespace:
     def bytes_to_bits(self) -> pl.Expr:
         """Convert bytes to bits."""
         return self._expr * 8
-

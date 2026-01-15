@@ -11,11 +11,11 @@ class NameExtensionNameSpace:
 
     def to_pascal_case(self) -> pl.DataFrame:
         """Converts column names to PascalCase
-        
+
         Examples
         --------
         .. code-block:: python
-        
+
             import polars as pl
             from polars_extensions import *
             data = pl.read_csv('datasets/employees.csv')
@@ -46,6 +46,7 @@ class NameExtensionNameSpace:
             └────────────┴───────────┴──────────┴─────────────┴─────────────┴────────────┴────────────┴────────┘
 
         """
+
         def _to_pascal_case(name: str) -> str:
             return "".join(
                 word.capitalize() for word in re.sub(r"[_\s]+", " ", name).split()
@@ -57,11 +58,11 @@ class NameExtensionNameSpace:
 
     def to_snake_case(self) -> pl.DataFrame:
         """Converts column names to snake_case
-        
+
         Examples
         --------
         .. code-block:: python
-        
+
             import polars as pl
             from polars_extensions import *
             data = pl.read_csv('datasets/employees.csv')
@@ -92,7 +93,7 @@ class NameExtensionNameSpace:
             │            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
-    
+
         def _to_snake_case(name: str) -> str:
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
 
@@ -101,7 +102,7 @@ class NameExtensionNameSpace:
 
     def to_camel_case(self) -> pl.DataFrame:
         """Converts column names to camelCase
-        
+
         Examples
         --------
 
@@ -136,6 +137,7 @@ class NameExtensionNameSpace:
             │            ┆           ┆          ┆ com         ┆             ┆            ┆            ┆        │
             └────────────┴───────────┴──────────┴─────────────┴─────────────┴────────────┴────────────┴────────┘
         """
+
         def _to_camel_case(name: str) -> str:
             words = re.sub(r"[_\s]+", " ", name).split()
             return words[0].lower() + "".join(word.capitalize() for word in words[1:])
@@ -145,7 +147,7 @@ class NameExtensionNameSpace:
 
     def to_pascal_snake_case(self) -> pl.DataFrame:
         """Converts column names to Pascal_Snake_Case
-        
+
         Examples
         --------
         .. code-block:: python
@@ -154,7 +156,7 @@ class NameExtensionNameSpace:
             from polars_extensions import *
             data = pl.read_csv('datasets/employees.csv')
             data.name_ext.to_pascal_snake_case()
-        
+
         .. code-block:: text
 
             shape: (5, 8)
@@ -180,6 +182,7 @@ class NameExtensionNameSpace:
             │            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
+
         def _to_pascal_snake_case(name: str) -> str:
             words = re.sub(r"[_\s]+", " ", name).split()
             return "_".join(word.capitalize() for word in words)
@@ -199,7 +202,7 @@ class NameExtensionNameSpace:
             data = pl.read_csv('datasets/employees.csv')
             data.name_ext.to_kebeb_case()
 
-        .. code-block:: text 
+        .. code-block:: text
 
             shape: (5, 8)
             ┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
@@ -224,6 +227,7 @@ class NameExtensionNameSpace:
             │            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
+
         def _to_kebeb_case(name: str) -> str:
             return re.sub(r"(?<!^)(?=[A-Z])", "-", name).lower().replace("_", "-")
 
@@ -232,7 +236,7 @@ class NameExtensionNameSpace:
 
     def to_upper_snake_case(self) -> pl.DataFrame:
         """Converts column names to UPPER_SNAKE_CASE
-        
+
         Examples
         --------
         .. code-block:: python
@@ -242,7 +246,7 @@ class NameExtensionNameSpace:
             data = pl.read_csv('datasets/employees.csv')
             data.name_ext.to_kebeb_case()
 
-        .. code-block:: text 
+        .. code-block:: text
 
             shape: (5, 8)
             ┌────────────┬────────────┬───────────┬────────────┬────────────┬────────────┬────────────┬────────┐
@@ -269,6 +273,7 @@ class NameExtensionNameSpace:
 
 
         """
+
         def _to_upper_snake_case(name: str) -> str:
             return re.sub(r"(?<!^)(?=[A-Z])", "_", name).upper().replace("-", "_")
 
@@ -311,6 +316,7 @@ class NameExtensionNameSpace:
             │            ┆            ┆           ┆ e.com      ┆            ┆            ┆            ┆        │
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
+
         def _to_train_case(name: str) -> str:
             return "-".join(
                 word.capitalize() for word in re.sub(r"[_\s]+", " ", name).split()

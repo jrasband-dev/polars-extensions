@@ -1,5 +1,6 @@
 import polars as pl
 
+
 @pl.api.register_dataframe_namespace("str_ext")
 class StringExtensionNamespace:
     """String Extensions for the Polars Library"""
@@ -11,12 +12,12 @@ class StringExtensionNamespace:
         """
         Calculates a similarity score between two columns of strings based on common characters,
         accounting for repeated characters.
-        
+
         Parameters
         ----------
         col_a (str): The name of the first column to compare.
         col_b (str): The name of the second column to compare.
-        
+
         Returns
         -------
         DataFrame
@@ -27,7 +28,7 @@ class StringExtensionNamespace:
         .. code-block:: python
 
             import polars_extensions as plx
-            import polars as pl 
+            import polars as pl
 
             data = pl.read_csv('datasets/string_sim.csv')
             data.str_ext.f1_string_similarity('a','c')
@@ -52,7 +53,7 @@ class StringExtensionNamespace:
             │ it was the best of times ┆ it was the worst of times ┆ 0.897959 │
             │ of times it was the best ┆ it was the worst of times ┆ 0.897959 │
             └──────────────────────────┴───────────────────────────┴──────────┘
-        
+
 
         """
 
@@ -76,19 +77,18 @@ class StringExtensionNamespace:
                 if char in list2_copy:
                     intersection.append(char)
                     list2_copy.remove(char)
-            
+
             common_chars = len(intersection)
             total_chars = len(list1) + len(list2)
             return (2 * common_chars) / total_chars if total_chars > 0 else 0.0
 
         # Apply the similarity function row-by-row
         similarity_scores = [
-            similarity(row_a, row_b) for row_a, row_b in zip(self._df[col_a], self._df[col_b])
+            similarity(row_a, row_b)
+            for row_a, row_b in zip(self._df[col_a], self._df[col_b])
         ]
 
         # Add the similarity scores as a new column to the DataFrame
-        self._df = self._df.with_columns(
-            pl.Series("f1_score", similarity_scores)
-        )
+        self._df = self._df.with_columns(pl.Series("f1_score", similarity_scores))
 
         return self._df
