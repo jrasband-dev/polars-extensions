@@ -1,3 +1,4 @@
+import re
 """Main writer module for fast SQL Server bulk inserts."""
 
 import polars as pl
@@ -37,6 +38,13 @@ class MSSQLNamespace:
             batch_size=batch_size,
             show_progress=show_progress,
         )
+
+
+def validate_identifier(name: str) -> str:
+    # Allow only alphanumeric, underscore, and must not be empty
+    if not re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", name):
+        raise ValueError(f"Invalid SQL identifier: {name}")
+    return name
 
 
 def write_mssql(
@@ -104,6 +112,16 @@ def write_mssql(
         connection = pyodbc.connect(connection_string)
     else:
         should_close_connection = False
+
+
+    # Validate schema and table name
+    schema = validate_identifier(schema)
+    table_name = validate_identifier(table_name)
+
+    # Validate column names
+    columns = df.columns
+    for col in columns:
+        validate_identifier(col)
 
     # Enable fast_executemany for bulk insert performance
     connection.autocommit = False
