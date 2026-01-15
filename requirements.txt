@@ -17,7 +17,6 @@ packaging==25.0
 parso==0.8.5
 platformdirs==4.5.1
 polars==1.36.1
--e file:///C:/Repos/jrasband-dev/polars-extensions
 polars-runtime-32==1.36.1
 prompt-toolkit==3.0.52
 psutil==7.2.0
