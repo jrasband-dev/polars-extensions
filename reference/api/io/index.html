@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Input/Output &#8212; Polars Extensions 1.2.1 documentation</title>
+    <title>Input/Output &#8212; Polars Extensions unknown documentation</title>
   
   
   
@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../_static/documentation_options.js?v=9d442c52"></script>
+    <script src="../../../_static/documentation_options.js?v=19a9095c"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -124,7 +124,7 @@
   
   
   
-    <p class="title logo__title">Polars Extensions 1.2.1 documentation</p>
+    <p class="title logo__title">Polars Extensions unknown documentation</p>
   
 </a></div>
     
@@ -257,10 +257,6 @@ document.write(`
     </div>
   
 
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
   
 </div>
 
@@ -460,141 +456,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-polars_extensions.io">
-<span id="input-output"></span><h1>Input/Output<a class="headerlink" href="#module-polars_extensions.io" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="polars_extensions.io.read_schema">
-<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_schema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L261-L285"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_schema" title="Link to this definition">#</a></dt>
-<dd><p>Load a JSON schema file and return a Polars Schema object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">str | Path</span></dt><dd><p>Input JSON file.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>pl.Schema</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="polars_extensions.io.read_xml">
-<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">read_xml</span></span><span class="sig-paren">(</span>
-
-<dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">xml_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">record_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">include_attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
-</dl>
-
-<span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L8-L236"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.read_xml" title="Link to this definition">#</a></dt>
-<dd><p>Reads and normalizes XML into a flat or semi-structured Polars DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>xml_input</strong><span class="classifier">str | bytes | Path</span></dt><dd><p>XML string, bytes, or file path.</p>
-</dd>
-<dt><strong>record_path</strong><span class="classifier">str, optional</span></dt><dd><p>Dot-separated path to record nodes (e.g., &quot;channel.item&quot;).
-Can optionally include the root element (e.g., &quot;catalog.product&quot;).</p>
-</dd>
-<dt><strong>include_attributes</strong><span class="classifier">bool</span></dt><dd><p>Whether to include XML attributes in the output.</p>
-</dd>
-<dt><strong>flatten</strong><span class="classifier">bool</span></dt><dd><p>Recursively explode lists and unnest structs.</p>
-</dd>
-<dt><strong>strict</strong><span class="classifier">bool</span></dt><dd><p>True -&gt; Polars raises on type mismatch.
-False -&gt; wraps primitives in lists to avoid schema mismatch.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>pl.DataFrame</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">polars_extensions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plx</span>
-<span class="n">xml_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&lt;catalog&gt;</span>
-<span class="s1">    &lt;product sku=&quot;A123&quot; available=&quot;true&quot;&gt;</span>
-<span class="s1">        &lt;name&gt;Mechanical Keyboard&lt;/name&gt;</span>
-<span class="s1">        &lt;price currency=&quot;USD&quot;&gt;129.99&lt;/price&gt;</span>
-<span class="s1">        &lt;features&gt;</span>
-<span class="s1">            &lt;feature&gt;RGB Lighting&lt;/feature&gt;</span>
-<span class="s1">            &lt;feature&gt;Hot-swappable switches&lt;/feature&gt;</span>
-<span class="s1">            &lt;feature&gt;Aluminum frame&lt;/feature&gt;</span>
-<span class="s1">        &lt;/features&gt;</span>
-<span class="s1">    &lt;/product&gt;</span>
-
-<span class="s1">    &lt;product sku=&quot;B456&quot; available=&quot;false&quot;&gt;</span>
-<span class="s1">        &lt;name&gt;Noise Cancelling Headphones&lt;/name&gt;</span>
-<span class="s1">        &lt;price currency=&quot;USD&quot;&gt;299.00&lt;/price&gt;</span>
-<span class="s1">        &lt;features&gt;</span>
-<span class="s1">            &lt;feature&gt;ANC&lt;/feature&gt;</span>
-<span class="s1">            &lt;feature&gt;Bluetooth 5.0&lt;/feature&gt;</span>
-<span class="s1">        &lt;/features&gt;</span>
-<span class="s1">    &lt;/product&gt;</span>
-<span class="s1">&lt;/catalog&gt;</span>
-<span class="s1">&#39;&#39;&#39;</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">plx</span><span class="o">.</span><span class="n">read_xml</span><span class="p">(</span><span class="n">xml_data</span><span class="p">,</span><span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-</div>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>shape: (5, 6)
-┌────────────────┬────────────────┬────────────────┬───────────────┬───────────────┬───────────────┐
-│ catalog.produc ┆ catalog.produc ┆ catalog.produc ┆ catalog.produ ┆ catalog.produ ┆ catalog.produ │
-│ t.product.sku  ┆ t.product.avai ┆ t.product.name ┆ ct.product.pr ┆ ct.product.pr ┆ ct.product.fe │
-│ ---            ┆ la…            ┆ .t…            ┆ ice.…         ┆ ice.…         ┆ atur…         │
-│ str            ┆ ---            ┆ ---            ┆ ---           ┆ ---           ┆ ---           │
-│                ┆ str            ┆ str            ┆ str           ┆ str           ┆ str           │
-╞════════════════╪════════════════╪════════════════╪═══════════════╪═══════════════╪═══════════════╡
-│ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ RGB Lighting  │
-│                ┆                ┆ Keyboard       ┆               ┆               ┆               │
-│ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ Hot-swappable │
-│                ┆                ┆ Keyboard       ┆               ┆               ┆ switches      │
-│ A123           ┆ true           ┆ Mechanical     ┆ USD           ┆ 129.99        ┆ Aluminum      │
-│                ┆                ┆ Keyboard       ┆               ┆               ┆ frame         │
-│ B456           ┆ false          ┆ Noise          ┆ USD           ┆ 299.00        ┆ ANC           │
-│                ┆                ┆ Cancelling     ┆               ┆               ┆               │
-│                ┆                ┆ Headphones     ┆               ┆               ┆               │
-│ B456           ┆ false          ┆ Noise          ┆ USD           ┆ 299.00        ┆ Bluetooth 5.0 │
-│                ┆                ┆ Cancelling     ┆               ┆               ┆               │
-│                ┆                ┆ Headphones     ┆               ┆               ┆               │
-└────────────────┴────────────────┴────────────────┴───────────────┴───────────────┴───────────────┘
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="polars_extensions.io.write_schema">
-<span class="sig-prename descclassname"><span class="pre">polars_extensions.io.</span></span><span class="sig-name descname"><span class="pre">write_schema</span></span><span class="sig-paren">(</span>
-
-<dl>
-<dd><em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Schema</span></span></em>,</dd>
-<dd><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em>,</dd>
-</dl>
-
-<span class="sig-paren">)</span><a class="reference external" href="https://github.com/jrasband-dev/polars-extensions/blob/main/polars-extensions/../polars_extensions/io.py#L239-L258"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#polars_extensions.io.write_schema" title="Link to this definition">#</a></dt>
-<dd><p>Save a Polars schema to a JSON file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>schema</strong><span class="classifier">DataFrame | Schema</span></dt><dd><p>The schema source.</p>
-</dd>
-<dt><strong>file</strong><span class="classifier">str | Path</span></dt><dd><p>Output JSON file.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="input-output">
+<h1>Input/Output<a class="headerlink" href="#input-output" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -631,25 +494,6 @@ False -&gt; wraps primitives in lists to avoid schema mismatch.</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.io.read_schema"><code class="docutils literal notranslate"><span class="pre">read_schema()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.io.read_xml"><code class="docutils literal notranslate"><span class="pre">read_xml()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polars_extensions.io.write_schema"><code class="docutils literal notranslate"><span class="pre">write_schema()</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
