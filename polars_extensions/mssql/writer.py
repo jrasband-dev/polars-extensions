@@ -239,35 +239,20 @@ def write_mssql(
                 rows.append(prepared_row)
 
             if use_upsert:
-                # Defensive: temp table name is validated
-                temp_table = f"#temp_upsert_{table_name}"
-                temp_table = validate_identifier(temp_table.replace("#", ""))
-                temp_table = f"#{temp_table}"
-                # Drop temp table if exists (safe, validated name)
-                cursor.execute(
-                    f"IF OBJECT_ID('tempdb..[{temp_table[1:]}]') IS NOT NULL DROP TABLE {temp_table}"
-                )
-                # Create temp table with same structure
-                create_temp_sql = get_create_table_sql(temp_table, None, batch_df)
-                cursor.execute(create_temp_sql)
-                # Insert batch into temp table
-                temp_insert_sql = (
-                    f"INSERT INTO {temp_table} ({columns_str}) VALUES ({placeholders})"
-                )
-                cursor.fast_executemany = True
-                cursor.executemany(temp_insert_sql, rows)
-                # Build and execute MERGE statement
-                # All identifiers are validated, values are parameterized
+                # Use MERGE with VALUES for upsert, no temp table
+                values_clause = ", ".join([
+                    f"({', '.join(['?' for _ in columns])})" for _ in rows
+                ])
                 merge_sql = (
                     f"MERGE INTO {full_table_name} AS target "
-                    f"USING {temp_table} AS source "
+                    f"USING (VALUES {values_clause}) AS source ({', '.join([f'[{col}]' for col in columns] )}) "
                     f"ON {on_clause} "
                     f"WHEN MATCHED THEN UPDATE SET {update_set} "
                     f"WHEN NOT MATCHED THEN INSERT ({insert_cols}) VALUES ({insert_vals});"
                 )
-                cursor.execute(merge_sql)
-                # Drop temp table
-                cursor.execute(f"DROP TABLE {temp_table}")
+                # Flatten rows for parameterized VALUES
+                flat_rows = [item for row in rows for item in row]
+                cursor.execute(merge_sql, flat_rows)
             else:
                 # Execute bulk insert for this batch
                 cursor.executemany(insert_sql, rows)
