@@ -9,7 +9,17 @@ class UnitExtensionNamespace:
         self._expr = expr
 
     def _apply_expr(self, fallback_expr: pl.Expr) -> pl.Expr:
-        """Apply native Polars expression conversion."""
+        """
+        Validate and apply a Polars expression for this unit conversion.
+
+        This helper centralizes any future dispatch logic (e.g., toggling between
+        different execution backends) and currently ensures the provided value is
+        a valid ``polars.Expr`` before returning it unchanged.
+        """
+        if not isinstance(fallback_expr, pl.Expr):
+            raise TypeError(
+                f"_apply_expr expected a polars.Expr, got {type(fallback_expr)!r}"
+            )
         return fallback_expr
 
     def fahrenheit_to_celsius(self) -> pl.Expr:
