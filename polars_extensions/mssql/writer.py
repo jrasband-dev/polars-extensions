@@ -4,7 +4,7 @@ import re
 import polars as pl
 import pyodbc
 from typing import Optional, Literal
-from tqdm import tqdm
+from tqdm.auto import tqdm
 from .types import get_create_table_sql, prepare_value_for_insert
 
 # Register as Polars DataFrame extension
