@@ -6,3 +6,5 @@ polars_extensions.egg-info
 *.log
 docs/build
 usage.ipynb
+target
+.maturin
