@@ -4,44 +4,7 @@ import importlib.util
 import os
 import sys
 from glob import glob
-
-def _load_rust_extension():
-    try:
-        from . import _name_rust as module
-
-        return module
-    except ImportError:
-        pass
-
-    for module_name in ("polars_extensions._name_rust", "_name_rust"):
-        try:
-            return importlib.import_module(module_name)
-        except ImportError:
-            continue
-
-    for path_entry in sys.path:
-        if "site-packages" not in path_entry.lower():
-            continue
-
-        candidates = glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.pyd"))
-        candidates += glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.so"))
-        candidates += glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.dylib"))
-
-        for candidate in candidates:
-            spec = importlib.util.spec_from_file_location(
-                "polars_extensions._name_rust",
-                candidate,
-            )
-            if spec is None or spec.loader is None:
-                continue
-
-            module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(module)
-            return module
-
-    return None
-
-
+from .name import _load_rust_extension
 _name_rust = _load_rust_extension()
 
 
