@@ -1,5 +1,49 @@
 import polars as pl
-import re
+import importlib
+import importlib.util
+import os
+import sys
+from glob import glob
+
+
+def _load_rust_extension():
+    try:
+        from . import _name_rust as module
+
+        return module
+    except ImportError:
+        pass
+
+    for module_name in ("polars_extensions._name_rust", "_name_rust"):
+        try:
+            return importlib.import_module(module_name)
+        except ImportError:
+            continue
+
+    for path_entry in sys.path:
+        if "site-packages" not in path_entry.lower():
+            continue
+
+        candidates = glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.pyd"))
+        candidates += glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.so"))
+        candidates += glob(os.path.join(path_entry, "polars_extensions", "_name_rust*.dylib"))
+
+        for candidate in candidates:
+            spec = importlib.util.spec_from_file_location(
+                "polars_extensions._name_rust",
+                candidate,
+            )
+            if spec is None or spec.loader is None:
+                continue
+
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+
+    return None
+
+
+_name_rust = _load_rust_extension()
 
 
 @pl.api.register_dataframe_namespace("name_ext")
@@ -8,6 +52,28 @@ class NameExtensionNameSpace:
 
     def __init__(self, df: pl.DataFrame):
         self._df = df
+
+    def _rename_columns_with(
+        self,
+        rust_converter_name: str,
+    ) -> pl.DataFrame:
+        if _name_rust is None:
+            raise ImportError(
+                "Rust extension module 'polars_extensions._name_rust' is required for name_ext. "
+                "Install or reinstall `polars-extensions` from a wheel for your platform. "
+                "For local development, run `python -m maturin develop -m Cargo.toml`."
+            )
+
+        columns = self._df.columns
+        if not hasattr(_name_rust, rust_converter_name):
+            raise AttributeError(
+                f"Rust converter '{rust_converter_name}' is not available in polars_extensions._name_rust"
+            )
+
+        converter = getattr(_name_rust, rust_converter_name)
+        converted = converter(columns)
+
+        return self._df.rename(dict(zip(columns, converted)))
 
     def to_pascal_case(self) -> pl.DataFrame:
         """Converts column names to PascalCase
@@ -47,14 +113,7 @@ class NameExtensionNameSpace:
 
         """
 
-        def _to_pascal_case(name: str) -> str:
-            return "".join(
-                word.capitalize() for word in re.sub(r"[_\s]+", " ", name).split()
-            )
-
-        columns = self._df.columns
-        new_columns = {col: _to_pascal_case(col) for col in columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_pascal_case_columns")
 
     def to_snake_case(self) -> pl.DataFrame:
         """Converts column names to snake_case
@@ -94,11 +153,7 @@ class NameExtensionNameSpace:
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
 
-        def _to_snake_case(name: str) -> str:
-            return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
-
-        new_columns = {col: _to_snake_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_snake_case_columns")
 
     def to_camel_case(self) -> pl.DataFrame:
         """Converts column names to camelCase
@@ -138,12 +193,7 @@ class NameExtensionNameSpace:
             └────────────┴───────────┴──────────┴─────────────┴─────────────┴────────────┴────────────┴────────┘
         """
 
-        def _to_camel_case(name: str) -> str:
-            words = re.sub(r"[_\s]+", " ", name).split()
-            return words[0].lower() + "".join(word.capitalize() for word in words[1:])
-
-        new_columns = {col: _to_camel_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_camel_case_columns")
 
     def to_pascal_snake_case(self) -> pl.DataFrame:
         """Converts column names to Pascal_Snake_Case
@@ -183,12 +233,7 @@ class NameExtensionNameSpace:
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
 
-        def _to_pascal_snake_case(name: str) -> str:
-            words = re.sub(r"[_\s]+", " ", name).split()
-            return "_".join(word.capitalize() for word in words)
-
-        new_columns = {col: _to_pascal_snake_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_pascal_snake_case_columns")
 
     def to_kebeb_case(self) -> pl.DataFrame:
         """Converts column names to kebab-case
@@ -228,11 +273,7 @@ class NameExtensionNameSpace:
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
 
-        def _to_kebeb_case(name: str) -> str:
-            return re.sub(r"(?<!^)(?=[A-Z])", "-", name).lower().replace("_", "-")
-
-        new_columns = {col: _to_kebeb_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_kebab_case_columns")
 
     def to_upper_snake_case(self) -> pl.DataFrame:
         """Converts column names to UPPER_SNAKE_CASE
@@ -274,11 +315,7 @@ class NameExtensionNameSpace:
 
         """
 
-        def _to_upper_snake_case(name: str) -> str:
-            return re.sub(r"(?<!^)(?=[A-Z])", "_", name).upper().replace("-", "_")
-
-        new_columns = {col: _to_upper_snake_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_upper_snake_case_columns")
 
     def to_train_case(self) -> pl.DataFrame:
         """Converts column names to Train-Case
@@ -317,10 +354,4 @@ class NameExtensionNameSpace:
             └────────────┴────────────┴───────────┴────────────┴────────────┴────────────┴────────────┴────────┘
         """
 
-        def _to_train_case(name: str) -> str:
-            return "-".join(
-                word.capitalize() for word in re.sub(r"[_\s]+", " ", name).split()
-            )
-
-        new_columns = {col: _to_train_case(col) for col in self._df.columns}
-        return self._df.rename(new_columns)
+        return self._rename_columns_with("to_train_case_columns")
