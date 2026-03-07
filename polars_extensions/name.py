@@ -285,7 +285,7 @@ class NameExtensionNameSpace:
             import polars as pl
             from polars_extensions import *
             data = pl.read_csv('datasets/employees.csv')
-            data.name_ext.to_kebeb_case()
+            data.name_ext.to_upper_snake_case()
 
         .. code-block:: text
 
