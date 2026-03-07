@@ -1,3 +1,7 @@
+[build-system]
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
+
 [project]
 name = "polars-extensions"
 
@@ -21,9 +25,6 @@ dependencies = [
 "Source" = "https://github.com/jrasband-dev/polars-extensions"
 "Documentation" = "https://jrasband-dev.github.io/polars-extensions/"
 
-[tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.packages.find]
-[tool.setuptools.dynamic]
-version = {attr = "polars_extensions.__version__"}
+[tool.maturin]
+module-name = "polars_extensions._name_rust"
+python-source = "."

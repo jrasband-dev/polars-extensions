@@ -1,27 +1,46 @@
 import polars as pl
+import importlib
+import importlib.util
+import os
+import sys
+from glob import glob
+from .name import _load_rust_extension
+_name_rust = _load_rust_extension()
+
+
+def _map_with_rust(expr: pl.Expr, rust_fn_name: str, return_dtype: pl.DataType) -> pl.Expr:
+    if _name_rust is None:
+        raise ImportError(
+            "Rust extension module 'polars_extensions._name_rust' is required for num_ext. "
+            "Install or reinstall `polars-extensions` from a wheel for your platform. "
+            "For local development, run `python -m maturin develop -m Cargo.toml`."
+        )
+
+    if not hasattr(_name_rust, rust_fn_name):
+        raise AttributeError(
+            f"Rust converter '{rust_fn_name}' is not available in polars_extensions._name_rust"
+        )
+
+    rust_fn = getattr(_name_rust, rust_fn_name)
+    return expr.map_elements(rust_fn, return_dtype=return_dtype)
+
+
+def to_roman(expr: pl.Expr) -> pl.Expr:
+    return _map_with_rust(expr, "to_roman_scalar", pl.String)
+
+
+def from_roman(expr: pl.Expr) -> pl.Expr:
+    return _map_with_rust(expr, "from_roman_scalar", pl.Int64)
+
+
+def word_to_number(expr: pl.Expr) -> pl.Expr:
+    return _map_with_rust(expr, "word_to_number_scalar", pl.Int64)
 
 
 @pl.api.register_expr_namespace("num_ext")
 class NumericExtensionNamespace:
     def __init__(self, expr: pl.Expr):
         self._expr = expr
-
-    # Roman numeral mappings
-    _roman_map = [
-        ("M", 1000),
-        ("CM", 900),
-        ("D", 500),
-        ("CD", 400),
-        ("C", 100),
-        ("XC", 90),
-        ("L", 50),
-        ("XL", 40),
-        ("X", 10),
-        ("IX", 9),
-        ("V", 5),
-        ("IV", 4),
-        ("I", 1),
-    ]
 
     def to_roman(self) -> pl.Expr:
         """
@@ -56,19 +75,7 @@ class NumericExtensionNamespace:
             └─────────┴───────┘
         """
 
-        def convert_to_roman(value: int) -> str:
-            if not (0 < value < 4000):
-                raise ValueError("Number out of range (1-3999)")
-
-            result = []
-            for roman, num in self._roman_map:
-                while value >= num:
-                    result.append(roman)
-                    value -= num
-            return "".join(result)
-
-        # Use map_elements for element-wise operation
-        return self._expr.map_elements(convert_to_roman, return_dtype=pl.String)
+        return to_roman(self._expr)
 
     def from_roman(self) -> pl.Expr:
         """
@@ -102,23 +109,7 @@ class NumericExtensionNamespace:
             │ V     ┆ 5       │
             └───────┴─────────┘
         """
-        roman_to_value = {roman: value for roman, value in self._roman_map}
-
-        def convert_from_roman(roman: str) -> int:
-            i = 0
-            total = 0
-            while i < len(roman):
-                # Check for two-character numeral first
-                if i + 1 < len(roman) and roman[i : i + 2] in roman_to_value:
-                    total += roman_to_value[roman[i : i + 2]]
-                    i += 2
-                else:
-                    total += roman_to_value[roman[i]]
-                    i += 1
-            return total
-
-        # Use map_elements for element-wise operation
-        return self._expr.map_elements(convert_from_roman, return_dtype=pl.Int64)
+        return from_roman(self._expr)
 
     def word_to_number(self) -> pl.Expr:
         """Convert Natural Language to Numbers
@@ -153,9 +144,4 @@ class NumericExtensionNamespace:
 
 
         """
-        from word2number import w2n
-
-        return self._expr.map_elements(
-            lambda x: w2n.word_to_num(x) if isinstance(x, str) else x,
-            return_dtype=pl.Int64,
-        )
+        return word_to_number(self._expr)
