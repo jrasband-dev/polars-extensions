@@ -3,6 +3,15 @@ from typing import Union, Optional
 import defusedxml.ElementTree as ET
 import polars as pl
 from pathlib import Path
+import importlib
+
+try:
+    from . import _name_rust
+except ImportError:
+    try:
+        _name_rust = importlib.import_module("_name_rust")
+    except ImportError:
+        _name_rust = None
 
 
 def read_xml(
@@ -114,7 +123,53 @@ def read_xml(
 
         return df
 
-    # --- Load XML ---
+    def _to_xml_text(value: Union[str, bytes, Path]) -> str:
+        if isinstance(value, (bytes, bytearray)):
+            if value.lstrip().startswith(b"<"):
+                return value.decode("utf-8")
+            path = Path(value.decode("utf-8"))
+            return path.read_text(encoding="utf-8")
+
+        if isinstance(value, str):
+            if value.strip().startswith("<"):
+                return value
+            return Path(value).read_text(encoding="utf-8")
+
+        if isinstance(value, Path):
+            return value.read_text(encoding="utf-8")
+
+        raise TypeError("xml_input must be str, bytes, or pathlib.Path")
+
+    # --- Rust-fast path (records parse + extraction) ---
+    if _name_rust is not None and hasattr(_name_rust, "read_xml_records"):
+        records_json = _name_rust.read_xml_records(
+            _to_xml_text(xml_input),
+            record_path,
+            include_attributes,
+        )
+        records = json.loads(records_json)
+
+        def wrap_primitives(obj):
+            if isinstance(obj, dict):
+                return {k: wrap_primitives(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                if all(not isinstance(i, dict) and not isinstance(i, list) for i in obj):
+                    return obj
+                return [wrap_primitives(i) for i in obj]
+            else:
+                return [obj]
+
+        if not strict:
+            records = [wrap_primitives(r) for r in records]
+
+        df = pl.from_dicts(records)
+
+        if flatten:
+            df = _fully_flatten(df)
+
+        return df
+
+    # --- Load XML (Python fallback) ---
     # Support string/bytes XML payloads or file paths (Path or string)
     if isinstance(xml_input, (bytes, bytearray)):
         is_string = xml_input.lstrip().startswith(b"<")

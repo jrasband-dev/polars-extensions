@@ -4,6 +4,7 @@ polars
 pyarrow
 recommonmark
 shapely
+pyodbc
 sphinx==7.3.7
 
 # Third-party Sphinx extensions

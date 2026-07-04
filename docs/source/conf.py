@@ -28,7 +28,10 @@ logging.basicConfig(
 
 # -- Path setup --------------------------------------------------------------
 
-sys.path.insert(0, str(Path("../..").resolve()))
+conf_dir = Path(__file__).resolve().parent
+repo_root = conf_dir.parent.parent
+
+sys.path.insert(0, str(repo_root))
 
 
 # -- Project information -----------------------------------------------------
@@ -37,7 +40,6 @@ project = "Polars Extensions"
 copyright = "2025, Jayden Rasband"
 author = "Jayden Rasband"
 try:
-    sys.path.insert(0, str(Path("../../polars_extensions").resolve()))
     from polars_extensions import __version__
 
     release = __version__
