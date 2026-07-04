@@ -5,6 +5,8 @@ pyarrow
 recommonmark
 shapely
 pyodbc
+defusedxml
+tqdm
 sphinx==7.3.7
 
 # Third-party Sphinx extensions
