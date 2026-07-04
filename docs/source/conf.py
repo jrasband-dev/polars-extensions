@@ -68,6 +68,8 @@ extensions = [
     "recommonmark",
 ]
 
+autosummary_generate = True
+
 # Render docstring text in `single backticks` as code.
 default_role = "code"
 
